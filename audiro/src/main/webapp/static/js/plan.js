@@ -476,7 +476,9 @@ $(document).ready(function () {
 		let htmlStr = '';
 		htmlStr = `
 			<div id="dayPlan${index}" day-id="${index}" class="plans row g-0 m-2">
+				::before
 				<h5>${index}일차</h5>
+				::after
 				<div class="timeline">
 					<ul>
 				 	</ul>

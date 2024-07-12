@@ -8,6 +8,22 @@ input, h2, ul, #dayContainer, #planContainer, button, .favDestination{
 	font-family: 'Cafe24SsurroundAir' !important;
 }
 
+.plans{
+	padding: 15px 20px;
+	position: relative;
+	margin-bottom:30px;
+}
+.plans:hover{
+	cursor: pointer;
+}
+.plans.active {
+	background-color: yellow; /* Change this to your desired color */
+}
+
+::after, ::before{
+	box-sizing:border-box;
+}
+
 #planContainer h5 {
 	font-family: 'Cafe24SsurroundAir';
 	font-size: 2rem;
