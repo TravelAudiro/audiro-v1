@@ -78,7 +78,7 @@ public class CommentsService {
 	// 댓글 수정
 	public int update(CommentUpdateDto dto) {
 		log.debug("update({})", dto);
-		int result = commentDao.update(dto.toEntity());
+		int result = commentDao.update(dto);
 		return result;
 	}
 	//댓글 1개 삭제

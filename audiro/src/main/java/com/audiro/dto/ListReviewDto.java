@@ -25,6 +25,7 @@ public class ListReviewDto {
 	private Integer travelPlanId;
 	private LocalDateTime modifiedTime;
 	private Integer favoritePost;
+	private String id;
 	
 	public static ListReviewDto fromEntity(Post post) {
 		
@@ -36,7 +37,8 @@ public class ListReviewDto {
 				.good(post.getGood())
 				.travelPlanId(post.getTravelPlanId())
 				.modifiedTime(post.getModifiedTime())
-				.favoritePost(post.getFavoritePost())
+				.favoritePost(post.getFavoritePostId())
+				.id(post.getId())
 				.build();
 		
 	}

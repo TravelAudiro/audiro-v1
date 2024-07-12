@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.audiro.dto.CreateReviewDto;
+import com.audiro.dto.DetailsReviewDto;
 import com.audiro.dto.LikeReviewPostDto;
 import com.audiro.dto.LikeUserFavoriteDto;
 import com.audiro.dto.MyReviewListDto;
@@ -14,16 +15,16 @@ public interface ReviewDao {
 
 	// 내여행일기
 	// 내 여행일기 목록 불러오기 (최신순)
-	List<MyReviewListDto> readMyReview(Integer usersId);
+	List<MyReviewListDto> readMyReview(String id);
 
 	// 내 여행일기 목록 불러오기 (좋아요순)
 	List<MyReviewListDto> readMyReviewByGood();
 
 	// 나를 찜한 유저 수
-	int countLike(Integer usersId);
+	int countLike(String id);
 
 	//내 여행일기 수
-	int countMyReveiw(Integer usersId);
+	int countMyReveiw(String id);
 	
 	//여행후기 찜 수
 	int countFavoriteReveiw(Integer postId);
@@ -37,7 +38,7 @@ public interface ReviewDao {
 	
 	// 여행후기 게시판//////////////////////////////////////////////////////////////
 	// 여행후기 postId로 1개 상세보기
-	Post readDetailsReviewById(Integer postId);
+	DetailsReviewDto readDetailsReviewById(Integer postId, String id);
 
 	// 여행후기 postId good 수
 	int countGoodByPostId(Integer postId);
@@ -46,10 +47,10 @@ public interface ReviewDao {
 	List<LikeUserFavoriteDto> getFavoriteUserIds(LikeUserFavoriteDto dto);
 	
 	// 관심유저 담기
-	int addLikeUser(LikeUserFavoriteDto dto);
+	int addLikeUser(Integer usersId);
 	
 	// 관심유저 삭제
-	int deleteLikeUser(LikeUserFavoriteDto dto);
+	int deleteLikeUser(Integer usersId); // LikeUserFavoriteDto dto
 
 	//여행후기 찜 담아있는 내용 불러오기
 	List<LikeReviewPostDto> getFavoritePostIds(LikeReviewPostDto dto);
@@ -79,7 +80,7 @@ public interface ReviewDao {
 	List<Post> searchKeyword(SerachReviewDto dto);
 		
 	//프로필 이미지 가져오기
-	String profileImg(Integer usersId);
+	String profileImg(String id);
 	
 	
 	//여행후기 임시저장

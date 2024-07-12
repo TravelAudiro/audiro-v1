@@ -10,6 +10,7 @@ public class CommentCreateDto {
     private Integer postId;
     private String content;
     private Integer usersId;
+    private String id;
     private String path;
     private Integer isPrivate;
     private Integer parentCommentId;
@@ -23,6 +24,7 @@ public class CommentCreateDto {
                 .postId(postId)
                 .content(content)
                 .usersId(usersId)
+                .id(id)
                 .path(path)
                 .isPrivate(isPrivate)
                 .parentCommentId(parentCommentId)

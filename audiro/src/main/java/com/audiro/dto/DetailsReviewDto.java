@@ -27,6 +27,9 @@ public class DetailsReviewDto {
 	private LocalDateTime modifiedTime;
 	private Integer favoritePost;
 	private Integer favoriteUserId;
+	private String id;
+	private String formattedModifiedTime; //시간타입변환해서 저장용도
+	private Integer commentId;
 	
 	public static DetailsReviewDto fromEntity(Post post) {
 		
@@ -38,10 +41,12 @@ public class DetailsReviewDto {
 				.good(post.getGood())
 				.travelPlanId(post.getTravelPlanId())
 				.modifiedTime(post.getModifiedTime())
-				.favoriteUserId(post.getFavoriteUserId())
-				.favoritePost(post.getFavoritePost())
+				.favoriteUserId(post.getInterestedUserId())
+				.favoritePost(post.getFavoritePostId())
+				.id(post.getId())
+				.formattedModifiedTime(post.getFormattedModifiedTime())
+				.commentId(post.getCommentId())
 				.build();
 		
 	}
 }
-

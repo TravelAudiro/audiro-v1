@@ -18,21 +18,29 @@ public class MyReviewListDto {
 	
 	private Integer postId;
 	private Integer usersId;
+	private String  id;
 	private String nickname;
 	private String title;
 	private LocalDateTime modifiedTime;
-	private Integer favoritePost;
-	private Integer favoriteUserId;
+	private Integer favoritePost; //찜담은 여행후기에서
+	private Integer favoriteUserId; //관심유저 고유키 별칭으로가져옴.
+	private String path; //프로필경로
+	private String introduction; //프로필 자기소개
+	private String content;
 	
 	public static MyReviewListDto fromEntity(Post post) {
 		return MyReviewListDto.builder()
 				.postId(post.getPostId())
 				.usersId(post.getUsersId())
+				.id(post.getId())
 				.nickname(post.getNickname())
 				.title(post.getTitle())
 				.modifiedTime(post.getModifiedTime())
-				.favoritePost(post.getFavoritePost())
-				.favoriteUserId(post.getFavoriteUserId())
+				.favoritePost(post.getFavoritePostId())
+				.favoriteUserId(post.getInterestedUserId())
+				.path(post.getPath())
+				.introduction(post.getIntroduction())
+				.content(post.getContent())
 				.build();
 	}
 }

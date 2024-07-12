@@ -23,7 +23,8 @@
 		<typeAlias type="com.audiro.repository.DraftPost" alias="DraftPost"/>		
 		<typeAlias type="com.audiro.dto.CreateReviewDto" alias="CreateReviewDto"/>		
 		<typeAlias type="com.audiro.dto.MyReviewListDto" alias="MyReviewListDto"/>		
-		<typeAlias type="com.audiro.dto.LikeReviewPostDto" alias="LikeReviewPostDto"/>	  
+		<typeAlias type="com.audiro.dto.LikeReviewPostDto" alias="LikeReviewPostDto"/>
+		<typeAlias type="com.audiro.dto.DetailsReviewDto" alias="DetailsReviewDto"/>	  
 	</typeAliases>
 </configuration>
 

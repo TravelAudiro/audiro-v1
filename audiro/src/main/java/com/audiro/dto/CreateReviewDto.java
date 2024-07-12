@@ -13,6 +13,7 @@ public class CreateReviewDto {
 	private Integer postId;
 	private String title;
 	private String content;
+	private String id;
 	
 	public Post toEntity() {
 		return Post.builder()
@@ -20,7 +21,9 @@ public class CreateReviewDto {
 					.postTypeId(postTypeId)
 					.postId(postId)
 					.title(title)
-					.content(content).build();
+					.content(content)
+					.id(id)
+					.build();
 		
 	}
 

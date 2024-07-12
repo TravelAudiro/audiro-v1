@@ -24,4 +24,5 @@ public class Comment {
 	    //-> 비밀 댓글. DB에서 default 0으로 되어있음(공개 0, 비밀1로 하기로 정함)
 	    private String nickname;// 닉네님으로 댓글 보여주기위해
 	    private String path; //프로필 이미지
+	    private String id; //유저아이디
 }

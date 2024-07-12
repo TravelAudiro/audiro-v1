@@ -3,6 +3,7 @@ package com.audiro.repository;
 import java.util.List;
 
 import com.audiro.dto.CommentCreateDto;
+import com.audiro.dto.CommentUpdateDto;
 
 
 public interface CommentDao {
@@ -15,7 +16,7 @@ public interface CommentDao {
     int newInsert(CommentCreateDto dto);
     
     // 댓글 내용, 수정 시간을 업데이트
-    int update(Comment comment);
+    int update(CommentUpdateDto dto);
     
     // 댓글 아이디로 삭제
     int deleteById(Integer commentsId);
@@ -29,15 +30,7 @@ public interface CommentDao {
     // 댓글 아이디(PK)로 검색
     Comment selectById(Integer commentsId);
     
-    
-    
     // 대 댓글 추가
     int insert(CommentCreateDto dto);
     
-    //대댓글 삭제하기
-    int deleteByIdReply(Integer commentsId);
-    //대댓글 수정하기
-    int updateReply(Comment comment);
-
-
 }

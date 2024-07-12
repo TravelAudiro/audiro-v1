@@ -7,5 +7,6 @@ public class LikeUserFavoriteDto {
 	private Integer favoriteUsersId;
 	private Integer usersId;
 	private Integer interestedUserId;
+	private String id;
 
 }
