@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.audiro.repository.TravelDestination" alias="Destination" />
+        <typeAlias type="com.audiro.repository.FavoriteDestination" alias="FavoriteDestination" />
+		<typeAlias type="com.audiro.dto.FavoriteDestinationDto" alias="FavoriteDestinationDto" />
+		<typeAlias type="com.audiro.repository.TravelPlan" alias="TravelPlan"/>
+		<typeAlias type="com.audiro.repository.DetailedPlan" alias="DetailedPlan"/>
+		<typeAlias type="com.audiro.dto.DetailedPlanDto" alias="DetailedPlanDto"/>
+		
+	</typeAliases>
+</configuration>

@@ -1,0 +1,24 @@
+@charset "UTF-8";
+ 
+table {
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 20px;
+	height: 100%;
+	table-layout: fixed;
+}
+
+td, th {
+	font-family: 'Cafe24SsurroundAir';
+	border: 1px solid black;
+	text-align: center;
+	padding: 20px;
+}
+
+td.img{
+	 width: 7%;
+}
+img.deletePlanImg{
+	max-width: 100%; /* 이미지의 최대 너비를 부모 요소(td)의 너비에 맞추기 */
+    height: auto; /* 비율 유지를 위해 height를 auto로 설정 */
+}

@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+.timeline {
+	max-width: 1024px;
+	width: 90%;
+	margin: 0 auto;
+}
+
+.timeline ul {
+	font-family: 'Cafe24SsurroundAir';
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	transition: all 0.5s linear;
+	top: 0;
+	text-align: left;
+}
+
+.list {
+	padding: 3em 2em 2em;
+	position: relative;
+	border-left: 2px solid; 
+	color: rgba(246, 241, 180, 1);
+}
+.list .name{
+	color:black
+}
+
+.list::before {   
+	content: attr(date-is);
+	position: absolute;
+	left: 2em;
+	font-weight: bold;
+	top: 1em;
+	display: block;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	font-size: .785rem;
+}
+
+.list::after {
+	width: 10px;
+	height: 10px;
+	display: block;
+	top: 1em;
+	position: absolute;
+	left: -7px;
+	border-radius: 10px;
+	content: '';
+	border: 2px solid rgba(246, 241, 180, 1);
+	background: white;
+}
+
+.list:last-child {
+	border-image: linear-gradient(to bottom, purple 60%, #F6F1B4 100%);
+}

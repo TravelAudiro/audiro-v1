@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- TODO: -->
+<mapper namespace="com.audiro.repository.TravelDestinationDao">
+	<insert id="saveAll"
+		parameterType="Destination">
+		INSERT INTO travel_destination (name, description, phone, site, address, latitude,
+		longitude, img_url, region, theme, companion)
+		VALUES (#{name}, #{description}, #{phone}, #{site}, #{address}, #{latitude}, #{longitude},
+		#{imgUrl}, #{region}, #{theme}, #{companion} )
+	</insert>
+
+	<select id="findAll"
+		resultType="Destination">
+		SELECT * FROM travel_destination
+	</select>
+</mapper>
