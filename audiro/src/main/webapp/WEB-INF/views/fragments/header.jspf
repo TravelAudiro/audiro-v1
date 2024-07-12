@@ -122,7 +122,7 @@
                 </li>             
                 <!-- 나의 여행코스 -->
                 <li class="nav-item">
-                    <c:url var="traveCoursePage" value="/travel/course" />
+                    <c:url var="traveCoursePage" value="/travel/plan/list" />
                     <a class="nav-link" href="${traveCoursePage}">나의 여행코스</a>
                 </li>               
                 <!-- 여행일기 -->
