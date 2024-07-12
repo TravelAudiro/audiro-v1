@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+button.badge {
+    border: none;
+}
+
+.img-destination {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.img-like {
+    width: 25px;
+    height: 25px;
+}
