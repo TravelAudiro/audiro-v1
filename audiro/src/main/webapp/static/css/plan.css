@@ -4,7 +4,7 @@ body {
 	font-size: 14px;
 	line-height: 1.5;
 }
-input, h2, ul, #dayContainer, button{
+input, h2, ul, #dayContainer, #planContainer, button, .favDestination{
 	font-family: 'Cafe24SsurroundAir' !important;
 }
 
