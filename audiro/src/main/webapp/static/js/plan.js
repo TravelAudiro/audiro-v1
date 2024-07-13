@@ -33,6 +33,8 @@ $(document).ready(function() {
 	}).on('changeDate', function() {
 		getDateRange(false); // showModal을 false로 전달
 	});
+	
+	
 
 	// 여행계획 수정 시에 eventlistener 초기화
 	document.addEventListener('click', function(event) {
@@ -75,8 +77,13 @@ $(document).ready(function() {
 		clickDays(event);
 
 	});
+	
+	planContainer.addEventListener('click', (event) => {
+		event.preventDefault(); // 폼 제출 기본 동작 막기
+		clickDays(event);
 
-
+	});
+	
 	function createAll() {
 		createDayForm();
 		createPlanForm();
@@ -295,10 +302,10 @@ $(document).ready(function() {
 						createAll();
 					}
 				}
-			} else {
+			}/*else if(differenceInDays<0){
 				// 날짜 범위가 없는 경우 모든 일차 삭제
 				deleteAllDay(showModal); // showModal 변수를 전달
-			}
+			}*/
 		}
 
 
@@ -325,6 +332,7 @@ $(document).ready(function() {
 		// 부모요소의 day-id 속성값 가져오기
 		const dayId = dayElement.getAttribute('day-id');
 		const planElement = document.querySelector(`#dayPlan${dayId}`);
+
 		// deleteDayAndPlan 함수 내 모달 초기화
 		const deleteModal = new bootstrap.Modal(document.querySelector('div.modal'), { backdrop: true });
 		deleteModal.show();
@@ -333,6 +341,7 @@ $(document).ready(function() {
 
 		function confirmDeleteDay() {
 			console.log(index);
+ 
 			// 현재 endDate의 값을 가져와서 Date 객체로 변환
 			const endDateValue = document.querySelector('#endDate').value;
 			if (endDateValue) {
@@ -351,6 +360,7 @@ $(document).ready(function() {
 			planElement.remove();
 			resetDay();
 			deleteModal.hide();
+			//index--;
 			console.log(index);
 
 		}
@@ -369,16 +379,30 @@ $(document).ready(function() {
 	function clickDays(event) {
 		const days = document.querySelectorAll('.days');
 		const clickedDay = event.target.closest('.days');
+		const plans=document.querySelectorAll('.plans');
+		const clickedPlan=event.target.closest('.plans');
 
 		// 모든 요소를 non-click으로 초기화
 		days.forEach((d) => {
 			d.classList.remove("click");
 			d.classList.add("non-click");
 		});
+		plans.forEach((p) => {
+			p.classList.remove("click");
+			p.classList.add("non-click");
+		});
 
 		// 클릭된 요소만 click 클래스로 설정
 		clickedDay.classList.remove('non-click');
 		clickedDay.classList.add('click');
+		
+		clickedPlan.classList.remove('non-click');
+		clickedPlan.classList.add('click');
+		
+		const id=clickedDay.getAttribute('day-id');
+		console.log(`id=${id}`);
+		document.querySelector(`#dayPlan${id}`).classList.remove('non-click');
+		document.querySelector(`#dayPlan${id}`).classList.add('click');
 
 	}
 
@@ -506,10 +530,8 @@ $(document).ready(function() {
 	function createPlanForm() {
 		let htmlStr = '';
 		htmlStr = `
-			<div id="dayPlan${index}" day-id="${index}" class="plans row g-0 m-2">
-				::before
+			<div id="dayPlan${index}" day-id="${index}" class="plans non-click row g-0 m-2">
 				<h5>${index}일차</h5>
-				::after
 				<div class="timeline">
 					<ul>
 				 	</ul>
@@ -519,6 +541,17 @@ $(document).ready(function() {
 			</div>
 		`;
 		planContainer.insertAdjacentHTML('beforeend', htmlStr);
+
+		// 모든 일차를 non-click 상태로 설정
+		const plans = document.querySelectorAll('.plans');
+		plans.forEach((p) => {
+			p.classList.remove('click');
+			p.classList.add('non-click');
+		})
+		// 최신 일차를 click 상태로 설정
+		const newDay = document.querySelector(`#dayPlan${index}`);
+		newDay.classList.remove('non-click');
+		newDay.classList.add('click');
 	}
 
 
@@ -641,7 +674,7 @@ $(document).ready(function() {
                         </div>
                     `;
 			planStr = `
-                	<div id="dayPlan${i}" day-id="${i}" class="plans row g-0 m-2">
+                	<div id="dayPlan${i}" day-id="${i}" class="plans non-click row g-0 m-2">
 						<h5>${i}일차</h5>
 						<div class="timeline">
 							<ul>

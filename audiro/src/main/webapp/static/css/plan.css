@@ -28,12 +28,29 @@ input, h2, ul, #dayContainer, #planContainer, button, .favDestination{
 	font-family: 'Cafe24SsurroundAir';
 	font-size: 2rem;
 	margin-bottom: .5em;
+}
+
+.days.click {
+	border-style: inset;
+	border-width: 1px;
+}
+
+.plans.click{
 	background-color: #F6F1B4;
 }
 
-.click {
-	border-style: inset;
-	border-width: 1px;
+
+
+.plans::before {
+    content: "";
+    width: 100%;
+    height: 5px;
+    border-radius: 0px;
+    background: #000000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.5s ease 0s;
 }
 
 .days {
