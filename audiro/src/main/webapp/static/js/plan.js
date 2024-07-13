@@ -2,20 +2,20 @@
  * /audiro/plan.jsp에 포함
  */
 
-$(document).ready(function () {
-	
+$(document).ready(function() {
+
 	let index = 1;
 	const currentPath = window.location.pathname;
 	const btnCreateDay = document.querySelector('button#createDay');
 	const dayContainer = document.querySelector('div#dayContainer');
 	const planContainer = document.querySelector('div#planContainer');
 	const deleteAll = document.querySelector('button#deleteAll');
-	const btnSave=document.querySelector('#btnSave');
+	const btnSave = document.querySelector('#btnSave');
 	const deleteModal = new bootstrap.Modal(document.querySelector('div.modal'), { backdrop: true });
 	const btnConfirm = document.querySelector('#btnConfirm');
 	let startDateValue = document.querySelector('input#startDate').value;
 	let endDateValue = document.querySelector('input#endDate').value;
-	const modifyUrl="/audiro/travel/plan/modify";
+	const modifyUrl = "/audiro/travel/plan/modify";
 
 	// Datepicker 초기화
 	$('#startDate').datepicker({
@@ -44,7 +44,7 @@ $(document).ready(function () {
 	});
 
 	// 수정 용
-	if (currentPath ===modifyUrl) {
+	if (currentPath === modifyUrl) {
 		modifyForm();
 	} else {
 		defaultDay();
@@ -60,7 +60,7 @@ $(document).ready(function () {
 		}
 	});
 
-	deleteAll.addEventListener('click', (event) =>  {
+	deleteAll.addEventListener('click', (event) => {
 		event.preventDefault(); // 폼 제출 기본 동작 막기
 		deleteAllDay(true); // showModal을 true로 전달
 	});
@@ -88,10 +88,10 @@ $(document).ready(function () {
 		const title = document.querySelector('input#title').value;
 		let startDate = document.querySelector('input#startDate').value;
 		let endDate = document.querySelector('input#endDate').value;
-		
+
 		const startDateToDate = new Date(startDate);
 		const endDateToDate = new Date(endDate);
-		
+
 		const millisecondsInADay = 24 * 60 * 60 * 1000;
 		let duration = (endDateToDate - startDateToDate) / millisecondsInADay;
 
@@ -107,8 +107,8 @@ $(document).ready(function () {
 			})
 		}
 
-			const data = { travelPlanId, title, startDate, duration, endDate };
-			const uri = '/audiro/api/plan/modify';
+		const data = { travelPlanId, title, startDate, duration, endDate };
+		const uri = '/audiro/api/plan/modify';
 		axios
 			.post(uri, data)
 			.then((response) => {
@@ -145,9 +145,9 @@ $(document).ready(function () {
 				duration = endDay - startDay;
 			}
 		} else if (startDate == null || endDate == null) {
-			btnSave.diabled=true;
+			btnSave.diabled = true;
 			const alert = document.querySelector('div#alert');
-			alert.innerHTML='';
+			alert.innerHTML = '';
 			const htmlStr = `
             <div class="alert alert-primary d-flex align-items-center" role="alert">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
@@ -165,12 +165,12 @@ $(document).ready(function () {
 			const millisecondsInADay = 24 * 60 * 60 * 1000;
 			duration = (endDateToDate - startDateToDate) / millisecondsInADay;
 		}
-		
+
 
 		if (title === '') {
 			const alert = document.querySelector('div#alert');
-			alert.innerHTML='';
-			btnSave.diabled=true;
+			alert.innerHTML = '';
+			btnSave.diabled = true;
 			const htmlStr = `
             <div class="alert alert-primary d-flex align-items-center" role="alert">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
@@ -190,16 +190,16 @@ $(document).ready(function () {
 			.post(uri, data)
 			.then((response) => {
 				travelPlanId = response.data;
-				createrDetailedPlan(travelPlanId,startTime,endTime);
+				createrDetailedPlan(travelPlanId, startTime, endTime);
 				// 페이지 새로고침
-            	window.location.reload();
+				window.location.reload();
 			})
 			.catch((error) => {
 				console.log(error);
 			});
 	}
 
-	function createrDetailedPlan(travelPlanId,startTime,endTime) {
+	function createrDetailedPlan(travelPlanId, startTime, endTime) {
 		let detailedPlans = [];
 		const detailedPlanElements = document.querySelectorAll(`div.plans`);
 
@@ -208,7 +208,7 @@ $(document).ready(function () {
 			favoriteDestinationElements.forEach((list) => {
 				const destinationId = list.getAttribute("des-id");
 				const day = d.getAttribute('day-id')
-				
+
 
 				const data = { travelPlanId, destinationId, day, startTime, endTime };
 				detailedPlans.push(data);
@@ -224,10 +224,10 @@ $(document).ready(function () {
 				console.log(error);
 			});
 
-	
+
 	}
 
-	
+
 	function getDateRange(showModal) {
 		const alert = document.querySelector('div#alert');
 
@@ -327,23 +327,38 @@ $(document).ready(function () {
 		btnConfirm.addEventListener('click', confirmDeleteDay); // 새로운 이벤트 리스너 추가
 
 		function confirmDeleteDay() {
+			// 현재 endDate의 값을 가져와서 Date 객체로 변환
+			const endDateValue = document.querySelector('#endDate').value;
+			if (endDateValue) {
+				const endDate = new Date(endDateValue);
+				// 날짜에서 하루를 뺀다
+				endDate.setDate(endDate.getDate() - 1);
+				// endDate를 'yyyy-mm-dd' 형식으로 포맷팅
+				const formattedDate = endDate.toISOString().slice(0, 10);
+
+				// endDate에 특정 날짜 설정
+				$('#endDate').datepicker('setDate', formattedDate);
+			}
+
+			// 요소 삭제 및 초기화
 			dayElement.remove();
 			planElement.remove();
 			resetDay();
 			deleteModal.hide();
 			index--;
+
 		}
 
 	}
 	// .list 요소를 삭제하는 함수
-    function deleteList(event) {
+	function deleteList(event) {
 		// 부모 요소 중에서 .list 클래스를 가진 요소를 찾음
 		const favList = event.target.closest('.list');
 		if (favList) {
 			favList.remove();
 		}
-    }
-	
+	}
+
 
 	function clickDays(event) {
 		const days = document.querySelectorAll('.days');
@@ -379,7 +394,7 @@ $(document).ready(function () {
 			</div>
 		`;
 		dayContainer.insertAdjacentHTML('beforeend', htmlStr);
-		
+
 		// 모든 일차를 non-click 상태로 설정
 		const days = document.querySelectorAll('.days');
 		days.forEach((d) => {
@@ -399,12 +414,13 @@ $(document).ready(function () {
 
 	function addNewEvent() {
 		// 새로운 deleteDayImg 요소에 이벤트 리스너 추가
-		const deleteDayImg = document.querySelectorAll('img.deleteDayImg');
+		// TODO:이거 때매 중복됨. 필요없으면 삭제하자.
+	/*	const deleteDayImg = document.querySelectorAll('img.deleteDayImg');
 		deleteDayImg.forEach((d) => {
 			d.removeEventListener('click', deleteDayAndPlan); // 중복방지
 			d.addEventListener('click', deleteDayAndPlan);
 		});
-
+*/
 		// 새로운 collapseImg 요소에 이벤트 리스너 추가
 		const collapseImg = document.querySelectorAll('img.collapseImg');
 		collapseImg.forEach((c) => {
@@ -456,7 +472,16 @@ $(document).ready(function () {
 		dayElement.forEach((d) => d.remove());
 		planElement.forEach((p) => p.remove());
 		index = 1;
+
+		// endDate 리셋
+		$('#startDate').datepicker('setDate', '');
+		// endDate 리셋
+		$('#endDate').datepicker('setDate', '');
+		// 일차추가 버튼 보이기
+		btnCreateDay.style.display = 'block';
+
 		
+
 	}
 
 	function defaultDay() {
@@ -536,7 +561,7 @@ $(document).ready(function () {
 		axios
 			.get(uri)
 			.then((response) => {
-				index=response.data.maxDay+1;
+				index = response.data.maxDay + 1;
 				getDayAndPlan(response.data);
 				getDetailedPlans(response.data);
 				// 페이지 로딩 -> axios로 데이터 받아서 요소에 저장 -> 바뀐 요소 다시 초기화
@@ -546,10 +571,10 @@ $(document).ready(function () {
 				if (startDateValue !== '' || endDateValue !== '') {
 					btnCreateDay.style.display = 'none';
 				}
-			/*	else {
-					btnCreateDay.style.display = 'block';
-				}
-*/
+				/*	else {
+						btnCreateDay.style.display = 'block';
+					}
+	*/
 			})
 			.catch((error) => {
 				console.log(error);
@@ -557,7 +582,7 @@ $(document).ready(function () {
 
 	}
 
-	function getDate(dateArray){
+	function getDate(dateArray) {
 		// 배열에서 연도, 월, 일 추출
 		const year = dateArray[0];
 		const month = dateArray[1].toString().padStart(2, '0');  // 월을 2자리로 만들고 부족한 부분은 0으로 채움
@@ -570,23 +595,23 @@ $(document).ready(function () {
 	}
 	function getDayAndPlan(data) {
 		const travelPlan = data.travelPlan;
-		
+
 		const title = travelPlan.title;
 		const duration = travelPlan.duration;
 		const startDate = travelPlan.startDate;
 		const endDate = travelPlan.endDate
 		const startDateElement = document.querySelector('input#startDate');
-		const endDateElement= document.querySelector('input#endDate');
-		
+		const endDateElement = document.querySelector('input#endDate');
+
 		// startDate와 endDate 값이 null이 아닌 경우에만 입력
-		if (startDate&&endDate) {
+		if (startDate && endDate) {
 			startDateElement.value = getDate(travelPlan.startDate);
 			endDateElement.value = getDate(travelPlan.endDate);
 		}
 
 		// 각 필드에 travelPlan 객체의 값 설정하기
-		document.querySelector('input#title').value=title;
-		document.querySelector('input#duration').value=duration;
+		document.querySelector('input#title').value = title;
+		document.querySelector('input#duration').value = duration;
 		/*document.querySelector('input#startDate').value=startDate;
 		document.querySelector('input#endDate').value=endDate;*/
 
@@ -594,7 +619,7 @@ $(document).ready(function () {
 		let dayStr = '';
 		let planStr = '';
 
-	// 이미 해당 day-id를 가진 요소가 있는지 체크
+		// 이미 해당 day-id를 가진 요소가 있는지 체크
 
 		for (let i = 1; i <= maxDay; i++) {
 			dayStr = `
