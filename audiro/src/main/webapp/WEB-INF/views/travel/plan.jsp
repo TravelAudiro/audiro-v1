@@ -44,7 +44,7 @@
 							<div class="row g-0">
 								<div id="btnContainer">
 
-									<button id="deleteAll" class="btn btn-primary">전체 삭제</button>
+									<button id="deleteAll" style="display: none;"btn btn-primary">전체 삭제</button>
 									<button type="submit" id="btnSave" class="btn btn-primary">저장</button>
 								</div>
 							</div>

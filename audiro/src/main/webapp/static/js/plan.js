@@ -81,6 +81,7 @@ $(document).ready(function() {
 		createDayForm();
 		createPlanForm();
 		index++;
+		console.log(`c=${index}`);
 	}
 
 	function updateTravelPlan() {
@@ -246,18 +247,19 @@ $(document).ready(function() {
 			return;
 		}
 
-		const startDateToDate = new Date(startDate);
-		const endDateToDate = new Date(endDate);
+		if (startDate && endDate) {
+			const startDateToDate = new Date(startDate);
+			const endDateToDate = new Date(endDate);
 
 
-		if (startDateToDate > endDateToDate) {
-			alert.innerHTML = '';
-			btnSave.diabled = true;
-			startDate = '';
-			endDate = '';
-			// TODO: 문제없으면 삭제
-			//deleteAllElements();
-			const htmlStr = `
+			if (startDateToDate > endDateToDate) {
+				alert.innerHTML = '';
+				btnSave.diabled = true;
+				startDate = '';
+				endDate = '';
+				// TODO: 문제없으면 삭제
+				//deleteAllElements();
+				const htmlStr = `
 				<div class="alert alert-primary d-flex align-items-center" role="alert">
 				  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
 				    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
@@ -267,36 +269,39 @@ $(document).ready(function() {
 				  </div>
 				</div>
 			`;
-			alert.insertAdjacentHTML('beforeend', htmlStr);
-			return;
-		}
-
-		const differenceInMillis = endDateToDate - startDateToDate;
-		// 밀리초를 일수로 변환
-		const differenceInDays = Math.floor(differenceInMillis / (1000 * 60 * 60 * 24)) + 1;
-		const duration = document.querySelector('input#duration');
-		duration.value = differenceInDays;
-		let currentDay = index - 1;
-
-		// 현재 생성된 일차 수와 날짜 차이를 비교하여 일차를 증가 또는 감소시킴
-		if (differenceInDays >= 0) {
-			if (differenceInDays < currentDay) {
-				// 현재 일차 수가 날짜 차이보다 많으면 초과된 일차 삭제
-				for (let i = currentDay; i > differenceInDays; i--) {
-					deleteExceededIndex(i);
-				}
-			} else if (differenceInDays === currentDay) {
+				alert.insertAdjacentHTML('beforeend', htmlStr);
 				return;
-			} else {
-				// 현재 일차 수가 날짜 차이보다 적으면 일차 추가
-				for (let i = currentDay + 1; i <= differenceInDays; i++) {
-					createAll();
-				}
 			}
-		} else {
-			// 날짜 범위가 없는 경우 모든 일차 삭제
-			deleteAllDay(showModal); // showModal 변수를 전달
+
+			const differenceInMillis = endDateToDate - startDateToDate;
+			// 밀리초를 일수로 변환
+			const differenceInDays = Math.floor(differenceInMillis / (1000 * 60 * 60 * 24)) + 1;
+			const duration = document.querySelector('input#duration');
+			duration.value = differenceInDays;
+			let currentDay = index - 1;
+
+			// 현재 생성된 일차 수와 날짜 차이를 비교하여 일차를 증가 또는 감소시킴
+			if (differenceInDays >= 0) {
+				if (differenceInDays < currentDay) {
+					// 현재 일차 수가 날짜 차이보다 많으면 초과된 일차 삭제
+					for (let i = currentDay; i > differenceInDays; i--) {
+						deleteExceededIndex(i);
+					}
+				} else if (differenceInDays === currentDay) {
+					return;
+				} else {
+					// 현재 일차 수가 날짜 차이보다 적으면 일차 추가
+					for (let i = currentDay + 1; i <= differenceInDays; i++) {
+						createAll();
+					}
+				}
+			} else {
+				// 날짜 범위가 없는 경우 모든 일차 삭제
+				deleteAllDay(showModal); // showModal 변수를 전달
+			}
 		}
+
+
 	}
 
 	// 날짜 지정시 초과된 index 삭제
@@ -327,6 +332,7 @@ $(document).ready(function() {
 		btnConfirm.addEventListener('click', confirmDeleteDay); // 새로운 이벤트 리스너 추가
 
 		function confirmDeleteDay() {
+			console.log(index);
 			// 현재 endDate의 값을 가져와서 Date 객체로 변환
 			const endDateValue = document.querySelector('#endDate').value;
 			if (endDateValue) {
@@ -345,7 +351,7 @@ $(document).ready(function() {
 			planElement.remove();
 			resetDay();
 			deleteModal.hide();
-			index--;
+			console.log(index);
 
 		}
 
@@ -480,14 +486,14 @@ $(document).ready(function() {
 		// 일차추가 버튼 보이기
 		btnCreateDay.style.display = 'block';
 
-		
+
 
 	}
 
 	function defaultDay() {
 		const days = document.querySelectorAll('div.days');
 
-		if (days.length === 0) {
+		if (days.length == 0) {
 
 			index = 1;
 			createDayForm();
@@ -535,10 +541,9 @@ $(document).ready(function() {
 
 			indexReset++;
 
-		}
-
-		);
+		});
 		index = indexReset;
+		console.log(`reset${index}`);
 		// 한 개의 일차만 남은 경우 다시 일차 생성
 		defaultDay();
 		indexReset = 1;
