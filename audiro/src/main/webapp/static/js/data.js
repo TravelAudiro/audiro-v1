@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// 맨 처음 db 저장할 때만 사용
 	//getDes();
-	getTag();
+	//getTag();
 	
 });
 
