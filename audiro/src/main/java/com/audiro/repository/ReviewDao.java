@@ -80,7 +80,7 @@ public interface ReviewDao {
 	List<Post> searchKeyword(SerachReviewDto dto);
 		
 	//프로필 이미지 가져오기
-	String profileImg(String id);
+	String profileImg(Integer id);
 	
 	
 	//여행후기 임시저장

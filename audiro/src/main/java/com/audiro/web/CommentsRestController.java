@@ -47,9 +47,13 @@ public class CommentsRestController {
 	
 	//대 댓글등록
 	@PostMapping("/")
-	public ResponseEntity<Integer> insertComment(@RequestBody CommentCreateDto dto) {
+	public ResponseEntity<Integer> insertComment(@RequestBody CommentCreateDto dto, HttpSession session) {
+		String id = (String) session.getAttribute("signedInUser");
+		Integer usersId =  (Integer) session.getAttribute("signedInUsersId");
+		dto.setId(id);
+		dto.setUsersId(usersId);
 		log.debug("insertComment={}",dto);
-		
+	
 		int result = commentDao.insert(dto);
 		return ResponseEntity.ok(result);
 	}

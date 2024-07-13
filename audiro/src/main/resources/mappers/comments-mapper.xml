@@ -43,7 +43,7 @@
     <update id="update">
         update comments
         set content = #{content}, modified_time = systimestamp
-        where users_id = #{users_id}
+        where comments_id = #{commentsId}
     </update>
     <!-- 댓글 삭제 -->
     <delete id="deleteById">

@@ -3,7 +3,7 @@ package com.audiro.web;
 
 import java.util.List;
 
-
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.audiro.dto.CreateReviewDto;
 import com.audiro.dto.DetailsReviewDto;
@@ -47,7 +48,10 @@ public class ReviewController {
 
 	// 여행후기 작성 저장 후 페이지
 	@PostMapping("/create")
-	public String create(CreateReviewDto dto) {
+	public String create(CreateReviewDto dto, HttpSession session ) {
+		// 세션에서 사용자 ID 가져오기
+	    Integer usersId = (Integer)session.getAttribute("signedInUsersId");
+		dto.setUsersId(usersId);
 		reviewService.create(dto);
 		return "redirect:/post/review/list";
 	}
@@ -72,7 +76,7 @@ public class ReviewController {
 		//찜 수
 		int countFavorite = reviewService.countFavorite(dto.getPostId());
 		//프로필 이미지
-		String profile = reviewService.img(dto.getId());
+		String profile = reviewService.img(post.getUsersId());
 		
 		model.addAttribute("post", post);
 		model.addAttribute("countLike", countLike);
@@ -83,8 +87,8 @@ public class ReviewController {
 	}
 
 	// 여행후기 수정 업데이트
-	@PostMapping("/update")
-	public String update(@RequestBody  CreateReviewDto dto) {
+	@PostMapping(value="/update")
+	public String update(@ModelAttribute CreateReviewDto dto) {
 		reviewService.update(dto);
 		return "redirect:/post/review/details?postId=" + dto.getPostId();
 	}
@@ -94,8 +98,8 @@ public class ReviewController {
 	public void mypage(Model model, MyReviewListDto dto) {
 		
 	    // 내 여행일기 목록
-	    List<MyReviewListDto> list = reviewService.myReviewList(dto);
-	    model.addAttribute("list", list);
+	    List<MyReviewListDto> post = reviewService.myReviewList(dto);
+	    model.addAttribute("post", post);
 	   
 	    // 세션에 id 추가
 	    model.addAttribute("id", dto.getId());

@@ -89,14 +89,13 @@
 		//대댓글 등록
 		function addReply(commentsId) {
 			const postId = document.querySelector('#postId').value;
-			const content = document.querySelector(`#comment${commentsId}`).value;
-			const usersId = document.querySelector('#usersId').value;
-			
+			const content = document.querySelector(`#comment${commentsId != undefined ? commentsId : ''}`).value;
+
 			if (content === '') {
 				alert('댓글 내용을 입력하세요.')
 				return;
 			}
-			const data = { postId, usersId, content, parentCommentId: commentsId };
+			const data = { postId, content, parentCommentId: commentsId };
 			const uri = `/audiro/api/comment/`;
 			axios
 				.post(uri, data)

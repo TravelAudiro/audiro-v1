@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		e.preventDefault();// 버튼기본동작을 막음.
 
 		const inputTitle = document.querySelector('input#title').value;
-		const content = document.querySelector('textarea#c_editor').value;
+		const content = document.querySelector('.ql-editor').innerHTML;
 
 		// form 찾음. -> form.action, form.method 설정 -> form.submit()
 		const form = document.querySelector('form#createForm')
@@ -73,6 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			alert('제목과 내용은 반드시 입력하세요.');
 			return;
 		}
+		document.querySelector("#c_editor").value = content;
+		
 		form.action = 'create';
 		form.method = 'POST';
 

@@ -56,7 +56,7 @@ public class ReviewService {
 
 	}
 	//프로필 이미지 가져오기
-	public String img(String id) {
+	public String img(Integer id) {
 		String profileimg = reviewDao.profileImg(id);
 		return profileimg;
 	}

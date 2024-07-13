@@ -25,7 +25,7 @@
 	    left join favorite_users fu on p.users_id = fu.users_id
 	    left join profile pr on p.users_id = pr.users_id 
 	    where p.post_type_id = 10
-	          and u.id = #{id}
+	          and u.users_id = #{id}   
 	    order by p.modified_time desc
 	</select>
 
@@ -45,7 +45,7 @@
 		select p.path
 		from profile p
 		join users u on p.users_id = u.users_id
-		where u.id = #{id}
+		where u.users_id = #{usersId}
 	</select>
 	
 	<!-- 나를 찜한 유저 수 -->
@@ -143,8 +143,8 @@
 	</delete>
 
 	<!-- 여행 후기 1개 삭제 -->
-	<delete id="deleteReview" >>
-		delete post where post_id = #{postId}
+	<delete id="deleteReview" >
+		delete from post where post_id = #{postId}
 	</delete>
 
 	<!-- 여행후기 저장하기 -->
