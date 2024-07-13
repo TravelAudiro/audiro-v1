@@ -89,4 +89,6 @@
 	<c:url var="listJS" value="/js/plan_list.js" />
 	<script src="${listJS}"></script>
 
+	<c:url var="dataJS" value="/js/data.js" />
+	<script src="${dataJS}"></script> 
 </body>
