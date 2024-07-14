@@ -97,11 +97,11 @@
 	<select id="getFavoriteUserIds" resultType="com.audiro.dto.LikeUserFavoriteDto">
 		select 
          	    fu.*
-         	  , u.user_id as favoriteUserId
+         	  , u.users_id as favoriteUserId
    		from favorite_users fu
    		join users u on fu.users_id = u.users_id
    		where 
-         	 u.id = #{id}
+         	 u.users_id = #{usersId}
         and fu.interested_user_Id = #{interestedUserId} 
 	</select>
 

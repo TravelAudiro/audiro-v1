@@ -167,15 +167,7 @@ main {
 	color: #6c757d;
 }
 
-.like-button {
-	background: url('https://via.placeholder.com/24x24') no-repeat center center; /* 찜 담기 버튼 배경 */
-	background-size: contain;
-	width: 24px;
-	height: 24px;
-	cursor: pointer;
-	border: none; /* 버튼 테두리 제거 */
-	margin-left: 10px; /* 유저네임 옆 간격 */
-}
+
 
 .blog-post-item a {
 	text-decoration: none; /* 링크 밑줄 제거 */
@@ -222,7 +214,7 @@ main {
 }
 
 /* 좋아요 버튼 스타일 */
-.likeReview {
+.likeReviewBtn, .userLike {
     width: 30px;
     height: 30px;
     background: url("../../images/like_black.png") no-repeat center center;
@@ -230,7 +222,7 @@ main {
     border: none;
 }
 
-.likeReview.active {
+.likeReviewBtn.active , .userLike.active {
     background: url("../../images/like_red2.png") no-repeat center center;
     background-size: contain;
 }
@@ -253,7 +245,7 @@ main {
 							<h2 class="profile-nickname-container">
 								<span id="nickname" class="profile-nickname">${post[0].nickname}</span>
 								<button id="userLike"
-									class="likeReview ${post[0].favoriteUserId != null ? 'active' : ''}"
+									class="userLike ${post[0].favoriteUserId != null ? 'active' : ''}"
 									data-user-id="${signedInUsersId}"></button>
 							</h2>
 							<div class="stats">
@@ -306,7 +298,7 @@ main {
 									<!-- .modified-time -->
 									<div class="card-header" style="text-align: right">
 										<button
-											class="btn likeReview ${post.favoritePost != null ? 'active' : ''}"
+											class="btn likeReviewBtn ${post.favoritePost != null ? 'active' : ''}"
 											data-review-id="${post.postId}"></button>
 									</div>
 								</div>
