@@ -25,8 +25,15 @@
 	
 	//댓글 등록
 	function registerCommmetnbtnListener(e) {
-		alert('댓글등록!!!')
-
+		
+		/*
+		if (signedInUser === null || signedInUser === '') {
+		            if (confirm("로그인 후 댓글등록 가능합니다. 로그인하시겠습니까?")) {
+		                window.location.href = '/audiro/user/signin';
+		            }
+		            return;
+		        }
+		*/
 		
 		const postId = document.querySelector('#postId').value;
 		const content = document.querySelector('#comment').value;
@@ -40,7 +47,6 @@
 		axios
 			.post('/audiro/api/comment/new', data)
 			.then((response) => {
-				alert('댓글등록성공!!')
 				getAllComments();
 				document.querySelector('textarea#comment').value = '';
 			})
@@ -50,12 +56,9 @@
 
 	//여행후기 수정버튼
 	function modifyBtnListener() {
-		//alert('수정버튼!');
 		
 		const form = document.querySelector('.reviewBtn');
-		//const id = document.querySelector()
 		const postId = document.querySelector('input#postId').value;
-		//const uri = `http://localhost:8080/audiro/post/review/modify?postId=${postId}`;
 		console.log(postId);
 		form.action = 'modify';
 		form.method = 'get';
@@ -65,7 +68,6 @@
 
 	//여행후기 삭제버튼
 	function deletebtnBtnListener(e) {
-		alert('삭제버튼!');
 
 		e.preventDefault();
 		const result = confirm('정말 삭제할까요?');
@@ -206,8 +208,8 @@
 				});
 		}
 		
-// 모든 댓글 그리기
-function makeCommentElements(data, level) {
+	// 모든 댓글 그리기
+	function makeCommentElements(data, level) {
 	return data.map(cmm => {
 		// 타임스탬프를 Date 객체로 변환
 		const modifiedTime = new Date(cmm.modifiedTime);
