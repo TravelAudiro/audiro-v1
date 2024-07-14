@@ -6,11 +6,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Insert title here</title>
+    <title>여행지 찾기</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+    	integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    	crossorigin="anonymous" referrerpolicy="no-referrer" />
     <c:url var="travelSearchCss" value="/css/travel-search.css" />
     <link href="${travelSearchCss}" rel="stylesheet" />
     <c:url var="heartCss" value="/css/heart.css" />
@@ -25,7 +28,11 @@
         
         <main> 
             <div class="row">
-                <div class="col-2">
+                <div class="col-2 tag-container">
+                	<button id="btnReset">
+                		<i class="fa-solid fa-arrow-rotate-left" style="color: #666666"></i>
+                	</button>
+                    <hr>
                     <div>
                         <p>지역</p>
                         <button class="badge text-bg-light"># 서울</button>
@@ -46,6 +53,7 @@
                         <button class="badge text-bg-light"># 전남</button>
                         <button class="badge text-bg-light"># 제주</button>
                     </div>
+                    <hr>
                     <div>
                         <p>테마</p>
                         <button class="badge text-bg-light"># 힐링</button>
@@ -53,6 +61,7 @@
                         <button class="badge text-bg-light"># 문화</button>
                         <button class="badge text-bg-light"># 체험</button>
                     </div>
+                    <hr>
                     <div>
                         <p>동행자</p>
                         <button class="badge text-bg-light"># 가족</button>
@@ -64,7 +73,7 @@
                 </div>
                 
                 <div class="col-10">
-                    <div class="row">
+                    <div class="row search-container">
                         <div class="col-10">
                             <input type="text" id="inputSearch" class="form-control" />
                         </div>
