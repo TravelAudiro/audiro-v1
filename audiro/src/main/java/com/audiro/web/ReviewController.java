@@ -78,15 +78,15 @@ public class ReviewController {
 	@GetMapping("/details")
 	public void reviewDetails(@RequestParam("postId") Integer postId, Model model, HttpSession session) {
 	    // 세션에서 사용자 ID 가져오기
+	    Integer usersId = (Integer) session.getAttribute("signedInUsersId");
 	    String id = (String) session.getAttribute("signedInUser");
-	    //Integer usersId = (Integer) session.getAttribute("signedInUsersId");
 
 	    DetailsReviewDto dto = new DetailsReviewDto();
-	    dto.setId(id);
+	    dto.setUsersId(usersId);
 	    dto.setPostId(postId);
 
 	    // 여행후기 상세보기
-	    DetailsReviewDto post = reviewService.readById(postId, id);
+	    DetailsReviewDto post = reviewService.readById(dto);
 
 	    // 굿 수
 	    int countLike = reviewService.countGood(postId);
@@ -144,9 +144,13 @@ public class ReviewController {
 							   Model model) {
 			
 		// 세션에서 사용자 ID 가져오기
-	    String id = (String) session.getAttribute("signedInUser");
-
-		DetailsReviewDto list = reviewService.readById(postId, id);
+	    Integer usersId = (Integer) session.getAttribute("signedInUsersId");
+		DetailsReviewDto list = reviewService.readById(DetailsReviewDto
+				.builder()
+				.postId(postId)
+				.usersId(usersId)
+				.build()
+			);
 		model.addAttribute("list", list);
 		
 		//return "/post/review/modify?postId=" + postId;
@@ -162,10 +166,9 @@ public class ReviewController {
 
 	// 여행후기 목록 랭킹모델함께 보냄.
 	@GetMapping("/list")
-	public void reviewList (Model model, HttpSession session) {
+	public void reviewList (SerachReviewDto dto, Model model, HttpSession session) {
 		
-	    String id = (String) session.getAttribute("signedInUser");
-		List<ListReviewDto> list = reviewService.readAll();
+		List<ListReviewDto> list = reviewService.readAll(dto,session);
         
 		model.addAttribute("list", list);
 		
@@ -173,13 +176,13 @@ public class ReviewController {
 	}
 
 	// 여행후기 검색
-	@GetMapping("/search")
-	public String search(SerachReviewDto dto, Model model) {
-		List<ListReviewDto> list = reviewService.search(dto);
-		model.addAttribute("list", list);
-
-		return "post/review/list";
-	}
+	/*
+	 * @GetMapping("/search") public String search(SerachReviewDto dto, Model model)
+	 * { List<ListReviewDto> list = reviewService.search(dto);
+	 * model.addAttribute("list", list);
+	 * 
+	 * return "post/review/list"; }
+	 */
 
 	// 댓글
 	@GetMapping("/comments")

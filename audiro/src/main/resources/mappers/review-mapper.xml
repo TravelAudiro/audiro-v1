@@ -21,7 +21,7 @@
 	        , pr.introduction
 	    from post p
 	    left join users u on p.users_id = u.users_id
-	    left join favorite_post fp on p.post_id = fp.post_id 
+	    left join favorite_post fp on p.post_id = fp.post_id and u.users_id = fp.users_id
 	    left join favorite_users fu on p.users_id = fu.users_id
 	    left join profile pr on p.users_id = pr.users_id 
 	    where p.post_type_id = 10
@@ -77,10 +77,19 @@
 	
 	<!-- 여행 후기 1개 상세 내용불러오기 -->
 	<select id="readDetailsReviewById" resultType="DetailsReviewDto" >
-		select p.*, u.nickname 
+    	select p.*, u.nickname, favorite_post_id
     	from post p 
     	join users u on p.users_id = u.users_id 
-    	left join favorite_post fp on p.users_id = fp.users_id
+    	left join favorite_post fp 
+        on p.post_id = fp.post_id
+        <choose>
+	        <when test="usersId != null and usersId !=''">
+	        	and fp.users_id = #{usersId}
+	        </when>
+        	<otherwise>
+        		and fp.users_id is null
+        	</otherwise>
+        </choose>
     	where p.post_id = #{postId}
  	</select>
 
@@ -187,24 +196,33 @@
 
 	<!-- 여행후기 제목, 내용, 제목+내용, 닉네임검색 -->
 	<select id="searchKeyword" resultType="com.audiro.repository.Post">
-		<bind name="searchKeyword" value="'%' + keyword + '%'" />
 			select p.*, u.nickname as userNickname
+			<if test="usersId != null and usersId != ''">
+				, favorite_post_id
+			</if>
 			from post p
 			inner join users u on p.users_id = u.users_id
+			<if test="usersId != null and usersId != ''">
+				left join favorite_post fp
+				on p.post_id = fp.post_id
+				and fp.users_id = #{usersId}
+			</if>
 		<where>
 			<choose>
-				<when test='category.equals("t")'>
-					and upper(p.title) like upper(#{searchKeyword})
+				<when test='category != null and category.equals("t")'>
+					and upper(p.title) like '%'||upper(#{keyword})||'%'
 				</when>
-				<when test='category.equals("c")'>
-					and upper(p.content) like upper(#{searchKeyword})
+				<when test='category != null and category.equals("c")'>
+					and upper(p.content) like '%'||upper(#{keyword})||'%'
 				</when>
-				<when test='category.equals("tc")'>
-					and (upper(p.title) like upper(#{searchKeyword}) or upper(p.content)
-					like upper(#{searchKeyword}))
+				<when test='category != null and category.equals("tc")'>
+					and (
+						upper(p.title) like '%'||upper(#{keyword})||'%' 
+						or upper(p.content) like '%'||upper(#{keyword})||'%'
+					)
 				</when>
-				<when test='category.equals("n")'>
-					and upper(u.nickname) like upper(#{searchKeyword})
+				<when test='category != null and category.equals("n")'>
+					and upper(u.nickname) like upper(#{keyword})
 				</when>
 			</choose>
 		</where>

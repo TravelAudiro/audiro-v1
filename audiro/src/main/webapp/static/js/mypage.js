@@ -41,10 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		        const response = await axios.post('/audiro/api/review/likeReview/toggle', { postId });
 		        if (response.data) {
 		            tag.classList.add('active'); // 찜 추가된 경우 UI 업데이트
-		            tag.querySelector('img').src = `../../images/like_red2.png`;
 		        } else if (!response.data) {
 		            tag.classList.remove('active'); // 찜 제거된 경우 UI 업데이트
-		            tag.querySelector('img').src = `../../images/like_black.png`;
 		        }
 		    } catch (error) {
 		        console.error('Error toggling favorite:', error);

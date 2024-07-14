@@ -324,6 +324,9 @@ main {
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 	<!-- reviewMypage.js -->
+	<script>
+		let signedInUsersId = ${sessionScope.signedInUsersId};
+	</script>
 	<c:url var="mypageJS" value="/js/mypage.js" />
 	<script src="${mypageJS}"></script>
 </body>
