@@ -39,6 +39,7 @@ public class CommentsRestController {
 	
 	public final CommentDao commentDao;
 	
+	
 	//댓글불러오기
 	@GetMapping("/{postId}")
 	public List<CommentItemDto> selectByPostId(@PathVariable(value = "postId") Integer postId) {

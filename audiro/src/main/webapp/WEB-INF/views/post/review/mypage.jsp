@@ -254,7 +254,7 @@ main {
 								<span id="nickname" class="profile-nickname">${post[0].nickname}</span>
 								<button id="userLike"
 									class="likeReview ${post[0].favoriteUserId != null ? 'active' : ''}"
-									data-user-id="${signedInUser}"></button>
+									data-user-id="${signedInUsersId}"></button>
 							</h2>
 							<div class="stats">
 								<div>
@@ -278,10 +278,9 @@ main {
 							class="post-${post.postId} post type-post status-publish format-standard has-post-thumbnail hentry category-lifestyle">
 							<div class="blog-post-item"
 								style="border: 1px solid #dbdbdb; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: box-shadow 0.3s ease;">
-								<span class="cat-links"> <a href="#" rel="category tag">#####</a>
-								</span>
+							
 								<div class="featured-image">
-									<a class="post-thumbnail" href="details?postId=${post.id}"
+									<a class="post-thumbnail" href="details?postId=${post.postId}"
 										aria-hidden="true" tabindex="-1"> <img width="150"
 										height="250"
 										src="https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=f8f357b6-4fdf-41dc-a6ff-cfddb4087409"
@@ -294,17 +293,13 @@ main {
 								<div class="entry-container">
 									<header class="entry-header">
 										<h4 class="entry-title">
-											<a href="details?id=${post.id}" rel="bookmark">${post.title}</a>
+										<a href="details?postId=${post.postId}" rel="bookmark">${post.title}</a>
 										</h4>
 									</header>
 									<!-- .entry-header -->
 									<div class="entry-content">${post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content}
 									</div>
 									<!-- .entry-content -->
-									<div class="read-more">
-										<a href="details?postId=${post.id}">Read More</a>
-									</div>
-									<!-- .read-more -->
 									<div class="modified-time">
 										<small>${post.modifiedTime}</small>
 									</div>

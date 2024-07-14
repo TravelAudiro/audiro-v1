@@ -91,6 +91,8 @@
 		where post_id = #{postId}
 	</select>
 	
+	
+	 
 	<!-- 관심유저 담아있는 내용 불러오기. -->
 	<select id="getFavoriteUserIds" resultType="com.audiro.dto.LikeUserFavoriteDto">
 		select 
@@ -118,7 +120,7 @@
 	<!-- 여행후기 찜 담아있는 정보 불러오기. -->
 	<select id="getFavoritePostIds" resultType="com.audiro.dto.LikeReviewPostDto">
         select 
-		    fp.favorite_post_id as favoritePostId
+		    fp.favorite_post_id as favoritePostId,
 		    fp.post_id,
 		    fp.users_id
 		from 
@@ -126,7 +128,7 @@
 		join 
 		    users u on fp.users_id = u.users_id
 		where 
-		    u.id = #{id}
+		    u.users_id = #{usersId}
 		    and fp.post_Id = #{postId}
 	</select>
 	
@@ -141,6 +143,7 @@
 		delete from favorite_post 
 		where favorite_post_id = #{favoritePostId}
 	</delete>
+	
 
 	<!-- 여행 후기 1개 삭제 -->
 	<delete id="deleteReview" >

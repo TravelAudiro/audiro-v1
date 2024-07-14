@@ -174,7 +174,11 @@ public class ReviewService {
 
 	
 	// 여행후기 담아있지는 확인.
-	public boolean toggleFavorite(LikeReviewPostDto dto) {
+	public boolean toggleFavorite(LikeReviewPostDto dto, HttpSession session) {
+		// 세션에서 로그인한 유저 ID 가져오기
+        Integer usersId = (Integer) session.getAttribute("signedInUserId");
+        dto.setUsersId(usersId); // 세션에서 가져온 로그인 유저 ID 설정
+		
 		// 여행후기 찜 담아있는 내용 불러오기.
 		List<LikeReviewPostDto> favoritePostIds = reviewDao.getFavoritePostIds(dto);
 
@@ -197,8 +201,8 @@ public class ReviewService {
 	public boolean togglUserFavorite(LikeUserFavoriteDto dto, HttpSession session) {
 		
 		// 세션에서 로그인한 유저 ID 가져오기
-        String id = (String) session.getAttribute("signedInUser");
-        dto.setId(id); // 세션에서 가져온 로그인 유저 ID 설정
+        Integer usersId = (Integer) session.getAttribute("signedInUserId");
+        dto.setUsersId(usersId); // 세션에서 가져온 로그인 유저 ID 설정
         
 		// 여행후기 찜 담아있는 내용 불러오기.
 		List<LikeUserFavoriteDto> favoriteUserIds = reviewDao.getFavoriteUserIds(dto);

@@ -4,9 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-	// 최신순, 좋아요 콤보박스 클릭이벤트
-	const sortSelect = document.querySelector('select#sortSelect');
-	sortSelect.addEventListener('change', SelectCombobox);
 
 	//여행후기 찜 담기 클릭 이벤트
 	const btnReviewLike = document.querySelectorAll('.likeReview');
@@ -31,8 +28,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		alert('관심유저 버튼!!!!!');
 		const tag = event.currentTarget;
 		const id = tag.attributes['data-user-id'].nodeValue; // 클릭된 버튼의 data-user-id 값 가져오기
+		const favoriteUserId = "'{post[0].usersId}';
 		try {
-			const response = await axios.post('/audiro/api/review/likeUser/toggle', { id });
+			const response = await axios.post('/audiro/api/review/likeUser/toggle', { id, favoriteUserId });
 			if (response.data) {
 				tag.classList.add('active'); // 찜 추가된 경우 UI 업데이트
 				tag.querySelector('img').src = `../../images/like_red2.png`;
@@ -68,7 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		    alert('후기찜버튼!!!!!');
 		    const tag = event.currentTarget;
 		    const postId = tag.attributes['data-review-id'].nodeValue; // 클릭된 버튼의 data-review-id 값 가져오기
-		    try {
+		    
+			try {
 		        const response = await axios.post('/audiro/api/review/likeReview/toggle', { postId });
 		        if (response.data) {
 		            tag.classList.add('active'); // 찜 추가된 경우 UI 업데이트
@@ -81,41 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		        console.error('Error toggling favorite:', error);
 		    }
 		}
-		
-		
-		
-		
-		
-		
-		
 
-//like_red2.png
-
-	//콤보박스
-	function SelectCombobox() {
-		alert('클릭');
-
-		if (combobox) {
-			combobox.addEventListener('change', function() {
-				const selectCombobox = combobox.value;
-				if (selectCombobox === 'latest') {
-					console.log('최신순');
-					latest();
-
-				} else if (selectCombobox === 'likes') {
-					console.log('좋아요순');
-					likes();
-				}
-			});
-		} else {
-			console.error('error');
-		}
-	}
-
-	//좋아요 db저장
-	async function saveLike() {
-
-	}
+		
 
 });
 

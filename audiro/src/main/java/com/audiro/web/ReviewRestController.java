@@ -40,8 +40,9 @@ public class ReviewRestController {
 
 	// 여행후기 담기
 	@PostMapping("/likeReview/toggle")
-	public ResponseEntity<Boolean> likeReview(@RequestBody LikeReviewPostDto request) {
-		Boolean likeReview = reviewService.toggleFavorite(request);
+	public ResponseEntity<Boolean> likeReview(@RequestBody LikeReviewPostDto request, HttpSession session) {
+		
+		Boolean likeReview = reviewService.toggleFavorite(request, session);
 
 		return ResponseEntity.ok(likeReview);
 	}
