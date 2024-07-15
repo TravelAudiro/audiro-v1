@@ -35,7 +35,7 @@
 						</div>
 					</form>
 				</div>
-				<div class="card-body m-5">
+				<div class="tableList card-body m-5">
 					<table>
 						<thead>
 							<tr>
@@ -77,6 +77,9 @@
 				</div>
 			</div>
 		</main>
+	</div>
+	<div class="container-fluid">
+		<%@ include file="../fragments/footer.jspf"%>
 	</div>
 	<%@ include file="../fragments/modal_delete_plan.jspf"%>
 	<script
