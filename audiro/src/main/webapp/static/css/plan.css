@@ -105,17 +105,21 @@ input, h2, ul, #dayContainer, #planContainer, button, .favDestination{
 	border-style: inset;
 	border-width: 1px;
 }
-li.darkColor {
+.darkColor {
     color: #27334c;
 }
 
-li.brightColor {
+.brightColor {
     color: white;
 }
 
 .plans.click{
 	background-color: #27334c;
 	color:white;
+}
+.plans.non-click{
+	background-color: white;
+	color:#27334c;
 }
 
 

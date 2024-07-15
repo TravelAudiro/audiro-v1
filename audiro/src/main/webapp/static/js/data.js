@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 여행지 데이터 db 저장
 function getDes() {
-	const url = 'https://opensheet.elk.sh/1YORMfROHtoPOM0VR4-hLfGPfvG3hjLoItlVvdPPBAPQ/sheet';
+	const url = 'https://opensheet.elk.sh/1tblPrUU-CCwCZWkk8wQcBTGS4isR2QERONOYhpKpLds/sheet';
 	axios.get(url)
 		.then(response => {
 			const data = response.data;
@@ -32,7 +32,7 @@ function getDes() {
 }
 
 // 태그 데이터 db 저장
-function getTag() {
+function getTag() { 
 	const url = 'https://opensheet.elk.sh/12WzGX7F-FVhSzqIn7KbHw3eqj3Nb0QC2jHZk8LkALb4/tag';
 	axios.get(url)
 		.then(response => {

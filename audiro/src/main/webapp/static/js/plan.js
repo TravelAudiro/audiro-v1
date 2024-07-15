@@ -16,6 +16,14 @@ $(document).ready(function() {
 	let startDateValue = document.querySelector('input#startDate').value;
 	let endDateValue = document.querySelector('input#endDate').value;
 	const modifyUrl = "/audiro/travel/plan/modify";
+	
+	if (signedInUser === null || signedInUser === '') {
+		if (confirm("로그인하시겠습니까?")) {
+			window.location.href = '/audiro/user/signin';
+		}
+		return;
+	}
+
 
 	// Datepicker 초기화
 	$('#startDate').datepicker({
@@ -131,8 +139,7 @@ $(document).ready(function() {
 	}
 
 	function createTravelPlan() {
-		//const usersId=session.getAttribute(SESSION_ATTR_USER);
-		const usersId = '1';
+		const usersId=session.getAttribute(SESSION_ATTR_USER);
 		const title = document.querySelector('input#title').value;
 		let startDate = document.querySelector('input#startDate').value;
 		let endDate = document.querySelector('input#endDate').value;
