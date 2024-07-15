@@ -17,12 +17,12 @@ $(document).ready(function() {
 	let endDateValue = document.querySelector('input#endDate').value;
 	const modifyUrl = "/audiro/travel/plan/modify";
 	
-	if (signedInUser === null || signedInUser === '') {
+	/*if (signedInUser === null || signedInUser === '') {
 		if (confirm("로그인하시겠습니까?")) {
 			window.location.href = '/audiro/user/signin';
 		}
 		return;
-	}
+	}*/
 
 
 	// Datepicker 초기화
@@ -387,9 +387,10 @@ $(document).ready(function() {
 		const days = document.querySelectorAll('.days');
 		const clickedDay = event.target.closest('.days');
 		const plans=document.querySelectorAll('.plans');
-		const clickedPlan = event.target.closest('.plans');
+		const id=clickDays.getAttribute('day-id');
+		const clickedPlan = document.querySelector(`#dayPlan${id}`)
 		const timeline=document.querySelectorAll('.timeline');
-		const clickedTimeline=clickedPlan.querySelector('.timeline');
+		const clickedTimeline = clickedPlan.querySelector('.timeline');
 
 		// 모든 요소를 non-click으로 초기화
 		days.forEach((d) => {
