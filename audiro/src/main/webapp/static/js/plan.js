@@ -381,6 +381,8 @@ $(document).ready(function() {
 		const clickedDay = event.target.closest('.days');
 		const plans=document.querySelectorAll('.plans');
 		const clickedPlan = event.target.closest('.plans');
+		const timeline=document.querySelectorAll('.timeline');
+		const clickedTimeline=clickedPlan.querySelector('.timeline');
 
 		// 모든 요소를 non-click으로 초기화
 		days.forEach((d) => {
@@ -391,12 +393,18 @@ $(document).ready(function() {
 			p.classList.remove("click");
 			p.classList.add("non-click");
 			// 하위 li 요소의 클래스 초기화
-			let ul=p.querySelector('ul');
-			ul.classList.remove("darkColor");
-			ul.classList.remove("brightColor");
 			
 		});
-
+		
+		if (clickedTimeline) {
+		timeline.classList.remove("darkColor");
+		timeline.classList.add("brightColor");
+		// 클릭된 요소의 하위 timeline 요소에 대해 클래스 설정
+		console.log(timeline);
+		clickedTimeline.classList.remove("brightColor");
+		clickedTimeline.classList.add("darkColor");
+		
+		}
 		// 클릭된 요소만 click 클래스로 설정
 		clickedDay.classList.remove('non-click');
 		clickedDay.classList.add('click');
@@ -404,11 +412,6 @@ $(document).ready(function() {
 		clickedPlan.classList.remove('non-click');
 		clickedPlan.classList.add('click');
 
-		const id=clickedDay.getAttribute('day-id');
-		// 클릭된 요소의 하위 li 요소에 대해 클래스 설정
-		let ul=document.querySelector(`#dayPlan${id}`).querySelector('ul');
-		ul.classList.remove("darkColor");
-		ul.classList.remove("brightColor");
 		
 		console.log(`id=${id}`);
 		document.querySelector(`#dayPlan${id}`).classList.remove('non-click');
@@ -542,7 +545,7 @@ $(document).ready(function() {
 		htmlStr = `
 			<div id="dayPlan${index}" day-id="${index}" class="plans non-click row g-0 m-2">
 				<h5>${index}일차</h5>
-				<div class="timeline">
+				<div class="timeline brightColor">
 					<ul>
 				 	</ul>
 				</div>
@@ -558,10 +561,21 @@ $(document).ready(function() {
 			p.classList.remove('click');
 			p.classList.add('non-click');
 		})
+		// 모든 일차를 non-click 상태로 설정
+		const timeline = document.querySelectorAll('.timeline');
+		timeline.forEach((t) => {
+			t.classList.remove('darkColor');
+			t.classList.add('brightColor');
+		})
 		// 최신 일차를 click 상태로 설정
 		const newDay = document.querySelector(`#dayPlan${index}`);
 		newDay.classList.remove('non-click');
 		newDay.classList.add('click');
+		
+		const newTimeLine=newDay.querySelector('.timeline');
+		newTimeLine.classList.remove('brightColor');
+		newTimeLine.classList.add('darkColor');
+		
 	}
 
 
@@ -686,7 +700,7 @@ $(document).ready(function() {
 			planStr = `
                 	<div id="dayPlan${i}" day-id="${i}" class="plans non-click row g-0 m-2">
 						<h5>${i}일차</h5>
-						<div class="timeline">
+						<div class="timeline brightColor">
 							<ul>
 						 	</ul>
 						</div>
