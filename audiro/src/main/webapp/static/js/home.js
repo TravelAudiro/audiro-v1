@@ -16,18 +16,17 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
     // 캐러셀 초기화 함수
-    function initCarousel(carouselId, pauseButtonId) {
-        var pauseButton = document.getElementById(pauseButtonId);
-        var carouselElement = document.querySelector(`#${carouselId}`);
-        if (pauseButton && carouselElement) {
-            var carousel = new bootstrap.Carousel(carouselElement, {
+    function initCarousel(carouselId) {
+        var carouselElement = document.querySelector('#destinationCarousel');
+        if (carouselElement) {
+            new bootstrap.Carousel(carouselElement, {
                 interval: 3000 // 슬라이드 전환 시간 (밀리초)
             });
-      
         } else {
-			console.error(`Element with ID ${pauseButtonId} or ${carouselId} not found`);
+            console.error('Element with ID destinationCarousel not found');
         }
         
+    initCarousel('destinationCarousel');
     }
 
 
@@ -105,9 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const dataId = element.getAttribute('data-id');
         
         if (signedInUser === null || signedInUser === '') {
-            if (confirm("로그인하시겠습니까?")) {
+            const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+            confirmModal.show();
+
+            document.getElementById('confirmBtn').addEventListener('click', function() {
                 window.location.href = '/audiro/user/signin';
-            }
+            });
             return;
         }
 

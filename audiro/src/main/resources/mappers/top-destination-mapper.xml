@@ -41,9 +41,9 @@
 		)
 		select travel_destination_id, name, address, img_url, num_favorites, rank
 		from mainTopDestination
-		where rank &lt;=12
+		where rank &lt;=15
 		order by rank, travel_destination_id
-		fetch first 12 rows only
+		fetch first 15 rows only
     </select>
     
 </mapper>

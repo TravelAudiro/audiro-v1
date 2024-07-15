@@ -12,6 +12,8 @@
     rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
     crossorigin="anonymous" />
+<link href="https://webfontworld.github.io/Cafe24SsurroundAir/Cafe24SsurroundAir.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
     
 <c:url var="favoriteListCss" value="/css/favorite_list.css" />
 <link href="${favoriteListCss}" rel="stylesheet" />
@@ -20,37 +22,41 @@
 <body>
     <div class="container-fluid">
         <%@ include file="../fragments/header.jspf"%>
-        <main class="favorite d-flex justify-content-center">
-            <div>
+        <main class="favorite">
+             <div class="favorite-content">
 	            <div class="title">
 	                <c:url var="heart" value="/images/heart.png" />
-	                <img src="${heart}" alt="heart" height="100">
+	                <img src="${heart}" alt="heart" height="70">
 	            </div>
-                <div class="card-wrapper">
-                	<div class="card mt-2">
-                    <div class="card-body">
-                        
+	            
+	            <div class="d-flex justify-content-between align-items-center">
+                    <ul class="nav nav-tabs w-100">                       
                         <!--Nav tabs -->
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
+                        <!-- <ul class="nav nav-tabs w-100"> -->
+                            <li class="nav-item flex-fill text-center">
                                 <a class="nav-link ${activeTab == '#tab-destination' ? 'active' : ''}" data-bs-toggle="tab" href="#tab-destination">여행지</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item flex-fill text-center">
                                 <a class="nav-link ${activeTab == '#tab-users' ? 'active' : ''}" data-bs-toggle="tab" href="#tab-users">관심유저</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item flex-fill text-center">
                                 <a class="nav-link ${activeTab == '#tab-post' ? 'active' : ''}" data-bs-toggle="tab" href="#tab-post">여행후기</a>
                             </li>
-                        </ul>
+                      </ul>
+                  </div>
                         
+                  <div class="card">
+                    <div class="card-body"> 
                         <!-- Sort Options -->
-						<div id="sort-container" class="mt-3">
+						<div id="sort-container" class="d-flex justify-content-end ms-2 mt-2 mr-2">
 						    <select id="sort-select" onchange="sortFavorites()">
 						        <option value="created_time" ${currentSort == 'created_time' ? 'selected' : ''}>최근 ♥순</option>
 						        <option value="name" ${currentSort == 'name' ? 'selected' : ''}>이름순</option>
 						    </select>
 						</div>
-                        
+					</div>
+					
+                       
                         <!--Tab panes -->
                         <div class="tab-content">
                             <div id="tab-destination" class="tab-pane fade ${activeTab == '#tab-destination' ? 'show active' : ''}">
@@ -58,9 +64,13 @@
 						            <c:forEach items="${favoriteDestination}" var="destination">
 						                <c:if test="${destination.usersId == sessionScope.signedInUsersId}">
 						                    <div class="favorite-list-container card">
-						                        <img src="${destination.imgUrl}" alt="${destination.favoriteDestination}" />
+						                    		<a href="/audiro/travel/details?id=${destination.destinationId}">
+						                        		<img src="${destination.imgUrl}" alt="${destination.favoriteDestination}" />
+						                        </a>
 						                        <div class="title-like-container">
-	                                                 <h5 class="card-title">${destination.favoriteDestination}</h5>
+	                                                 <h5 class="card-title">
+	                                                 	<a href="/audiro/travel/details?id=${destination.destinationId}">${destination.favoriteDestination}</a>
+	                                                 </h5>
 	                                                 <c:url var="like" value="/images/like_black.png" />
 	                                                 <p class="like" onclick="toggleLike(this)" data-type="destination" data-id="${destination.destinationId}">
 	                                                 	<img src="${like}" alt="like"></p>
@@ -106,8 +116,14 @@
                         </div>
                     </div>
                 </div>
+            
+            <div id="recently-viewed-container" class="ms-5">
+                <h3>최근 본 여행지</h3>
+                 <div id="recently-viewed">
+                    <!-- 최근 본 여행지 목록은 JavaScript에서 렌더링 -->
+                </div>
             </div>
-            </div>
+            
         </main>
     </div>
     
@@ -115,20 +131,6 @@
         <%@ include file="../fragments/footer.jspf" %>
     </div>
 	
-	<!-- <script>
-		window.embeddedChatbotConfig = {
-		chatbotId: "pgf573bMUX-3poQ0E4AMT",
-		domain: "www.chatbase.co"
-		}
-	</script>
-	
-	<script
-		src="https://www.chatbase.co/embed.min.js"
-		chatbotId="pgf573bMUX-3poQ0E4AMT"
-		domain="www.chatbase.co"
-		defer>
-	</script>
-	-->
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

@@ -18,20 +18,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
 <style>
-.navbar-nav .nav-item {
-	margin-left: 10px; /* 왼쪽 간격 */
+.navbar-brand {
+	margin-top: -30px;
+	
+}
+#nav-main .navbar-nav .nav-item {
+	margin-left: 20px; /* 왼쪽 간격 */
 	margin-right: 20px; /* 오른쪽 간격 */
 	font-family: "Nanum Gothic Coding", monospace;
 }
-.navbar-brand img {
-	display: block;
-	margin: 0; /* 이미지 주위의 여백 제거 */
-	padding: 0; /* 이미지 주위의 패딩 제거 */
-	transition: transform 0.3s ease, box-shadow 0.3s ease; /* 애니메이션 효과 추가 */
+#nav-user .navbar-nav .nav-item {
+	font-family: "Nanum Gothic Coding", monospace;
 }
-
 #nav-main {
-	font-size: 17px;
+	font-size: 15px;
 	font-weight: bold;
 	margin-top: 0px;
 }
@@ -41,15 +41,17 @@
 	padding: 0; /* 이미지 주위의 패딩 제거 */
 	transition: transform 0.3s ease, box-shadow 0.3s ease; /* 애니메이션 효과 추가 */
 }
-
-#nav-main img:hover {
-	transform: translateY(-5px); /* 이미지가 위로 올라가는 효과 */
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 사각형 테두리에 그림자 효과 */
-}
 #nav-user {
 	font-size:15px;
 	margin-bottom: 0px;
 	font-weight: bold;
+}
+.navbar-logo {
+    margin-right: 50px; /* 원하는 여백 값으로 조정 */
+}
+
+.custom-navbar-nav {
+    margin-left: 150px; /* 원하는 여백 값으로 조정 */
 }
 
 </style>
@@ -98,7 +100,7 @@
         <c:url var="audiroPage" value="/" />     
         <a class="navbar-brand" href="${audiroPage}">
         		<c:url var="audiroLogo" value="/images/logo30.png" />
-        		<img src="${audiroLogo}" alt="logo" width="150" height="50"/>
+        		<img src="${audiroLogo}" alt="logo" width="150" height="50" class="navbar-logo"/>
        	</a>
         <button class="navbar-toggler" type="button"
             data-bs-toggle="collapse"
@@ -108,8 +110,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-            <ul class="navbar-nav">          
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav custom-navbar-nav">          
                 <!-- 여행지 찾기 -->
                 <li class="nav-item">
                     <c:url var="travelDestinationPage" value="/travel/search" />
