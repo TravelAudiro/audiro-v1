@@ -43,7 +43,7 @@ body {
 }
 
 .cardTitle {
-	font-size:10px;
+	font-size:13px;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -103,16 +103,12 @@ input, h2, ul, #dayContainer, #planContainer, button, .favDestination{
 	border-width: 1px;
 }
 .darkColor {
-     color: white;
      background-color: #27334c;
 }
 
 .brightColor {
-   
-     color: #27334c;
      background-color:white;
 }
-
 .plans.click{
 	background-color: #27334c;
 	color:white;

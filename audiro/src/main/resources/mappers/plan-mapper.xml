@@ -24,12 +24,12 @@
 
 	<select id="selectAllTrvaelPlan" resultType="TravelPlan">
 		select * from
-		travel_plan order by created_time
+		travel_plan where users_id = #{usersId} order by created_time
 	</select>
 	
 	<select id="selectAllTrvaelPlanOrderByTitle" resultType="TravelPlan">
 		select * from
-		travel_plan order by title
+		travel_plan where users_id = #{usersId} order by title
 	</select>
 	
 	<select id="selectTravelPlanById" resultType="TravelPlan">

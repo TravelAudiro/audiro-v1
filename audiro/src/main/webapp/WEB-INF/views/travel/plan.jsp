@@ -32,6 +32,7 @@
 		<!-- hidden input for travelPlanId -->
 		<input type="hidden" id="travelPlanIdForModify"
 			name="travelPlanIdForModify" value="${travelPlanIdForModify}" />
+		<input type="hidden" value=${signedInUsersId} id="signedInUsersId"/>
 	</div>
 
 	<div class="container-full mx-5 text-center">

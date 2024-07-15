@@ -41,13 +41,13 @@ public class TravelPlanService {
 		return result;
 	}
 	
-	public List<TravelPlan> readAllTravelPlan() {
-		List<TravelPlan> list=travelPlanDao.selectAllTrvaelPlan();
+	public List<TravelPlan> readAllTravelPlan(int usersId) {
+		List<TravelPlan> list=travelPlanDao.selectAllTrvaelPlan(usersId);
 		return list;
 	}
 	
-	public List<TravelPlan> readAllTravelPlanOrderByTitle(){
-		List<TravelPlan> list=travelPlanDao.selectAllTrvaelPlanOrderByTitle();
+	public List<TravelPlan> readAllTravelPlanOrderByTitle(int usersId){
+		List<TravelPlan> list=travelPlanDao.selectAllTrvaelPlanOrderByTitle(usersId);
 		return list;
 	}
 	
