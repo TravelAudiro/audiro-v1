@@ -387,10 +387,12 @@ $(document).ready(function() {
 		const days = document.querySelectorAll('.days');
 		const clickedDay = event.target.closest('.days');
 		const plans=document.querySelectorAll('.plans');
-		const id=clickDays.getAttribute('day-id');
+		const id=clickedDay.getAttribute('day-id');
 		const clickedPlan = document.querySelector(`#dayPlan${id}`)
 		const timeline=document.querySelectorAll('.timeline');
-		const clickedTimeline = clickedPlan.querySelector('.timeline');
+		const clickedTimeline =  clickedPlan ? clickedPlan.querySelector('.timeline') : null;
+		console.log(clickedPlan);
+		console.log(clickedTimeline);
 
 		// 모든 요소를 non-click으로 초기화
 		days.forEach((d) => {
@@ -404,14 +406,19 @@ $(document).ready(function() {
 			
 		});
 		
-		if (clickedTimeline) {
-		timeline.classList.remove("darkColor");
-		timeline.classList.add("brightColor");
-		// 클릭된 요소의 하위 timeline 요소에 대해 클래스 설정
-		console.log(timeline);
-		clickedTimeline.classList.remove("brightColor");
-		clickedTimeline.classList.add("darkColor");
+		timeline.forEach((t) => {
+			t.classList.remove("darkColor");
+			t.classList.add("brightColor");
+			// 하위 li 요소의 클래스 초기화
+			
+		});
 		
+		
+		if (clickedTimeline) {
+			// 클릭된 요소의 하위 timeline 요소에 대해 클래스 설정
+			clickedTimeline.classList.remove("brightColor");
+			clickedTimeline.classList.add("darkColor");
+			
 		}
 		// 클릭된 요소만 click 클래스로 설정
 		clickedDay.classList.remove('non-click');
