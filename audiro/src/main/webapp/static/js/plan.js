@@ -17,12 +17,12 @@ $(document).ready(function() {
 	let endDateValue = document.querySelector('input#endDate').value;
 	const modifyUrl = "/audiro/travel/plan/modify";
 	
-	/*if (signedInUser === null || signedInUser === '') {
+	if (signedInUser === null || signedInUser === '') {
 		if (confirm("로그인하시겠습니까?")) {
 			window.location.href = '/audiro/user/signin';
 		}
 		return;
-	}*/
+	}
 
 
 	// Datepicker 초기화
@@ -139,7 +139,8 @@ $(document).ready(function() {
 	}
 
 	function createTravelPlan() {
-		const usersId=session.getAttribute(SESSION_ATTR_USER);
+		const usersId=document.getElementById('signedInUsersId').value;
+		console.log(usersId);
 		const title = document.querySelector('input#title').value;
 		let startDate = document.querySelector('input#startDate').value;
 		let endDate = document.querySelector('input#endDate').value;
@@ -386,13 +387,9 @@ $(document).ready(function() {
 	function clickDays(event) {
 		const days = document.querySelectorAll('.days');
 		const clickedDay = event.target.closest('.days');
-		const plans=document.querySelectorAll('.plans');
-		const id=clickedDay.getAttribute('day-id');
-		const clickedPlan = document.querySelector(`#dayPlan${id}`)
-		const timeline=document.querySelectorAll('.timeline');
-		const clickedTimeline =  clickedPlan ? clickedPlan.querySelector('.timeline') : null;
-		console.log(clickedPlan);
-		console.log(clickedTimeline);
+		const plans = document.querySelectorAll('.plans');
+		const timeline = document.querySelectorAll('.timeline');
+		
 
 		// 모든 요소를 non-click으로 초기화
 		days.forEach((d) => {
@@ -403,34 +400,43 @@ $(document).ready(function() {
 			p.classList.remove("click");
 			p.classList.add("non-click");
 			// 하위 li 요소의 클래스 초기화
-			
+
 		});
-		
+
 		timeline.forEach((t) => {
 			t.classList.remove("darkColor");
 			t.classList.add("brightColor");
 			// 하위 li 요소의 클래스 초기화
-			
+
 		});
-		
-		
-		if (clickedTimeline) {
-			// 클릭된 요소의 하위 timeline 요소에 대해 클래스 설정
-			clickedTimeline.classList.remove("brightColor");
-			clickedTimeline.classList.add("darkColor");
-			
+
+		if (clickedDay) {
+			const id = clickedDay.getAttribute('day-id');
+			const clickedPlan = document.querySelector(`#dayPlan${id}`)
+			const clickedTimeline = clickedPlan ? clickedPlan.querySelector('.timeline') : null;
+			console.log(clickedPlan);
+			console.log(clickedTimeline);
+			if (clickedTimeline) {
+				// 클릭된 요소의 하위 timeline 요소에 대해 클래스 설정
+				clickedTimeline.classList.remove("brightColor");
+				clickedTimeline.classList.add("darkColor");
+				return;
+
+			}
+			// 클릭된 요소만 click 클래스로 설정
+			clickedDay.classList.remove('non-click');
+			clickedDay.classList.add('click');
+
+			clickedPlan.classList.remove('non-click');
+			clickedPlan.classList.add('click');
+			console.log(`id=${id}`);
+			document.querySelector(`#dayPlan${id}`).classList.remove('non-click');
+			document.querySelector(`#dayPlan${id}`).classList.add('click');
 		}
-		// 클릭된 요소만 click 클래스로 설정
-		clickedDay.classList.remove('non-click');
-		clickedDay.classList.add('click');
 
-		clickedPlan.classList.remove('non-click');
-		clickedPlan.classList.add('click');
 
-		
-		console.log(`id=${id}`);
-		document.querySelector(`#dayPlan${id}`).classList.remove('non-click');
-		document.querySelector(`#dayPlan${id}`).classList.add('click');
+
+
 
 	}
 

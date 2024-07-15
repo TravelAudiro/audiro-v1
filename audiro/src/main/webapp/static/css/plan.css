@@ -105,16 +105,9 @@ input, h2, ul, #dayContainer, #planContainer, button, .favDestination{
 .darkColor {
      background-color: #27334c;
 }
-.darkColor .name{
-	color: white;
-}
 
 .brightColor {
      background-color:white;
-}
-
-.brightColor .name{
-	color: #27334c;
 }
 .plans.click{
 	background-color: #27334c;

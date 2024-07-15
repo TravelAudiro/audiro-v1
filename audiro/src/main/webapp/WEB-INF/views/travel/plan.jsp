@@ -89,7 +89,7 @@
 			</div>
 		</div>
 	</div>
-	
+	<input type="hidden" value=${signedInUsersId} id="signedInUsersId"/>
 	<div class="container-fluid">
 		<%@ include file="../fragments/footer.jspf"%>
 	</div>

@@ -21,10 +21,12 @@
 	padding: 3em 2em 2em;
 	position: relative;
 	border-left: 2px solid; 
-	color: rgba(246, 241, 180, 1);
 }
-.list .name{
-	color:black
+.darkColor .name{
+	color: white;
+}
+.brightColor .name{
+	color: #27334c;
 }
 
 .list::before {   
@@ -39,19 +41,34 @@
 	font-size: .785rem;
 }
 
-.list::after {
+.darkColor.list::after {
 	width: 10px;
 	height: 10px;
 	display: block;
 	top: 1em;
 	position: absolute;
 	left: -7px;
-	border-radius: 10px;
+	border-radius: 50%;
 	content: '';
-	border: 2px solid rgba(246, 241, 180, 1);
+	border: 2px solid white;
+	color: white;
+	background: white;
+	
+}
+.brightColor.list::after {
+	width: 10px;
+	height: 10px;
+	display: block;
+	top: 1em;
+	position: absolute;
+	left: -7px;
+	border-radius: 50%;
+	content: '';
+	border: 2px solid #27334c;
+	color: #27334c;
 	background: white;
 }
 
 .list:last-child {
-	border-image: linear-gradient(to bottom, purple 60%, #F6F1B4 100%);
+	border-image: linear-gradient(to bottom, purple 60%, #27334c 100%);
 }
