@@ -86,12 +86,12 @@ $(document).ready(function() {
 
 	});
 	
-	planContainer.addEventListener('click', (event) => {
+	/*planContainer.addEventListener('click', (event) => {
 		event.preventDefault(); // 폼 제출 기본 동작 막기
 		clickDays(event);
 
 	});
-	
+	*/
 	function createAll() {
 		createDayForm();
 		createPlanForm();
@@ -399,15 +399,11 @@ $(document).ready(function() {
 		plans.forEach((p) => {
 			p.classList.remove("click");
 			p.classList.add("non-click");
-			// 하위 li 요소의 클래스 초기화
-
 		});
 
 		timeline.forEach((t) => {
 			t.classList.remove("darkColor");
 			t.classList.add("brightColor");
-			// 하위 li 요소의 클래스 초기화
-
 		});
 
 		if (clickedDay) {
@@ -420,8 +416,6 @@ $(document).ready(function() {
 				// 클릭된 요소의 하위 timeline 요소에 대해 클래스 설정
 				clickedTimeline.classList.remove("brightColor");
 				clickedTimeline.classList.add("darkColor");
-				return;
-
 			}
 			// 클릭된 요소만 click 클래스로 설정
 			clickedDay.classList.remove('non-click');

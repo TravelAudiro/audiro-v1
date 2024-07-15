@@ -13,6 +13,8 @@ import com.audiro.dto.DetailedPlanDto;
 import com.audiro.repository.TravelPlan;
 import com.audiro.service.TravelPlanService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,8 +32,10 @@ public class TravelPlanController {
 	}
 
 	@GetMapping("/list")
-	public String list(Model model) {
-		List<TravelPlan> list= service.readAllTravelPlan();
+	public String list(HttpServletRequest request, Model model) {
+		HttpSession session=request.getSession();
+		int usersId=(int) session.getAttribute("signedInUsersId");
+		List<TravelPlan> list= service.readAllTravelPlan(usersId);
 		model.addAttribute("travelPlan", list);
 		return "/travel/plan_list";
 	}
@@ -51,12 +55,14 @@ public class TravelPlanController {
 	}
 	
 	@GetMapping("/search")
-	public String search(@RequestParam(name = "category", defaultValue = "c") String category, Model model) {
+	public String search(@RequestParam(name = "category", defaultValue = "c") String category,HttpServletRequest request, Model model) {
 		List<TravelPlan> list;
+		HttpSession session=request.getSession();
+		int usersId=(int) session.getAttribute("signedInUsersId");
 		if ("t".equals(category)) {
-			list = service.readAllTravelPlanOrderByTitle();
+			list = service.readAllTravelPlanOrderByTitle(usersId);
 		} else {
-			list = service.readAllTravelPlan();
+			list = service.readAllTravelPlan(usersId);
 		}
 		model.addAttribute("travelPlan", list);
 		return "/travel/plan_list";
