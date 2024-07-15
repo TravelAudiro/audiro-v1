@@ -47,6 +47,14 @@
             <param-value>/WEB-INF/servlet-context.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
+        
+        <multipart-config>
+            <location>${catalina.base}/wtpwebapps/audiro/static/images</location>
+            <max-file-size>20848820</max-file-size> <!-- 20MB -->
+            <max-request-size>418018841</max-request-size> <!-- 400MB -->
+            <file-size-threshold>1048576</file-size-threshold> <!-- 1MB -->
+        </multipart-config>
+        
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>

@@ -81,7 +81,7 @@
 	                    <a class="nav-link" href="${favoritePage}"><img src="${heart}" alt="heart" height="30"></a>
 	                </li>  
 	                <li class="nav-item">
-	                		<c:url var="myPage" value="/user/mypage">
+	                		<c:url var="myPage" value="/mypage">
 	                		<c:param name="id" value="${signedInUser}"></c:param>
 	                		</c:url>
 	                		<a class="nav-link" href="${myPage}">${signedInUsersNickname}님의 마이페이지</a>
