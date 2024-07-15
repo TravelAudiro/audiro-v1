@@ -14,6 +14,7 @@ public class CommentUpdateDto {
     private Integer isPrivate;
     private LocalDateTime modifiedTime;
     
+    
     // 프로필에서 닉네임과 이미지 수정되면 댓글 의 닉네임과 이미지들도 자동으로 수정되는지,,,????
 
     // CommentUpdateDto 타입을 Commnet 타입으로 변환해서 리턴.

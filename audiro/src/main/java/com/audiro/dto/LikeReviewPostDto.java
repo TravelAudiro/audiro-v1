@@ -14,6 +14,7 @@ public class LikeReviewPostDto {
 	private Integer usersId;
 	private Integer postId;
 	private Integer isChecked;
+	private String id;
 
 }
 

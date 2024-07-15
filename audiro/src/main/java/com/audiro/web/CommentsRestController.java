@@ -39,6 +39,7 @@ public class CommentsRestController {
 	
 	public final CommentDao commentDao;
 	
+	
 	//댓글불러오기
 	@GetMapping("/{postId}")
 	public List<CommentItemDto> selectByPostId(@PathVariable(value = "postId") Integer postId) {
@@ -47,26 +48,36 @@ public class CommentsRestController {
 	
 	//대 댓글등록
 	@PostMapping("/")
-	public ResponseEntity<Integer> insertComment(@RequestBody CommentCreateDto dto) {
+	public ResponseEntity<Integer> insertComment(@RequestBody CommentCreateDto dto, HttpSession session) {
+		String id = (String) session.getAttribute("signedInUser");
+		Integer usersId =  (Integer) session.getAttribute("signedInUsersId");
+		dto.setId(id);
+		dto.setUsersId(usersId);
 		log.debug("insertComment={}",dto);
-		
+	
 		int result = commentDao.insert(dto);
 		return ResponseEntity.ok(result);
 	}
 	
 	//새 댓글등록
 	@PostMapping("/new")
-	public ResponseEntity<Integer> newInsertComment(@RequestBody CommentCreateDto dto, HttpSession session) {
+	public ResponseEntity<String> newInsertComment(@RequestBody CommentCreateDto dto, HttpSession session) {
 		String id = (String) session.getAttribute("signedInUser"); // 세션에서 ID 가져오기
 		log.debug("Signed in user ID from session: " + id); 
 		
-		if (id == null) {
-	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // 유저가 로그인되어 있지 않은 경우 처리
-	    }
+		//if (id == null) {
+	    //    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // 유저가 로그인되어 있지 않은 경우 처리
+	   // }
 		
 	    dto.setId(id); // DTO에 ID 설정		
 		int result = commentDao.newInsert(dto);
-		return ResponseEntity.ok(result);
+		
+		if (result == 1) {
+			return ResponseEntity.ok("Y");
+		} else {
+			return ResponseEntity.ok("N");
+		} 
+		//return ResponseEntity.ok(result);
 	}
 	
 	// 댓글 수정
@@ -90,6 +101,4 @@ public class CommentsRestController {
         return ResponseEntity.ok(result);
 	}
 	
-	
-
 }

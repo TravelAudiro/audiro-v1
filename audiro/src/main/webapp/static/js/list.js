@@ -14,22 +14,25 @@ document.addEventListener('DOMContentLoaded', function() {
 	//여행후기 찜 담기 클릭 이벤트
 	const btnReviewLike = document.querySelectorAll('.likeReview');
 	btnReviewLike.forEach(btn => {
-		btn.addEventListener('click', favoriteReview);
+		btn.addEventListener('click', updateReveiw);
 	});
 	
+
+
 	
 	//여행후기 찜담기(찜담고 삭제기능)
-		async function favoriteReview(event) {
+		async function updateReveiw(event) {
 			alert('찜!!!!!!!!!!!!!!!');
 			const tag = event.currentTarget;
 			const postId = tag.attributes['data-review-id'].nodeValue; // 클릭된 버튼의 data-review-id 값 가져오기
-			const id = document.querySelector('input#id');
-			
+			const id = document.querySelector('input#usersId').value;
+			//const favoriteId
 			console.log('Post ID:', postId); // 디버깅을 위해 콘솔에 출력
 			console.log('Users ID:', id); // 디버깅을 위해 콘솔에 출력
 			
 			try {
-				const response = await axios.post('/audiro/api/review/likeReview/toggle', { postId });
+				const response = await axios.post('/audiro/api/review/likeReview/toggle', { postId },{ usersId });
+				console.log('Server response:', response.data);
 				if (response.data) {
 					tag.classList.add('active'); // 좋아요 추가된 경우 UI 업데이트
 				} else if (!response.data) {
@@ -42,67 +45,87 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-	//정렬
-	const rankForm = document.getElementById('rank');
-	const selectElement = rankForm.querySelector('select');
+		
+	
+		    // 버튼 요소를 ID로 가져옵니다
+		    const sortLatestButton = document.querySelector('button#sortLatest');
+		    const sortLikesButton = document.querySelector('button#sortLikes');
 
-	// select 요소 변경 시 이벤트 리스너 추가
-	selectElement.addEventListener('change', function() {
-		// 선택된 정렬 옵션 값 가져오기
-		const selectedOption = selectElement.value;
-		console.log('Selected option:', selectedOption);
+		    // 최신순 버튼 클릭 이벤트 리스너 추가
+		    sortLatestButton.addEventListener('click', function() {
+				alert('클릭');
+		        sortReviews('latest');
+		    });
 
-		// FormData 객체를 사용하여 선택된 값을 전송
-		const formData = new FormData();
-		formData.append('sort', selectedOption);
+		    // 좋아요순 버튼 클릭 이벤트 리스너 추가
+		    sortLikesButton.addEventListener('click', function() {
+				alert('클릭');
+		        sortReviews('likes');
+		    });
 
-		// Axios를 사용하여 서버로부터 데이터를 가져오기
-		axios.get(`/audiro/api/review/list?sort=${selectedOption}`)
-			.then(response => {
-				const data = response.data;
-				updateReviewList(data);
-			})
-			.catch(error => {
-				console.error(error);
-			});
-	});
+		    // 정렬된 리뷰 목록을 가져오는 함수
+		    function sortReviews(sortOption) {
+		        console.log('Selected option:', sortOption);
+
+		        // Axios를 사용하여 선택된 값을 쿼리 파라미터로 포함한 GET 요청을 보냅니다
+		        axios.get(`/api/review/list?sort=${sortOption}`)
+		            .then(response => {
+		                // 응답 데이터를 처리합니다
+		                const data = response.data;
+		                updateReviewList(data);
+		            })
+		            .catch(error => {
+		                // 에러를 처리합니다
+		                console.error(error);
+		            });
+		    }
+
+		    // 리뷰 목록을 업데이트하는 함수
+		    function updateReviewList(data) {
+		        // 리뷰를 표시할 컨테이너를 가져옵니다
+		        const reviewContainer = document.getElementById('reviewContainer');
+		        reviewContainer.innerHTML = '';
+
+		        // 데이터를 반복하면서 각 리뷰에 대한 HTML을 생성합니다
+		        data.forEach(review => {
+		            const reviewElement = document.createElement('div');
+		            reviewElement.classList.add('review-item');
+		            reviewElement.innerHTML = `
+					<div class="row row-cols-1 row-cols-md-4 g-4">
+					                           <!-- 여행후기 카드 반복문  이미지변경하기 -->
+					                           <c:forEach var="list" items="${list}">
+					                               <div class="col">
+					                               <input id="postId" name="postId" type="hidden" value="${post.postId}" /> 
+					                               <input id="usersId" name="usersId" type="hidden" value="${signedInUsersId}" /> 
+					                                   <div class="card h-80">
+					                                       <div class="position-relative">
+					                                           <img src="https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=f8f357b6-4fdf-41dc-a6ff-cfddb4087409" class="card-img-top" alt="...">
+					                                           <p class="btn likeReview ${list.favoritePost != null ? 'active' : ''}" data-review-id="${list.postId}" style="position: absolute; top: 10px; right: 1px; z-index: 10;">
+					                                               <img src="<c:url value='/images/like.png' />" alt="like" style="width: 24px; height: 24px;" />
+					                                           </p>
+					                                       </div>
+					                                       <div class="card-body">
+					                                           <!-- 클릭 시 상세페이지로 이동하는 링크 -->
+					                                           <h5 class="card-title">
+					                                               <a href="details?postId=${list.postId}&id=${list.id}" class="card-link">${list.title}</a>
+					                                           </h5>
+					                                           <a href="#" class="list-group-item list-group-item-action">
+					                                               <div class="d-flex w-100 justify-content-between">
+					                                                   <small>${list.modifiedTime}</small>
+					                                               </div>
+					                                           </a>
+					                                       </div>
+					                                   </div>
+					                               </div>
+					                           </c:forEach>
+					                       </div>
+		            `;
+		            reviewContainer.appendChild(reviewElement);
+						});
+					}
+				});
 
 
-	// 리뷰 목록을 업데이트하는 함수
-	function updateReviewList(data) {
-		const reviewContainer = document.querySelector('.row.row-cols-1.row-cols-md-4.g-4'); // 리뷰 목록 컨테이너 요소
-		reviewContainer.innerHTML = ''; // 기존 리뷰 목록 제거
-
-		data.forEach(review => {
-			const reviewCard = document.createElement('div');
-			reviewCard.className = 'col';
-			reviewCard.innerHTML = `
-            <div class="card h-80">
-                <div class="card-header" style="text-align: right">
-                    <button class="btn like-btn" data-review-id="${review.postId}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
-                            <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1" />
-                        </svg>
-                    </button>
-                </div>
-                <div>
-                    <img src="${review.imageUrl}" class="card-img-top" alt="...">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="details?postId=${review.postId}" class="card-link">${review.title}</a>
-                    </h5>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <small>${review.modifiedTime}</small>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        `;
-			reviewContainer.appendChild(reviewCard);
-		});
-	}
 
 
 
@@ -110,9 +133,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
-
-
-
-});

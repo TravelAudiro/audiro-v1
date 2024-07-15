@@ -21,11 +21,11 @@
 	        , pr.introduction
 	    from post p
 	    left join users u on p.users_id = u.users_id
-	    left join favorite_post fp on p.post_id = fp.post_id 
+	    left join favorite_post fp on p.post_id = fp.post_id and u.users_id = fp.users_id
 	    left join favorite_users fu on p.users_id = fu.users_id
 	    left join profile pr on p.users_id = pr.users_id 
 	    where p.post_type_id = 10
-	          and u.id = #{id}
+	          and u.users_id = #{id}   
 	    order by p.modified_time desc
 	</select>
 
@@ -45,7 +45,7 @@
 		select p.path
 		from profile p
 		join users u on p.users_id = u.users_id
-		where u.id = #{id}
+		where u.users_id = #{usersId}
 	</select>
 	
 	<!-- 나를 찜한 유저 수 -->
@@ -77,10 +77,19 @@
 	
 	<!-- 여행 후기 1개 상세 내용불러오기 -->
 	<select id="readDetailsReviewById" resultType="DetailsReviewDto" >
-		select p.*, u.nickname 
+    	select p.*, u.nickname, favorite_post_id
     	from post p 
     	join users u on p.users_id = u.users_id 
-    	left join favorite_post fp on p.users_id = fp.users_id
+    	left join favorite_post fp 
+        on p.post_id = fp.post_id
+        <choose>
+	        <when test="usersId != null and usersId !=''">
+	        	and fp.users_id = #{usersId}
+	        </when>
+        	<otherwise>
+        		and fp.users_id is null
+        	</otherwise>
+        </choose>
     	where p.post_id = #{postId}
  	</select>
 
@@ -91,15 +100,17 @@
 		where post_id = #{postId}
 	</select>
 	
+	
+	 
 	<!-- 관심유저 담아있는 내용 불러오기. -->
 	<select id="getFavoriteUserIds" resultType="com.audiro.dto.LikeUserFavoriteDto">
 		select 
          	    fu.*
-         	  , u.user_id as favoriteUserId
+         	  , u.users_id as favoriteUserId
    		from favorite_users fu
    		join users u on fu.users_id = u.users_id
    		where 
-         	 u.id = #{id}
+         	 u.users_id = #{usersId}
         and fu.interested_user_Id = #{interestedUserId} 
 	</select>
 
@@ -118,7 +129,7 @@
 	<!-- 여행후기 찜 담아있는 정보 불러오기. -->
 	<select id="getFavoritePostIds" resultType="com.audiro.dto.LikeReviewPostDto">
         select 
-		    fp.favorite_post_id as favoritePostId
+		    fp.favorite_post_id as favoritePostId,
 		    fp.post_id,
 		    fp.users_id
 		from 
@@ -126,7 +137,7 @@
 		join 
 		    users u on fp.users_id = u.users_id
 		where 
-		    u.id = #{id}
+		    u.users_id = #{usersId}
 		    and fp.post_Id = #{postId}
 	</select>
 	
@@ -141,10 +152,11 @@
 		delete from favorite_post 
 		where favorite_post_id = #{favoritePostId}
 	</delete>
+	
 
 	<!-- 여행 후기 1개 삭제 -->
-	<delete id="deleteReview" >>
-		delete post where post_id = #{postId}
+	<delete id="deleteReview" >
+		delete from post where post_id = #{postId}
 	</delete>
 
 	<!-- 여행후기 저장하기 -->
@@ -184,24 +196,33 @@
 
 	<!-- 여행후기 제목, 내용, 제목+내용, 닉네임검색 -->
 	<select id="searchKeyword" resultType="com.audiro.repository.Post">
-		<bind name="searchKeyword" value="'%' + keyword + '%'" />
 			select p.*, u.nickname as userNickname
+			<if test="usersId != null and usersId != ''">
+				, favorite_post_id
+			</if>
 			from post p
 			inner join users u on p.users_id = u.users_id
+			<if test="usersId != null and usersId != ''">
+				left join favorite_post fp
+				on p.post_id = fp.post_id
+				and fp.users_id = #{usersId}
+			</if>
 		<where>
 			<choose>
-				<when test='category.equals("t")'>
-					and upper(p.title) like upper(#{searchKeyword})
+				<when test='category != null and category.equals("t")'>
+					and upper(p.title) like '%'||upper(#{keyword})||'%'
 				</when>
-				<when test='category.equals("c")'>
-					and upper(p.content) like upper(#{searchKeyword})
+				<when test='category != null and category.equals("c")'>
+					and upper(p.content) like '%'||upper(#{keyword})||'%'
 				</when>
-				<when test='category.equals("tc")'>
-					and (upper(p.title) like upper(#{searchKeyword}) or upper(p.content)
-					like upper(#{searchKeyword}))
+				<when test='category != null and category.equals("tc")'>
+					and (
+						upper(p.title) like '%'||upper(#{keyword})||'%' 
+						or upper(p.content) like '%'||upper(#{keyword})||'%'
+					)
 				</when>
-				<when test='category.equals("n")'>
-					and upper(u.nickname) like upper(#{searchKeyword})
+				<when test='category != null and category.equals("n")'>
+					and upper(u.nickname) like upper(#{keyword})
 				</when>
 			</choose>
 		</where>

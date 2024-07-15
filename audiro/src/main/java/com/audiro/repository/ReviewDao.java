@@ -38,7 +38,7 @@ public interface ReviewDao {
 	
 	// 여행후기 게시판//////////////////////////////////////////////////////////////
 	// 여행후기 postId로 1개 상세보기
-	DetailsReviewDto readDetailsReviewById(Integer postId, String id);
+	DetailsReviewDto readDetailsReviewById(DetailsReviewDto dto);
 
 	// 여행후기 postId good 수
 	int countGoodByPostId(Integer postId);
@@ -80,7 +80,7 @@ public interface ReviewDao {
 	List<Post> searchKeyword(SerachReviewDto dto);
 		
 	//프로필 이미지 가져오기
-	String profileImg(String id);
+	String profileImg(Integer id);
 	
 	
 	//여행후기 임시저장
@@ -95,6 +95,7 @@ public interface ReviewDao {
 	
 	//임시저장 삭제하기
 	int deleteDraftPost(Integer draftPostId);
+
 	
 	
 	

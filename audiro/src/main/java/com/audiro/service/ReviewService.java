@@ -56,7 +56,7 @@ public class ReviewService {
 
 	}
 	//프로필 이미지 가져오기
-	public String img(String id) {
+	public String img(Integer id) {
 		String profileimg = reviewDao.profileImg(id);
 		return profileimg;
 	}
@@ -108,9 +108,9 @@ public class ReviewService {
 
 	///////////////////////////////////////////////////////
 	// 내 여행후기게시판 상세보기
-	public DetailsReviewDto readById(Integer postId, String id) {
-        
-		DetailsReviewDto list = reviewDao.readDetailsReviewById(postId, id);
+	public DetailsReviewDto readById(DetailsReviewDto dto) {
+
+		DetailsReviewDto list = reviewDao.readDetailsReviewById(dto);
 		
 		// 날짜 포맷팅을 위한 패턴 설정
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -160,8 +160,10 @@ public class ReviewService {
 	}
 
 	// 여행후기 모두 불러오기(최신순)
-	public List<ListReviewDto> readAll() {
-		List<Post> list = reviewDao.selectReviewAll();
+	public List<ListReviewDto> readAll(SerachReviewDto dto, HttpSession session) {
+	    Integer id = (Integer) session.getAttribute("signedInUsersId");
+	    dto.setUsersId(id);
+		List<Post> list = reviewDao.searchKeyword(dto);
 		return list.stream().map(ListReviewDto::fromEntity).toList();
 	}
 
@@ -174,7 +176,11 @@ public class ReviewService {
 
 	
 	// 여행후기 담아있지는 확인.
-	public boolean toggleFavorite(LikeReviewPostDto dto) {
+	public boolean toggleFavorite(LikeReviewPostDto dto, HttpSession session) {
+		// 세션에서 로그인한 유저 ID 가져오기
+        Integer usersId = (Integer) session.getAttribute("signedInUsersId");
+        dto.setUsersId(usersId); // 세션에서 가져온 로그인 유저 ID 설정
+		
 		// 여행후기 찜 담아있는 내용 불러오기.
 		List<LikeReviewPostDto> favoritePostIds = reviewDao.getFavoritePostIds(dto);
 
@@ -197,8 +203,8 @@ public class ReviewService {
 	public boolean togglUserFavorite(LikeUserFavoriteDto dto, HttpSession session) {
 		
 		// 세션에서 로그인한 유저 ID 가져오기
-        String id = (String) session.getAttribute("signedInUser");
-        dto.setId(id); // 세션에서 가져온 로그인 유저 ID 설정
+        Integer usersId = (Integer) session.getAttribute("signedInUserId");
+        dto.setUsersId(usersId); // 세션에서 가져온 로그인 유저 ID 설정
         
 		// 여행후기 찜 담아있는 내용 불러오기.
 		List<LikeUserFavoriteDto> favoriteUserIds = reviewDao.getFavoriteUserIds(dto);
