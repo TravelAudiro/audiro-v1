@@ -36,14 +36,14 @@
 
 	<div class="container-full mx-5 text-center">
 		<div class="row">
-			<div class="card col-8 px-0">
+			<div class="card col-8 px-0" id="container1">
 				<c:url var="createPlan" value="/api/plan/create"></c:url>
 				<form method="post" action="${createPlan}">
 					<div class="row g-0 ">
 						<div class="col-3 p-2 ">
 							<div class="row g-0">
 								<div id="btnContainer">
-
+								<!-- style="display: none;" -->
 									<button id="deleteAll" class="btn btn-primary">전체 삭제</button>
 									<button type="submit" id="btnSave" class="btn btn-primary">저장</button>
 								</div>
@@ -54,7 +54,7 @@
 
 						<div class="col-9">
 							<div id="planContainer">
-								<div class="row g-0 m-2">
+								<div class="planInput row g-0 m-2">
 									<div class="col-sm-6 col-12 mb-2">
 										<div id="title" class="mb-2">
 											<input type="text" id="title" name="title" maxlength="40"
@@ -81,31 +81,24 @@
 
 			<div class="card col-4 px-0">
 				<div class="card-body">
-					<h2>찜 목록 불러오기</h2>
 
 					<div class="content row row-cols-1 row-cols-md-4 g-4 m-1"
 						id="favDestination"></div>
-					<nav aria-label="Page navigation example">
-						<ul class="pagination">
-							<li class="pages-item"><a class="page-link" href="#"
-								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-							</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">4</a></li>
-							<li class="page-item"><a class="page-link" href="#">5</a></li>
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-							</a></li>
-						</ul>
-					</nav>
+					
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<div class="container-fluid">
+		<%@ include file="../fragments/footer.jspf"%>
+	</div>
 	<%@ include file="../fragments/modal_delete_plan.jspf"%>
 
+	<script>
+        const signedInUser = `${signedInUser}`;
+    </script>
+    
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script

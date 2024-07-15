@@ -4,7 +4,13 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-
+	/*if (signedInUser === null || signedInUser === '') {
+		if (confirm("로그인하시겠습니까?")) {
+			window.location.href = '/audiro/user/signin';
+		}
+		return;
+	}*/
+	
 	//여행후기 찜 담기 클릭 이벤트
 	const btnReviewLike = document.querySelectorAll('.likeReview');
 	btnReviewLike.forEach(btn => {

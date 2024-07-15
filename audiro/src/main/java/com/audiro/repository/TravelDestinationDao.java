@@ -4,8 +4,6 @@ import java.util.List;
 
 public interface TravelDestinationDao {
 
-	int saveAll(TravelDestination destination);
-	
 	List<TravelDestination> findAll();
 	
 	TravelDestination selectAllById(Integer id);

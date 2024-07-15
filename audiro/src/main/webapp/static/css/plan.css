@@ -4,20 +4,136 @@ body {
 	font-size: 14px;
 	line-height: 1.5;
 }
-input, h2, ul, #dayContainer, button{
+
+#container1{
+	border-radius: 10px;
+    padding: 35px 30px;
+}
+.row{ overflow: hidden;}
+
+.favDestination {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    flex-grow: 1;
+    margin: 10px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+    flex-grow: 1;
+}
+
+.card-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.cardTitle {
+	font-size:10px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.fav{
+   
+	border-radius: 10px;
+    box-shadow: 5px 5px 5px gray;
+    padding: 35px 30px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.fav.img{
+	 width: 100%;
+    height: 100%;
+}
+.fav.h5{
+	font-size: 10px;
+}
+.fav-img-top{
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+input, h2, ul, #dayContainer, #planContainer, button, .favDestination{
 	font-family: 'Cafe24SsurroundAir' !important;
 }
+
+.plans{
+	padding: 15px 20px;
+	position: relative;
+	margin-bottom:30px;
+}
+.plans:hover{
+	cursor: pointer;
+}
+.plans.active {
+	background-color: #27334c; /* Change this to your desired color */
+}
+
+::after, ::before{
+	box-sizing:border-box;
+}
+
 
 #planContainer h5 {
 	font-family: 'Cafe24SsurroundAir';
 	font-size: 2rem;
 	margin-bottom: .5em;
-	background-color: #F6F1B4;
 }
 
-.click {
+.days.click {
 	border-style: inset;
 	border-width: 1px;
+}
+.darkColor {
+     color: white;
+     background-color: #27334c;
+}
+
+.brightColor {
+   
+     color: #27334c;
+     background-color:white;
+}
+
+.plans.click{
+	background-color: #27334c;
+	color:white;
+}
+.plans.non-click{
+	background-color: white;
+	color:#27334c;
+}
+
+
+
+.plans::before {
+    content: "";
+    width: 100%;
+    height: 5px;
+    border-radius: 0px;
+    background: #000000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.5s ease 0s;
 }
 
 .days {
