@@ -17,32 +17,69 @@
 
 
 	//details  commnet 등록
-	const registerCommmetnbtn = document.querySelector('button#registerCommmetnbtn');
-	registerCommmetnbtn.addEventListener('click', registerCommmetnbtnListener);
+	const registerCommentBtn = document.querySelector('button#registerCommmetbtn'); 
+	registerCommentBtn.addEventListener('click', registerCommentBtnListener); 
+
 
 
 	////////////////////////////////////////////////////////////////////////////////
 	
+		// 댓글 등록 함수
+	    function registerCommentBtnListener(e) { 
+	        log.debug('버튼 클릭 이벤트 감지됨'); // 디버그 로그 추가
+	        const usersId = document.getElementById('loginUsersId').value;
+	        
+	        // 사용자가 로그인하지 않은 경우 로그인 페이지로 리디렉션합니다.
+	        if (usersId === null || usersId === '') {
+	            if (confirm("로그인 후 댓글등록 가능합니다. 로그인하시겠습니까?")) {
+	                window.location.href = '/audiro/user/signin';
+	            }
+	            return;
+	        }
+
+	        const postId = document.querySelector('#postId').value;
+	        const content = document.querySelector('#comment').value;
+	        
+	        // 댓글 내용이 비어 있는지 확인합니다.
+	        if (content === '') {
+	            alert('댓글 내용을 입력하세요.');
+	            return;
+	        }
+
+	        const data = { postId, content, usersId };
+
+	        // axios를 사용하여 서버에 댓글 데이터를 전송합니다.
+	        axios.post('/audiro/api/comment/new', data)
+	            .then((response) => {
+	                getAllComments(); // 댓글 목록을 새로 고칩니다.
+	                document.querySelector('textarea#comment').value = ''; // 댓글 입력란을 초기화합니다.
+	            })
+	            .catch((error) => {
+	                console.error('댓글 등록 중 오류 발생:', error); // 에러 로그 출력
+	            });
+	   }
+	
+	
 	//댓글 등록
 	function registerCommmetnbtnListener(e) {
-		
-		/*
-		if (signedInUser === null || signedInUser === '') {
+		log.debug('!!!!!!!!!!!!')
+; const usersId = document.getElementById('loginUsersId').value;
+		if (usersId === null || usersId=== '') {
 		            if (confirm("로그인 후 댓글등록 가능합니다. 로그인하시겠습니까?")) {
 		                window.location.href = '/audiro/user/signin';
 		            }
 		            return;
 		        }
-		*/
+		
 		
 		const postId = document.querySelector('#postId').value;
 		const content = document.querySelector('#comment').value;
-		const id = document.querySelector('#id').value;
+	//	const id = document.querySelector('#id').value;
 		if (content === '') {
 			alert('댓글 내용을 입력하세요.')
 			return;
 		}
-		const data = { postId, content, id };
+		const data = { postId, content, usersId };
 
 		axios
 			.post('/audiro/api/comment/new', data)
@@ -54,6 +91,10 @@
 			});
 	}
 
+	
+	
+	
+	
 	//여행후기 수정버튼
 	function modifyBtnListener() {
 		
@@ -78,6 +119,7 @@
 			form.submit();
 		}
 	}
+	
 		
 });    
 /////////////////////////////////////////////////////////////////////////////
@@ -221,8 +263,8 @@
 		const formattedTime = `${modifiedTime.getFullYear()}-${modifiedTime.getMonth() + 1}-${modifiedTime.getDate()} ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 
 		// 수정,삭제아이콘
-		const pencilPath = "M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325";
-		const trashPath = "M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5";
+		//const pencilPath = "M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325";
+		//const trashPath = "M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5";
 
 		// 대댓글 아이콘
 		const replyIcon = level > 0 ? '<svg class="reply-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12H21M3 12L8 7M3 12L8 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '';

@@ -35,7 +35,7 @@
 	    insert into comments (post_id, users_id, content)
 	    select #{postId}, u.users_id, #{content}
 	    from users u
-	    where u.id = #{id}
+	    where u.users_id = #{usersId}
 	</insert>
 
     

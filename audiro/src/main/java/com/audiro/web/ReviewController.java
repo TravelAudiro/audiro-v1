@@ -52,7 +52,7 @@ public class ReviewController {
 		List<DetailedPlanDto> list = service.readDetailedPlanByTravelPlanId(id);
 		List<DraftPost> draft = reviewService.draftList();
 		model.addAttribute("drafts", draft);
-		model.addAttribute("travelPlan",plan);
+		model.addAttribute("travelPlan",plan);		
 		model.addAttribute("list",list);
 
 	}
