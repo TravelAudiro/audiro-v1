@@ -6,11 +6,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Insert title here</title>
+    <title>여행지 상세보기</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
     <c:url var="travelDetailsCss" value="/css/travel-details.css" />
     <link href="${travelDetailsCss}" rel="stylesheet" />
     <c:url var="heartCss" value="/css/heart.css" />
@@ -26,31 +27,33 @@
             <div class="card">
                 <div class="card-header">
                     <span class="d-none" id="destination-id">${destination.travelDestinationId}</span>
-                    <span>${destination.name}</span>
+                    <h5>${destination.name}</h5>
                     <c:url var="imgLike" value="/images/like_black.png" />
                     <img src="${imgLike}" class="img-like" alt="like" />
                 </div>
                 
                 <div class="card-body">
                     <img src="${destination.imgUrl}" alt="${destination.name}">
-                    <h5>상세정보</h5>
+                    <h6>상세정보</h6>
                     <p>${destination.description}</p>
-                </div>
-            
-                <div class="card-footer">
                     <div id="map" latitude="${destination.latitude}" longitude="${destination.longitude}"></div>
-                    <div class="row">
-                        <div class="col-3">
-                            <p>문의 및 안내</p>
-                            <p>홈페이지</p>
-                            <p>주소</p>
-                        </div>
-                        <div class="col-9">
-                            <p>${destination.phone}</p>
-                            <a href="${destination.site}">${destination.site}</a>
-                            <p>${destination.address}</p>
-                        </div>
-                    </div>
+                    
+               		<table class="table">
+					    <tbody>
+					        <tr>
+					            <th scope="row">문의 및 안내</th>
+					            <td>${destination.phone}</td>
+					        </tr>
+					        <tr>
+					            <th scope="row">홈페이지</th>
+					            <td><a href="${destination.site}">${destination.site}</a></td>
+					        </tr>
+					        <tr>
+					            <th scope="row">주소</th>
+					            <td>${destination.address}</td>
+					        </tr>
+					    </tbody>
+					</table>
                 </div>
             </div>
             

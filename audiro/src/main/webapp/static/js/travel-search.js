@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const btnSearch = document.querySelector('button#btnSearch');
     btnSearch.addEventListener('click', clickBtnSearch);
+	
+	const btnReset = document.querySelector('button#btnReset');
+	btnReset.addEventListener('click', clickBtnReset);
     
     let baseUri = `../api/travel/search-tags?`;
     let regionTags = [];
@@ -29,6 +32,26 @@ document.addEventListener('DOMContentLoaded', function() {
         const initialUri = baseUri.slice(0, -1);
         sendRequest(initialUri);
     }
+	
+	function clickBtnReset() {
+	    regionTags = [];
+	    themeTags = [];
+	    companionTags = [];
+
+	    for (let tag in tagCategories) {
+	        delete tagCategories[tag];
+	    }
+
+	    const btnNewTags = document.querySelectorAll('button.new-badge');
+	    btnNewTags.forEach(tag => tag.remove());
+
+	    document.querySelector('input#inputSearch').value = '';
+
+	    currentPage = 1;
+	    keyword = '';
+
+	    updateUri();
+	}
     
     function clickTag(event) {
         const tag = event.target.textContent.substring(2);
@@ -130,14 +153,16 @@ document.addEventListener('DOMContentLoaded', function() {
         destinations.forEach(d => {
             const destinationDetailsPage = `./details?id=${d.travelDestinationId}`;
             const html = `
-                <div class="col-4 card">
-                    <a href="${destinationDetailsPage}">
-                        <img src="${d.imgUrl}" class="img-destination" alt="${d.name}" />
-                    </a>
-                    <div>
-                        <span>${d.name}</span>
-                        <img src="../images/like_black.png" class="img-like" alt="like" data-id="${d.travelDestinationId}" />
-                    </div>
+                <div class="col-4">
+					<div class="card">
+	                    <a href="${destinationDetailsPage}">
+	                        <img src="${d.imgUrl}" class="img-destination" alt="${d.name}" />
+	                    </a>
+	                    <div class="title-container">
+	                        <span>${d.name}</span>
+	                        <img src="../images/like_black.png" class="img-like" alt="like" data-id="${d.travelDestinationId}" />
+	                    </div>
+					</div>
                 </div>
             `;
             cardContainer.innerHTML += html;

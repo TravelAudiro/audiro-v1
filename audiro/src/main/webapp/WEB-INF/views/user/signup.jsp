@@ -6,11 +6,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>signup</title>
+    <title>회원가입</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+    	integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    	crossorigin="anonymous" referrerpolicy="no-referrer" />
     <c:url var="header2Css" value="/css/header2.css" />
     <link href="${header2Css}" rel="stylesheet" />
     <c:url var="signUpCss" value="/css/signup.css" />
@@ -24,23 +27,41 @@
         </header>
         
         <main>
-            <div class="card card-body col-6 mx-auto">
+            <div class="card card-body mx-auto">
                 <c:url var="signUpPage" value="/user/signup"/>
                 <form action="${signUpPage}" method="post">
-                    <input type="text" class="form-control" id="id" name="id" placeholder="아이디" required autofocus />
-                    <div id="checkIdResult"></div>
-                    <input type="password" class="form-control" id="password" name="passwordHash" placeholder="비밀번호" required />
-                    <input type="password" class="form-control" id="confirmPassword" placeholder="비밀번호 확인" required />
-                    <div id="checkPasswordResult"></div>
-                    <input type="text" class="form-control" id="username" name="userName" placeholder="이름" required />
-                    <div id="checkUsernameResult"></div>
-                    <input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임" required />
-                    <div id="checkNicknameResult"></div>
-                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="전화번호" required />
-                    <div id="checkPhoneResult"></div>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="이메일" required />
-                    <div id="checkEmailResult"></div>
-                    <button class="form-control btn btn-outline-success disabled" id="btnSignUp">작성 완료</button>
+                	<div class="input-container">
+                		<input type="text" class="form-control" id="id" name="id" placeholder="아이디" required autofocus />
+                    	<i class="fa-solid fa-check d-none" style="color: #4caf50;"></i>
+                		<div id="checkIdResult" class="text-danger"></div>
+                	</div>
+                    <div class="input-container">
+                    	<input type="password" class="form-control" id="password" name="passwordHash" placeholder="비밀번호" required />
+                    	<i class="fa-solid fa-check d-none" style="color: #4caf50;"></i>
+                    	<input type="password" class="form-control" id="confirmPassword" placeholder="비밀번호 확인" required />
+                    	<div id="checkPasswordResult" class="text-danger"></div>
+                    </div>
+                    <div class="input-container">
+                    	<input type="text" class="form-control" id="username" name="userName" placeholder="이름" required />
+                    	<i class="fa-solid fa-check d-none" style="color: #4caf50;"></i>
+                    	<div id="checkUsernameResult" class="text-danger"></div>
+                    </div>
+                    <div class="input-container">
+                    	<input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임" required />
+                   		<i class="fa-solid fa-check d-none" style="color: #4caf50;"></i>
+                   		<div id="checkNicknameResult" class="text-danger"></div>
+                    </div>
+                    <div class="input-container">
+                    	<input type="tel" class="form-control" id="phone" name="phone" placeholder="전화번호" required />
+                    	<i class="fa-solid fa-check d-none" style="color: #4caf50;"></i>
+                    	<div id="checkPhoneResult" class="text-danger"></div>
+                    </div>
+                    <div class="input-container">
+                    	<input type="email" class="form-control" id="email" name="email" placeholder="이메일" required />
+                    	<i class="fa-solid fa-check d-none" style="color: #4caf50;"></i>
+                    	<div id="checkEmailResult" class="text-danger"></div>
+                    </div>
+                    <button class="form-control btn btn-dark disabled" id="btnSignUp">작성 완료</button>
                 </form>
             </div>
         </main>
