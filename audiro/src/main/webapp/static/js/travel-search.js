@@ -189,17 +189,31 @@ document.addEventListener('DOMContentLoaded', function() {
     function updatePagination(totalPages) {
         const pagination = document.querySelector('ul#pagination');
         pagination.innerHTML = '';
+		
+		const maxVisiblePages = 5;
+		const startPage = Math.floor((currentPage - 1) / maxVisiblePages) * maxVisiblePages + 1;
+		const endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
     
         const firstPage = `
-            <li class="page-item">
+            <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
                 <a class="page-link" href="#" aria-label="First">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
         `;
         pagination.innerHTML += firstPage;
+		
+		const prevPageSet = `
+			<li class="page-item ${startPage === 1 ? 'disabled' : ''}">
+				<a class="page-link" href="#" aria-label="PreviousSet">
+					<span aria-hidden="true">&lsaquo;</span>
+				</a>
+			</li>
+		`;
+		pagination.innerHTML += prevPageSet;	
+					
     
-        for (let i = 1; i <= totalPages; i++) {
+        for (let i = startPage; i <= endPage; i++) {
             const btnPage = `
                 <li class="page-item ${currentPage === i ? 'active' : ''}">
                     <a class="page-link" href="#" data-page="${i}">${i}</a>
@@ -207,9 +221,18 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             pagination.innerHTML += btnPage;
         }
+		
+		const nextPageSet = `
+			<li class="page-item ${endPage >= totalPages ? 'disabled' : ''}">
+				<a class="page-link" href="#" aria-label="NextSet">
+					<span aria-hidden="true">&rsaquo;</span>
+				</a>
+			</li>
+		`;
+		pagination.innerHTML += nextPageSet;
     
         const lastPage = `
-            <li class="page-item">
+            <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
                 <a class="page-link" href="#" aria-label="Last">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
@@ -224,7 +247,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 const ariaLabel = event.target.getAttribute('aria-label');
                 if (ariaLabel === 'First') {
                     currentPage = 1;
-                } else if (ariaLabel === 'Last') {
+                } else if (ariaLabel === 'PreviousSet') {
+					currentPage = Math.max(startPage - maxVisiblePages, 1);
+				} else if (ariaLabel === 'NextSet') {
+					if (endPage < totalPages) {
+						currentPage = endPage + 1;
+					} else {
+						currentPage = totalPages;
+					}
+				} else if (ariaLabel === 'Last') {
                     currentPage = totalPages;
                 } else {
                     const page = parseInt(event.target.dataset.page);
@@ -238,12 +269,24 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const firstArrow = pagination.querySelector('[aria-label="First"]');
         const lastArrow = pagination.querySelector('[aria-label="Last"]');
+		const prevArrow = pagination.querySelector('[aria-label="PreviousSet"]');
+		const nextArrow = pagination.querySelector('[aria-label="NextSet"]');
+		
         if (currentPage === 1) {
             firstArrow.parentElement.classList.add('disabled');
-        }
+			prevArrow.parentElement.classList.add('disabled');
+        } else {
+			firstArrow.parentElement.classList.remove('disabled');
+			prevArrow.parentElement.classList.remove('disabled');
+		}
+		
         if (currentPage === totalPages) {
             lastArrow.parentElement.classList.add('disabled');
-        }
+			nextArrow.parentElement.classList.add('disabled');
+        } else {
+			lastArrow.parentElement.classList.remove('disabled');
+			nextArrow.parentElement.classList.remove('disabled');
+		}
     }
     
     function updateFavoriteStates(destinations) {
