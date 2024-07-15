@@ -24,8 +24,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const imgLike = document.querySelector('img.img-like');
     imgLike.addEventListener('click', clickLike);
     
+    // 최근 본 여행지 추가
     const destinationId = document.querySelector('#destination-id').innerHTML;
+
+    addRecentlyViewedDestination(destinationId);
+
+    function addRecentlyViewedDestination(destinationId) {
+        axios.post('../recentlyViewed/add', {
+            destinationId: destinationId
+        }).then(response => {
+            console.log('Recently viewed destination added successfully');
+        }).catch(error => {
+            console.error('Error adding recently viewed destination:', error);
+        });
+    }
     
+    //
     if (signedInUser !== null && signedInUser !== '') {
         getFavoriteState();
     }
@@ -95,4 +109,5 @@ document.addEventListener('DOMContentLoaded', function() {
             heartAnimation.classList.remove('play-animation');
         }, 2000);
     }
-})
+    
+});

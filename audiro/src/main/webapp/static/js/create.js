@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	saveBtn.addEventListener('click', saveBtnListener);
 
 	//cerate.jsp 임시저장
-	const draftBtn = document.querySelector('button#draftbtn');
-	draftBtn.addEventListener('click', draftBtnListener);
+	//const draftBtn = document.querySelector('button#draftbtn');
+	//draftBtn.addEventListener('click', draftBtnListener);
 
 
 	/*
@@ -35,28 +35,76 @@ document.addEventListener('DOMContentLoaded', () => {
 	/*--------------------------------------------------------------------------------------------------------- */
 
 	// 여행 코스 선택 버튼 클릭 시 모달 표시
-	const selectTravelCourseButton = document.querySelector('#selectTravelCourseButton');
-	selectTravelCourseButton.addEventListener('click', () => {
-		$('#selectTravelCourseModal').modal('show');
-	});
+		const selectTravelCourseButton = document.querySelector('#selectTravelCourseButton');
+	        selectTravelCourseButton.addEventListener('click', () => {
+	            $('#selectTravelCourseModal').modal('show');
+	        });
+	   // 여행 코스 선택 완료 버튼 클릭 시 처리
+	   const selectTravelCourseCompleteButton = document.querySelector('#selectTravelCourseCompleteButton');
+	   selectTravelCourseCompleteButton.addEventListener('click', () => {
+	       // 여행 코스 선택 로직 구현 (임시로 선택 완료 버튼 클릭 시 alert만 띄우도록 예시로 작성)
+	       alert('여행 코스를 선택했습니다.');
 
-	// 여행 코스 선택 완료 버튼 클릭 시 처리
-	const selectTravelCourseCompleteButton = document.querySelector('#selectTravelCourseCompleteButton');
-	selectTravelCourseCompleteButton.addEventListener('click', () => {
-		// 여행 코travelCourseContent스 선택 로직 구현 (임시로 선택 완료 버튼 클릭 시 alert만 띄우도록 예시로 작성)
-		alert('여행 코스를 선택했습니다.');
+	       // 여행 코스 내용을 특정 영역에 표시할 부분 추가
+	       const selectedCourse = `  		   	
+		   <div class="card-body m-5">
+		   		<table>
+		   			<thead>
+		   				<tr>
+		   					<th>제목</th>
+		   					<th>기간</th>
+		   					<th>기간</th>
+		   					<th>후기작성여부</th>
+		   				</tr>
+		   			</thead>
+		   			<tbody>
+		   				<c:forEach items="${travelPlan}" var="t">
+		   					<tr>
+		   						<td><c:url var="planDetailsPage"
+		   								value="/travel/plan/details">
+		   								<c:param name="id" value="${t.travelPlanId}"></c:param>
+		   							</c:url> <a href="${planDetailsPage}">${t.title}</a></td>
+		   						<c:set var="days" value="${t.duration+1}"></c:set>
+		   						<td>${t.duration}박${days}일</td>
+		   						<td>${t.startDate}~${t.endDate}</td>
+		   						<td><c:choose>
+		   								<c:when test="${t.isReviewed==0}">
+									   		No
+									   	</c:when>
+		   								<c:when test="${t.isReviewed==1}">
+									   		Yes
+									   	</c:when>
+		   							</c:choose></td>
+		   						<td class="img" plan-id="${t.travelPlanId}"><img
+		   							class="deletePlanImg" src="/audiro/images/delete.png" />
+		   						</td>
+		   					</tr>
+		   				</c:forEach>
+		   			</tbody>
+		   		</table>
+		   	</div>	   
+		   `; 
+		   // 여행 코스 선택 로직 구현 필요
+		   document.querySelector('modalBodyContent').innerHTML = selectedCourse;
 
-		// 여행 코스 내용을 특정 영역에 표시할 부분 추가
-		const selectedCourse = '여행 코스 내용을 가져와서 여기에 표시'; // 여행 코스 선택 로직 구현 필요
+	       //const travelCourseContent = document.querySelector('#travelCourseContent');
+	       //travelCourseContent.textContent = selectedCourse;
 
-		const travelCourseContent = document.querySelector('#travelCourseContent');
-		travelCourseContent.textContent = selectedCourse;
+	       // 모달 닫기
+	       $('#selectTravelCourseModal').modal('hide');
+	   });
 
-		// 모달 닫기
-		$('#selectTravelCourseModal').modal('hide');
-	});
+	   // 모달 닫기 버튼 클릭 시 모달 닫기
+	   document.querySelector('.modal-footer .btn-secondary').addEventListener('click', () => {
+	       $('#selectTravelCourseModal').modal('hide');
+	   });
 
-
+	   
+	   
+	   
+	   
+	   
+	   
 	// 저장 버튼 클릭 시 실행할 함수
 	function saveBtnListener(e) {
 		//alert('저장 버튼 클릭!');
@@ -64,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		e.preventDefault();// 버튼기본동작을 막음.
 
 		const inputTitle = document.querySelector('input#title').value;
-		const content = document.querySelector('textarea#c_editor').value;
+		const content = document.querySelector('.ql-editor').innerHTML;
 
 		// form 찾음. -> form.action, form.method 설정 -> form.submit()
 		const form = document.querySelector('form#createForm')
@@ -73,17 +121,26 @@ document.addEventListener('DOMContentLoaded', () => {
 			alert('제목과 내용은 반드시 입력하세요.');
 			return;
 		}
+		document.querySelector("#c_editor").value = content;
+		
 		form.action = 'create';
 		form.method = 'POST';
 
 		form.submit();
 
 	}
+	
+	
+	// 임시저장 선택 버튼 클릭 시 모달 표시
+		   const selectdraftButton = document.querySelector('#draftbtn');
+		   selectdraftButton.addEventListener('click', () => {
+		       $('#selectTravelCourseModal').modal('show');
+		   });
 
 	// 임시 저장하기
 	function draftBtnListener(e) {
 		e.preventDefault();// 버튼기본동작을 막음.
-
+		alert('ddddd');
 		const form = document.querySelector('form#createForm')
 
 		form.action = 'draft';
@@ -135,6 +192,65 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	
 	
+	
+	
+	
+	
+	
+	    thumbnailButton.on('click', function() {
+	        thumbnailInput.click();
+	    });
+
+	    thumbnailInput.on('change', function(event) {
+	        const file = event.currentTarget.files[0];
+	        const currentThumbnail = thumbnailPreview.attr('src');
+
+	        if (currentThumbnail && currentThumbnail !== '#') {
+	            if (!confirm('이미 썸네일 이미지가 등록되어 있습니다. 새로운 썸네일 이미지로 교체하시겠습니까?')) {
+	                event.currentTarget.value = '';
+	                return;
+	            }
+	        }
+
+	        if (file) {
+	            const reader = new FileReader();
+	            reader.onload = function(e) {
+	                thumbnailPreview.attr('src', e.target.result).show();
+	                thumbnailDeleteButton.show();
+
+	                const img = '<img src="' + e.target.result + '" alt="썸네일 이미지" id="thumbnailImage">';
+	                const delta = quill.clipboard.convert(img);
+	                quill.setContents(delta, 'silent');
+	                c_editor.val(e.target.result); // 썸네일 이미지를 textarea에 저장
+	            };
+	            reader.readAsDataURL(file);
+	        }
+	    });
+
+	    thumbnailDeleteButton.on('click', function() {
+	        thumbnailInput.val('');
+	        thumbnailPreview.attr('src', '#').hide();
+	        thumbnailDeleteButton.hide();
+
+	        quill.deleteText(0, quill.getLength(), 'silent');
+	        c_editor.val(''); // textarea에서 썸네일 이미지 제거
+	    });
+
+	    // 저장 버튼 클릭 시 textarea에 에디터 내용 저장
+	    $('#savebtn').on('click', function() {
+	        const editorContent = quill.root.innerHTML;
+	        c_editor.val(editorContent);
+	        $('#createForm').submit();
+	    });
+	});
+	
+	
+	
+	
+	
+	
+	
+	
 	// 썸네일 이미지 1개만 추가하기
 	$('#thumbnailInput').on('change', function(event) {
 	    const file = event.currentTarget.files[0];
@@ -162,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	            $('#thumbnailPreview').attr('src', e.target.result).show();
 	            $('#thumbnailDeleteButton').show();
 	            const img = '<img src="' + e.target.result + '" alt="썸네일 이미지" id="thumbnailImage">';
-	            $('#summernote').summernote('pasteHTML', img);
+	            $('#c_editor').editor('pasteHTML', img);
 	        };
 	        reader.readAsDataURL(file);
 	    }
@@ -210,9 +326,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-});
 
 
 

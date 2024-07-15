@@ -36,9 +36,9 @@
 		<!-- 인기 여행지 -->
 		<h3 class="top-title">찜 여행지 순위</h3>
 		<div id="destinationCarousel" class="carousel slide" data-bs-ride="carousel">
+				
 			<div class="carousel-inner">
-				<c:forEach items="${topDestination}" var="destination"
-					varStatus="status">
+				<c:forEach items="${topDestination}" var="destination" varStatus="status">
 					<c:choose>
 						<c:when test="${status.index % 3 == 0}">
 							<div class="carousel-item ${status.index == 0 ? 'active' : ''}">
@@ -51,20 +51,26 @@
 						<img src="${destination.imgUrl}" class="d-block w-100" alt="${destination.name}"/>
 						<p class="like" onclick="toggleLike(this)" data-id="${destination.travelDestinationId}" data-type="destination">
 						<img src="images/like.png" alt="like" /></p>		
-						
-						
-	
 					</div>
 					<c:choose>
-						<c:when
-							test="${status.index % 3 == 2 || status.index == (topDestination.size() - 1)}">
+						<c:when test="${status.index % 3 == 2 || status.index == (topDestination.size() - 1)}">
 								</div>
 							</div>
 						</c:when>
 					</c:choose>
 				</c:forEach>
 			</div>
-
+			
+			<div style="height: 50px;"></div>
+			
+			<div class="carousel-indicators">
+                <button type="button" data-bs-target="#destinationCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#destinationCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#destinationCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#destinationCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#destinationCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+            </div>
+	
 			<div id="heart-animation">
 				<img src="images/heart.png" alt="heart" class="heart" />
 			</div>
@@ -72,66 +78,93 @@
 			<div class="carousel-controls">
 				<button class="carousel-control-btn prev" type="button" data-bs-target="#destinationCarousel" data-bs-slide="prev">
 					<svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-					            <path fill-rule="evenodd" d="M11.854 1.646a.5.5 0 0 1 0 .708L5.707 8l6.147 5.646a.5.5 0 0 1-.708.708l-6.5-6a.5.5 0 0 1 0-.708l6.5-6a.5.5 0 0 1 .708 0z" />
-					        </svg>
+					    <path fill-rule="evenodd" d="M11.854 1.646a.5.5 0 0 1 0 .708L5.707 8l6.147 5.646a.5.5 0 0 1-.708.708l-6.5-6a.5.5 0 0 1 0-.708l6.5-6a.5.5 0 0 1 .708 0z" />
+					 </svg>
 				</button>
 				
 				<button class="carousel-control-btn next" type="button" data-bs-target="#destinationCarousel" data-bs-slide="next">
 					<svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-					            <path fill-rule="evenodd" d="M4.146 1.646a.5.5 0 0 1 .708 0l6.5 6a.5.5 0 0 1 0 .708l-6.5 6a.5.5 0 0 1-.708-.708L10.293 8 4.146 2.854a.5.5 0 0 1 0-.708z" />
-					        </svg>
+					     <path fill-rule="evenodd" d="M4.146 1.646a.5.5 0 0 1 .708 0l6.5 6a.5.5 0 0 1 0 .708l-6.5 6a.5.5 0 0 1-.708-.708L10.293 8 4.146 2.854a.5.5 0 0 1 0-.708z" />
+					 </svg>
 				</button>
 			</div>
-		
+			
 		</div>
-
-
-	<!-- 인기 여행후기 -->
-	<h3 class="top-title">인기 여행후기</h3>
-	<div id="postCarousel" class="carousel slide" data-bs-ride="carousel">
-		<div class="carousel-inner">
-			<c:forEach items="${topPost}" var="post" varStatus="status">
-				<c:choose>
-					<c:when test="${status.index % 3 == 0}">
-						<div class="carousel-item ${status.index == 0 ? 'active' : ''}">
-							<div class="d-flex justify-content-center">
-					</c:when>
-				</c:choose>
-					<div class="my-card">
-						<p class="top-rank">${status.index + 1}위</p>
-						<p id="post-title">${post.title}</p>
-						<p id="post-content">${post.content}</p>
-						<p id="post-like" class="like" onclick="toggleLike(this)"
-							data-id="${post.postId}" data-type="post">
-							<img src="images/like_black.png" alt="like" />
-						</p>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
 					</div>
-				<c:choose>
-					<c:when test="${status.index % 3 == 2 || status.index == (topPost.size() - 1)}">
-							</div>
-						</div>
-					</c:when>
-				</c:choose>
-			</c:forEach>
-		</div>
-		
-			<div class="carousel-controls">
-				<button class="carousel-control-btn prev" type="button" data-bs-target="#postCarousel" data-bs-slide="prev">
-					<svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-					            <path fill-rule="evenodd" d="M11.854 1.646a.5.5 0 0 1 0 .708L5.707 8l6.147 5.646a.5.5 0 0 1-.708.708l-6.5-6a.5.5 0 0 1 0-.708l6.5-6a.5.5 0 0 1 .708 0z" />
-					        </svg>
-				</button>
-				
-				<button class="carousel-control-btn next" type="button" data-bs-target="#postCarousel" data-bs-slide="next">
-					<svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-					            <path fill-rule="evenodd" d="M4.146 1.646a.5.5 0 0 1 .708 0l6.5 6a.5.5 0 0 1 0 .708l-6.5 6a.5.5 0 0 1-.708-.708L10.293 8 4.146 2.854a.5.5 0 0 1 0-.708z" />
-					        </svg>
-				</button>
+					<div class="modal-body text-center">
+						로그인 이후 사용 가능합니다.<br>로그인 페이지로 이동하시겠습니까?
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+						<button type="button" id="confirmBtn" class="btn btn-primary">확인</button>
+					</div>
+				</div>
 			</div>
-		
+		</div>
+
+
+		<!-- 인기 여행후기 -->
+		<h3 class="top-title">인기 여행후기</h3>
+		<div id="postCarousel" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<c:forEach items="${topPost}" var="post" varStatus="status">
+					<c:choose>
+						<c:when test="${status.index % 3 == 0}">
+							<div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+								<div class="d-flex justify-content-center">
+						</c:when>
+					</c:choose>
+						<div class="my-card">
+							<p class="top-rank">${status.index + 1}위</p>
+							<p id="post-title">${post.title}</p>
+							<p id="post-content">${post.content}</p>
+							<p id="post-like" class="like" onclick="toggleLike(this)"
+								data-id="${post.postId}" data-type="post">
+								<img src="images/like_black.png" alt="like" />
+							</p>
+						</div>
+					<c:choose>
+						<c:when test="${status.index % 3 == 2 || status.index == (topPost.size() - 1)}">
+								</div>
+							</div>
+						</c:when>
+					</c:choose>
+				</c:forEach>
+			</div>
+			
+			<div style="height: 50px;"></div>
+			
+			<div class="carousel-indicators">
+	                <button type="button" data-bs-target="#postCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+	                <button type="button" data-bs-target="#postCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+	                <button type="button" data-bs-target="#postCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+	                <button type="button" data-bs-target="#postCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+	                <button type="button" data-bs-target="#postCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+	            </div>
+			
+				<div class="carousel-controls">
+					<button class="carousel-control-btn prev" type="button" data-bs-target="#postCarousel" data-bs-slide="prev">
+						<svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						     <path fill-rule="evenodd" d="M11.854 1.646a.5.5 0 0 1 0 .708L5.707 8l6.147 5.646a.5.5 0 0 1-.708.708l-6.5-6a.5.5 0 0 1 0-.708l6.5-6a.5.5 0 0 1 .708 0z" />
+						</svg>
+					</button>
+					
+					<button class="carousel-control-btn next" type="button" data-bs-target="#postCarousel" data-bs-slide="next">
+						<svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" d="M4.146 1.646a.5.5 0 0 1 .708 0l6.5 6a.5.5 0 0 1 0 .708l-6.5 6a.5.5 0 0 1-.708-.708L10.293 8 4.146 2.854a.5.5 0 0 1 0-.708z" />
+						</svg>
+					</button>
+				</div>
+		  </div>
 	</div>
 	
-	</div>
+	
 	
 	<!-- rolling -->
 		<div class="wrap">
@@ -210,6 +243,8 @@
 		crossorigin="anonymous"></script>
 
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	
+
 	<!-- js -->
 
 	<!-- <script>

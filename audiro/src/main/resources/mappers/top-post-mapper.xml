@@ -49,9 +49,9 @@
 		select rp.post_id, rp.title, p.content, rp.created_time, rp.good, rp.num_favorites, rp.rank
 		from ranked_posts rp
 		join post p on rp.post_id = p.post_id
-		where rp.rank &lt;=12
+		where rp.rank &lt;=15
 		order by rank
-		fetch first 12 rows only
+		fetch first 15 rows only
     </select>
     
 </mapper>

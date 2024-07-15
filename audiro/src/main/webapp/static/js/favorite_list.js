@@ -78,13 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const dataType = element.getAttribute('data-type');
         const dataId = element.getAttribute('data-id');
         
-
         if (iconSrc === redIconSrc) {
             imgElement.setAttribute('src', blackIconSrc);
             updateFavoriteState(dataType, dataId, 0)
             		.then(() => {
-                    
-                    
+                                      
                 });
         } else {
             imgElement.setAttribute('src', redIconSrc);
@@ -129,4 +127,30 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector(`a[href="#${activeTab}"]`).classList.add('active');
     document.getElementById(activeTab).classList.add('show', 'active');
     
+    // 최근 본 여행지 표시
+    function displayRecentlyViewedDestinations() {
+        const recentlyViewedContainer = document.getElementById('recently-viewed');
+
+        axios.get('/audiro/recentlyViewed')
+            .then(response => {
+                const recentlyViewed = response.data;
+                console.log('Recently Viewed Destinations:', recentlyViewed);
+
+                recentlyViewedContainer.innerHTML = '';
+
+                recentlyViewed.forEach(destination => {
+                    const destinationElement = document.createElement('div');
+                    destinationElement.classList.add('recent-item');
+                    destinationElement.innerHTML = `
+                        <img src="${destination.imgUrl}" alt="${destination.name}" data-id="${destination.destinationId}" onclick="window.location.href='/audiro/travel/details?id=${destination.destinationId}'">
+                    `;
+                    recentlyViewedContainer.appendChild(destinationElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching recently viewed destinations:', error);
+            });
+    }
+
+    displayRecentlyViewedDestinations();
 });

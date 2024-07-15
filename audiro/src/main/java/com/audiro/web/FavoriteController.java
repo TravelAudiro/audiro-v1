@@ -20,7 +20,9 @@ import com.audiro.dto.FavoritePostDto;
 import com.audiro.dto.FavoriteStateReqDto;
 import com.audiro.dto.FavoriteUpdateReqDto;
 import com.audiro.dto.FavoriteUsersDto;
+import com.audiro.dto.RecentlyViewedDto;
 import com.audiro.service.FavoriteService;
+import com.audiro.service.RecentlyViewedService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 public class FavoriteController {
 	
 	private final FavoriteService favoriteService;
+	private final RecentlyViewedService recentlyViewedService;
 	
 	@GetMapping("/favorite/list")
 	public String list(@RequestParam(name = "sort", required = false) String sort, @RequestParam(name = "tab", required = false) String tab, Model model) {
@@ -46,7 +49,7 @@ public class FavoriteController {
 		model.addAttribute("favoritePost", favoritePost);
 		model.addAttribute("currentSort", sort); 
 		model.addAttribute("activeTab", "#" + tab);
-		
+			
 		return "/favorite/list";
 	}
 	
