@@ -33,11 +33,16 @@ public class TravelPlanController {
 
 	@GetMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
-		HttpSession session=request.getSession();
-		int usersId=(int) session.getAttribute("signedInUsersId");
-		List<TravelPlan> list= service.readAllTravelPlan(usersId);
-		model.addAttribute("travelPlan", list);
-		return "/travel/plan_list";
+		HttpSession session = request.getSession();
+		if (session != null) {
+			int usersId = (int) session.getAttribute("signedInUsersId");
+			List<TravelPlan> list = service.readAllTravelPlan(usersId);
+			model.addAttribute("travelPlan", list);
+			return "/travel/plan_list";
+		} else {
+			// 세션이 존재하지 않는 경우 처리할 로직 추가
+			return "redirect:/audiro/user/signin";
+		}
 	}
 	
 	@GetMapping("/details")

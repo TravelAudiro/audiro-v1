@@ -84,7 +84,7 @@
 	<%@ include file="../fragments/modal_delete_plan.jspf"%>
 	
 	<script>
-        const signedInUsersId = `${signedInUsersId}`;
+        const signedInUser = `${signedInUser}`;
     </script>
     
 	<script

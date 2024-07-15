@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			planStr = `
                 	<div id="dayPlan${i}" day-id="${i}" class="plans row g-0 m-2">
 						<h5>${i}일차</h5>
-						<div class="timeline">
+						<div class="timeline brightColor">
 							<ul>
 						 	</ul>
 						</div>
