@@ -61,23 +61,17 @@ public class CommentsRestController {
 	
 	//새 댓글등록
 	@PostMapping("/new")
-	public ResponseEntity<String> newInsertComment(@RequestBody CommentCreateDto dto, HttpSession session) {
+	public ResponseEntity<Integer> newInsertComment(@RequestBody CommentCreateDto dto, HttpSession session) {
 		String id = (String) session.getAttribute("signedInUser"); // 세션에서 ID 가져오기
 		log.debug("Signed in user ID from session: " + id); 
 		
-		//if (id == null) {
-	    //    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // 유저가 로그인되어 있지 않은 경우 처리
-	   // }
+		if (id == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // 유저가 로그인되어 있지 않은 경우 처리
+	    }
 		
 	    dto.setId(id); // DTO에 ID 설정		
 		int result = commentDao.newInsert(dto);
-		
-		if (result == 1) {
-			return ResponseEntity.ok("Y");
-		} else {
-			return ResponseEntity.ok("N");
-		} 
-		//return ResponseEntity.ok(result);
+		return ResponseEntity.ok(result);
 	}
 	
 	// 댓글 수정

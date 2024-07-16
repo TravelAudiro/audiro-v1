@@ -82,19 +82,6 @@ public interface ReviewDao {
 	//프로필 이미지 가져오기
 	String profileImg(Integer id);
 	
-	
-	//여행후기 임시저장
-	//여행후기 글 임시저장하기
-	int saveDraftPost(DraftPost draftPost);
-	
-	//임시저장 목록 불러오기
-	List<DraftPost> selectDraftList();
-	
-	//임시저장 1개 상세보기
-	DraftPost selectDrafById(Integer draftPostId);
-	
-	//임시저장 삭제하기
-	int deleteDraftPost(Integer draftPostId);
 
 	
 	

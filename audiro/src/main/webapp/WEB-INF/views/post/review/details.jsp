@@ -13,7 +13,10 @@
     rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
     crossorigin="anonymous" />
-       
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+    	integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    	crossorigin="anonymous" referrerpolicy="no-referrer" />  
 <style>
 
 
@@ -101,27 +104,31 @@
                                 <td colspan="2"
                                     class="d-flex align-items-center justify-content-between">
                                     <label id="title" class="label-title">${post.title}</label> <!-- 후기 찜담기 버튼 (하트이미지 추후에 변경) -->
+                                    <%-- 
                                     <button class="btn favorite-btn" data-review-id="${post.postId}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
                                         <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1" />
                                     </svg>
                                     <label class="favoriteMe" for="like-btn-${post.postId}">${countFavorite}</label>
                                     </button>
+                                    --%>
                                 </td>
                                 </tr>
                                 <tr>
                                 <td class="profile-container" colspan="2"
                                     style="display: flex; align-items: center; justify-content: space-between;">
                                     <div style="display: flex; align-items: center;">
-                                        <img src="${profile}" alt="프로필 이미지" class="p-profile-image"
-                                            id="p-profile-image" />
-                                        <div>
+                                   <!--  --> 
+                                   <c:url var="path" value="../../${post.path}"></c:url>
+                                         <img src="${path}" alt="프로필 이미지" class="p-profile-image"
+                                            id="p-profile-image" />--> 
+                                        <div> 
 										<a href="/audiro/post/review/mypage?id=${post.usersId}"
 											class="nickname-link"> <span>${post.nickname}</span>
 										</a> <br /> 
-										<label for="modifiedTime" class="label-time"
+										 <label for="modifiedTime" class="label-time" id="modifiedTime"
                                                    style="margin-left: 2px; flex-shrink: 0; font-size: 0.8em;">
-                                                   ${post.formattedModifiedTime} 
+                                                   ${post.modifiedTime}  
                                             </label>
                                         </div>
                                     </div>

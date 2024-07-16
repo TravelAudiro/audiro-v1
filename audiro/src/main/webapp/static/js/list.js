@@ -21,32 +21,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	
 	//여행후기 찜담기(찜담고 삭제기능)
-		async function updateReveiw(event) {
-			alert('찜!!!!!!!!!!!!!!!');
-			const tag = event.currentTarget;
-			const postId = tag.attributes['data-review-id'].nodeValue; // 클릭된 버튼의 data-review-id 값 가져오기
-			const id = document.querySelector('input#usersId').value;
-			//const favoriteId
-			console.log('Post ID:', postId); // 디버깅을 위해 콘솔에 출력
-			console.log('Users ID:', id); // 디버깅을 위해 콘솔에 출력
-			
-			try {
-				const response = await axios.post('/audiro/api/review/likeReview/toggle', { postId },{ usersId });
-				console.log('Server response:', response.data);
-				if (response.data) {
-					tag.classList.add('active'); // 좋아요 추가된 경우 UI 업데이트
-				} else if (!response.data) {
-					tag.classList.remove('active'); // 좋아요 제거된 경우 UI 업데이트
-				}
-			} catch (error) {
-				console.error('Error toggling favorite:', error);
+	async function updateReveiw(event) {
+		alert('찜!!!!!!!!!!!!!!!');
+		const tag = event.currentTarget;
+		const postId = tag.attributes['data-review-id'].nodeValue; // 클릭된 버튼의 data-review-id 값 가져오기
+		const id = document.querySelector('input#usersId').value;
+		//const favoriteId
+		console.log('Post ID:', postId); // 디버깅을 위해 콘솔에 출력
+		console.log('Users ID:', id); // 디버깅을 위해 콘솔에 출력
+		
+		try {
+			const response = await axios.post('/audiro/api/review/likeReview/toggle', { postId },{ usersId });
+			console.log('Server response:', response.data);
+			if (response.data) {
+				tag.classList.add('active'); // 좋아요 추가된 경우 UI 업데이트
+			} else if (!response.data) {
+				tag.classList.remove('active'); // 좋아요 제거된 경우 UI 업데이트
 			}
+		} catch (error) {
+			console.error('Error toggling favorite:', error);
 		}
+	}
 
 
 
 		
-	
+			/*
 		    // 버튼 요소를 ID로 가져옵니다
 		    const sortLatestButton = document.querySelector('button#sortLatest');
 		    const sortLikesButton = document.querySelector('button#sortLikes');
@@ -123,13 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		            reviewContainer.appendChild(reviewElement);
 						});
 					}
-				});
+					*/
 
-
-
-
-
-
-
-
-
+				
+});

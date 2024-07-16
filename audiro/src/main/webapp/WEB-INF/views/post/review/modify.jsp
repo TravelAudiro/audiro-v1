@@ -27,6 +27,34 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
+<style>
+/* 중앙 정렬을 위한 스타일 추가 */
+body {
+	margin: 0;
+	font-family: Arial, sans-serif;
+	background-color: #f8f9fa;
+}
+
+.container-fluid {
+	width: 100%;
+	padding: 0;
+}
+
+.main-content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: calc(100vh - 70px); /* 70px는 네비바 높이를 가정 */
+}
+
+.card {
+	width: 100%;
+	max-width: 800px; /* 원하는 너비로 설정 */
+	margin: 0 auto;
+}
+</style>
+
 </head>
 
 <body>
@@ -34,16 +62,12 @@
 		<c:set var="travelReviewPage" value="내 여행일기" />
 		<%@ include file="../../fragments/header.jspf"%>
 
-	<header>
-
-	</header>
-	<main>
-		<div class="mt-2 card">
-			<div class="card-header">
-				<h4>여행후기 수정페이지</h4>
-			</div>
-			<div class="card-body">
-
+		<div class="main-content">
+			<div class="mt-2 card">
+				<div class="card-header">
+					<h4>여행후기 수정페이지</h4>
+				</div>
+				<div class="card-body">
 					<form id="modifyForm" action="/audiro/post/review/update"
 						method="post" class="form-inline">
 						<input type="hidden" id="postId" name="postId" value="${list.postId}" /> 
@@ -56,17 +80,10 @@
 							<button class="btn btn-primary" id="modifyBtn">수정완료</button>
 						</div>
 					</form>
-
 				</div>
-
+			</div>
 		</div>
-
-	</main>
-	
 	</div>
-
-
-
 
 	<script>
 		// Summernote 설정
@@ -86,8 +103,8 @@
 		
 	</script>
 	
-	 <!-- Axios 라이브러리 포함 -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<!-- Axios 라이브러리 포함 -->
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 	<!-- reviewMypage.js -->
 	<c:url var="mypageJS" value="/js/modify.js" />
