@@ -42,3 +42,7 @@ img.deletePlanImg{
     height: auto; /* 비율 유지를 위해 height를 auto로 설정 */
 }
 
+.link{
+	color: inherit; /* 부모 요소의 색상을 상속 */
+    text-decoration: none; /* 밑줄 제거 */
+}

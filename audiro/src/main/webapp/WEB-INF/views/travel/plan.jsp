@@ -85,10 +85,8 @@
 
 			<div class="card col-4 px-0">
 				<div class="card-body">
-
-					<div class="content row row-cols-1 row-cols-md-4 g-4 m-1"
+					<div class="content row row-cols-1 row-cols-md-4 g-2 m-1"
 						id="favDestination"></div>
-					
 				</div>
 			</div>
 		</div>
