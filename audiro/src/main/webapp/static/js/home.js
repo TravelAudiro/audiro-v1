@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // 로그인 유저의 찜 상태 
+     // 로그인 유저의 찜 상태 
     if (signedInUser !== null && signedInUser !== '') {
         const pLikes = document.querySelectorAll('p.like');
         for (const p of pLikes) {
@@ -55,18 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => {
                     console.log(response.data);
                     if (response.data !== -1) {
-						if (dataType === 'post') {
-							el.innerHTML = '<img src="/audiro/images/like_red2.png" alt="like_red">';
-						} else if (dataType === 'destination') {
-							el.innerHTML = '<img src="/audiro/images/like_red.png" alt="like_red">';
-						}
-					} else {
-						if (dataType === 'post') {
-							el.innerHTML = '<img src="/audiro/images/like_black.png" alt="like_black">';
-						} else if (dataType === 'destination') {
-							el.innerHTML = '<img src="/audiro/images/like.png" alt="like">';
-						}
-					}
+                        el.innerHTML = '<img src="/audiro/images/like_red2.png" alt="like_red">';
+                    } else {
+                        el.innerHTML = '<img src="/audiro/images/like_black2.png" alt="like_black">';
+                    }
                 })
                 .catch(error => {
                     console.error('오류가 발생했습니다:', error);
@@ -107,24 +99,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const imgElement = element.querySelector('img');
         const iconSrc = imgElement.getAttribute('src');
         const redIconSrc = '/audiro/images/like_red2.png';
-        const blackIconSrc = '/audiro/images/like_black.png';
+        const blackIconSrc = '/audiro/images/like_black2.png';
         const dataType = element.getAttribute('data-type');
         const dataId = element.getAttribute('data-id');
         
         if (signedInUser === null || signedInUser === '') {
-            const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-            confirmModal.show();
-
-            document.getElementById('confirmBtn').addEventListener('click', function() {
+            if (confirm("로그인하시겠습니까?")) {
                 window.location.href = '/audiro/user/signin';
-            });
+            }
             return;
         }
 
         if (iconSrc === redIconSrc) {
             imgElement.setAttribute('src', blackIconSrc);
             updateFavoriteState(dataType, dataId, 0)
-            		.then(() => {
+                    .then(() => {
                     
                     
                 });
