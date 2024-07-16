@@ -623,7 +623,7 @@ $(document).ready(function() {
 		const plans = document.querySelectorAll('div.plans');
 		plans.forEach((plan) => {
 			plan.id = `dayPlan${indexReset}`;
-			const planNum = plan.querySelector('h5');
+			const planNum = plan.querySelector('.daySize');
 			planNum.textContent = `${indexReset}일차`;
 			plan.setAttribute('day-id', indexReset);
 			indexReset++;
