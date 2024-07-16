@@ -733,7 +733,7 @@ $(document).ready(function() {
 		detailedPlans.forEach((d) => {
 			const li = document.querySelector(`#dayPlan${d.day} ul`);
 			let htmlStr = `
-                <li id="list${d.favoriteDestinationId}" class="list row g-0 my-1 p-2" des-id="${d.destinationId}">
+                <li id="list${d.favoriteDestinationId}" class="list row g-0 p-2" des-id="${d.destinationId}">
 	            	<div class="name col-10">${d.name}</div>
 	            	<div class="deleteFav col-2">
 						<img class="deleteFavImg" src="/audiro/images/delete.png" />

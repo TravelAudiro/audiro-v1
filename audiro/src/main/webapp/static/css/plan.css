@@ -80,9 +80,7 @@ input, h2, ul, #dayContainer, #planContainer, button, .favDestination{
 	position: relative;
 	margin-bottom:30px;
 }
-.plans:hover{
-	cursor: pointer;
-}
+
 .plans.active {
 	background-color: #27334c; /* Change this to your desired color */
 }
