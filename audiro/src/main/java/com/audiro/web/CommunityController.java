@@ -91,7 +91,7 @@ public class CommunityController {
        int result = communityService.delete(postId);
        log.debug("delete(삭제된 행의 개수 : {})", result);
         // 포스트 목록 페이지로 리다이렉트.
-        return "redirect:/community/matelist";
+        return "redirect:/community/alllist";
     }
 	
 	//수정하기
@@ -177,7 +177,13 @@ public class CommunityController {
 		// 서비스 컴포넌트의 메서드를 호출해 데이터베이스에 새 글을 저장.
 		communityService.communityInsertCreateWriting(dto);
 		
-		return "redirect:/community/matelist"; // 포스트 목록 페이지로 리다이렉트
+		if(dto.getPostTypeId() ==20) {
+			return "redirect:/community/matelist"; // 포스트 목록 페이지로 리다이렉트
+		} else {
+			return "redirect:/community/freelist"; // 포스트 목록 페이지로 리다이렉트
+		}
+		
+		
 		
 	}
 	
