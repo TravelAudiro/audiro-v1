@@ -13,9 +13,9 @@ public class CommunityPostDetailsDto {
 	private Integer postTypeId;				//Foregin key: post_type 테이블의 post_type_id(pk) 컬럼을 참조. (10:여행후기, 20:여행메이트, 30:자유)
 	private String title;					//게시글 제목.
 	private String content;					//게시글 내용.
-	@JsonFormat(pattern = "YYYY-MM-DD hh:mm:ss")
+	@JsonFormat(pattern = "YYYY-MM-dd hh:mm:ss")
 	private LocalDateTime createdTime;		//게시글 최초 작성 시간.
-	@JsonFormat(pattern = "YYYY-MM-DD hh:mm:ss")
+	@JsonFormat(pattern = "YYYY-MM-dd hh:mm:ss")
 	private LocalDateTime modifiedTime;		//게시글 최종 수정 시간.
 	private Integer good;					//게시글 좋아요 갯수.
 	
