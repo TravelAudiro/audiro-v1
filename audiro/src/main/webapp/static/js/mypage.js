@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	//유저 관심 담기 클릭 이벤트
-	const btnUserLike = document.querySelector('#userLike');
-	btnUserLike.addEventListener('click', favoriteUser);
+	//const btnUserLike = document.querySelector('#userLike');
+	//btnUserLike.addEventListener('click', favoriteUser);
 
 
 

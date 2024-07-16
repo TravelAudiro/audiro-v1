@@ -23,12 +23,19 @@
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
 	rel="stylesheet">
 
-
+<!-- 글꼴을 명시적으로 가져오기 -->
 <style>
+@font-face {
+	font-family: 'Cafe24SsurroundAir';
+	src: url('https://webfontworld.github.io/Cafe24SsurroundAir/Cafe24SsurroundAir.woff2') format('woff2'),
+		 url('https://webfontworld.github.io/Cafe24SsurroundAir/Cafe24SsurroundAir.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 body {
 	width: 100%;
 	margin: 0;
-	font-family: Arial, sans-serif;
 	line-height: 1.6;
 	background-color: white !important;
 	flex-direction: column;
@@ -43,19 +50,17 @@ body {
 }
 
 .card {
-    margin-left: auto; /* 왼쪽 마진 자동으로 설정 */
-    margin-right: auto; /* 오른쪽 마진 자동으로 설정 */
-    margin-top: 50px !important; /* 위쪽 마진 추가 */
-    width: 90%; /* 카드의 너비를 90%로 설정 */
-    max-width: 1000px; /* 카드의 최대 너비를 1000px로 설정 */
-    padding: 20px; /* 내부 패딩 추가 */
-    border: 1px solid #ccc; /* 경계 설정 */
-    border-radius: 8px; /* 둥근 모서리 설정 */
-    background-color: #fff; /* 배경색 설정 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 설정 */
+	margin-left: auto; /* 왼쪽 마진 자동으로 설정 */
+	margin-right: auto; /* 오른쪽 마진 자동으로 설정 */
+	margin-top: 50px !important; /* 위쪽 마진 추가 */
+	width: 90%; /* 카드의 너비를 90%로 설정 */
+	max-width: 1000px; /* 카드의 최대 너비를 1000px로 설정 */
+	padding: 20px; /* 내부 패딩 추가 */
+	border: 1px solid #ccc; /* 경계 설정 */
+	border-radius: 8px; /* 둥근 모서리 설정 */
+	background-color: #fff; /* 배경색 설정 */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 설정 */
 }
-
-
 
 #title, #buttons-container {
 	width: 100%;
@@ -157,47 +162,46 @@ body {
 	content: '32px';
 	font-size: 32px;
 }
-
-
-
-
 </style>
 </head>
 <body class="bg-white">
-		<c:set var="travelReviewPage" value="내 여행일기" />
-		<%@ include file="../../fragments/header.jspf"%>
+	<c:set var="travelReviewPage" value="내 여행일기" />
+	<%@ include file="../../fragments/header.jspf"%>
 	<div class="container-fluid">
 
 		<header>
 			<main>
-				<div class="mt-5 card ">
-					<div class="card-header">
-						<h4>여행후기 글쓰기</h4>
+				<div class="mt-15 main">
+					<div class="mt-5 card ">
+						<div class="card-header">
+							<h4>여행후기 글쓰기</h4>
+						</div>
+						<div class="card-body">
+							<c:url var="reviewPage" value="/post/review/list" />
+
+							<!-- 여행후기 작성 폼 -->
+							<form id="createForm">
+								<input type="hidden" name="id" value="${signedInUser}" />
+
+								<!-- 제목 입력란 -->
+								<div class="form-group">
+									<input id="title" name="title" class="form-control" type="text"
+										placeholder="제목을 입력하세요" required>
+								</div>
+
+								<!-- Quill 에디터를 사용한 내용 입력 -->
+								<div class="form-group mt-3">
+									<div class="editor-container" id="editor"></div>
+									<!-- Quill 에디터 내용을 저장하기 위한 숨겨진 텍스트 영역 -->
+									<textarea id="c_editor" name="content" style="display: none;"></textarea>
+								</div>
+							</form>
+
+							<!-- 저장 버튼 -->
+							<button type="submit" class="btn" id="savebtn">저장</button>
+						</div>
+
 					</div>
-					<div class="card-body">
-						<c:url var="reviewPage" value="/post/review/list" />
-
-						<!-- 여행후기 작성 폼 -->
-						<form id="createForm">
-							<input type="hidden" name="id" value="${signedInUser}" />
-							
-							<!-- 제목 입력란 -->
-							<div class="form-group">
-								<input id="title" name="title" class="form-control" type="text" placeholder="제목을 입력하세요" required>
-							</div>
-
-							<!-- Quill 에디터를 사용한 내용 입력 -->
-							<div class="form-group mt-3">
-								<div class="editor-container" id="editor"></div>
-								<!-- Quill 에디터 내용을 저장하기 위한 숨겨진 텍스트 영역 -->
-								<textarea id="c_editor" name="content" style="display: none;"></textarea>
-							</div>
-						</form>
-
-						<!-- 저장 버튼 -->
-						<button type="submit" class="btn" id="savebtn">저장</button>
-					</div>
-
 				</div>
 	</div>
 	</main>

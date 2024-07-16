@@ -120,7 +120,7 @@
                                     <div style="display: flex; align-items: center;">
                                   
                                    <c:url var="path" value="../../${post.path}"></c:url>
-                                         <img src="${path}" alt="프로필 이미지" class="p-profile-image"
+                                         <img src="../../images/defaultprofile5.png" alt="프로필 이미지" class="p-profile-image"
                                             id="p-profile-image" />
                                         <div> 
 										<a href="/audiro/post/review/mypage?id=${post.usersId}"
