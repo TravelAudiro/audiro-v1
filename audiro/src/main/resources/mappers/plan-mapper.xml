@@ -38,14 +38,12 @@
 	</select>
 
 	<select id="selectDetailedPlan" resultType="DetailedPlanDto">
-		select d.*, t.name, t.img_url, f.favorite_destination_id 
+		select distinct d.*, t.name, t.img_url, t.travel_destination_id 
 		from detailed_plan d
 		join travel_destination t
 		on d.destination_id = t.travel_destination_id
-		join favorite_destination f
-   		on t.travel_destination_id = f.destination_id
 		where travel_plan_id = #{travelPlanId}
-		order by detailed_plan_id
+		order by detailed_plan_id;
 	</select>
 	
 	<select id="selectMaxDay"  resultType="Integer">
