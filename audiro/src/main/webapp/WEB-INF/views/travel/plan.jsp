@@ -35,9 +35,11 @@
 		<input type="hidden" value=${signedInUsersId} id="signedInUsersId"/>
 	</div>
 
-	<div class="container-full mx-5 text-center">
+	<div class="container-fluid mx-5 text-center" >
 		<div class="row">
-			<div class="card col-8 px-0" id="container1">
+			<div class="col-1">
+			</div>
+			<div class="card col-6 px-0" id="cardContainer">
 				<c:url var="createPlan" value="/api/plan/create"></c:url>
 				<form method="post" action="${createPlan}">
 					<div class="row g-0 ">
@@ -83,11 +85,15 @@
 
 			</div>
 
-			<div class="card col-4 px-0">
-				<div class="card-body">
-					<div class="content row row-cols-1 row-cols-md-4 g-2 m-1"
-						id="favDestination"></div>
+			<div class="col-4 px-0">
+				<div class="card" id="noLine">
+					<div class="card-body">
+						<div class="content row row-cols-1 row-cols-md-2 m-1"
+							id="favDestination"></div>
+					</div>
 				</div>
+			</div>
+			<div class="col-1">
 			</div>
 		</div>
 	</div>

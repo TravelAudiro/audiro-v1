@@ -26,11 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		let htmlStr = '';
 		for (let destination of data) {
 			htmlStr += `
-				<div class="favDestination col" fav-id="${destination.favoriteDestinationId}">
+				<div class="favDestination col-2" fav-id="${destination.favoriteDestinationId}">
 						<div class="card fav">
 							<img src="${destination.imgUrl}" class="card-img-top" alt="${destination.name}"/>
 							<div class="card-body my-2">
-								<h5 class="cardTitle">${destination.name}</h5>
+								<div class="cardTitle">${destination.name}</div>
 							</div>
 						</div>
 				</div>

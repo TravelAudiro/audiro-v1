@@ -23,49 +23,57 @@
 <body>
 	<div class="container-fluid">
 		<%@ include file="../fragments/header.jspf"%>
-		<div class="container-full mx-5 text-center card px-0">
-					<c:url var="modifyPlan" value="/travel/plan/modify"></c:url>
-					<form method="post" action="${modifyPlan}">
-						<div class="row">
-							<div class="col-3 p-2 ">
-								<div class="row g-0">
-									<div id="btnContainer" class="btn-group text-start ms-3" role="group" aria-label="Basic example">
-										<button class="btn btn-secondary"type="submit" id="btnSave">수정</button>
-									</div>
-								</div>
-								<div id="dayContainer" plan-id="${travelPlan.travelPlanId}">
+	</div>
+	<div class="container-fluid text-center">
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10" id="cardContainer">
+				<c:url var="modifyPlan" value="/travel/plan/modify"></c:url>
+				<form method="post" action="${modifyPlan}">
+					<div class="row g-0">
+						<div class="col-3 p-2 ">
+							<div class="row g-0">
+								<div id="btnContainer" class="btn-group text-start ms-3"
+									role="group" aria-label="Basic example">
+									<button class="btn btn-secondary" type="submit" id="btnSave">수정</button>
 								</div>
 							</div>
+							<div id="dayContainer" plan-id="${travelPlan.travelPlanId}">
+							</div>
+						</div>
 
-							<div class="col-9">
-								<div id="planContainer">
-									<div class="row g-0 m-2">
-										<div class="col-sm-6 col-12 mb-2">
-											<div id="title" class="mb-2">
-												<input type="text" id="title" maxlength="40"
-													value="${travelPlan.title}" class="form-control" />
-											</div>
+						<div class="col-9">
+							<div id="planContainer">
+								<div class="row g-0 m-2">
+									<div class="col-sm-6 col-12 mb-2">
+										<div id="title" class="mb-2">
+											<input type="text" id="title" maxlength="40"
+												value="${travelPlan.title}" class="form-control" />
 										</div>
-										<div class="date col-sm-3 col-6 mb-2">
-											<input type="text" id="startDate"
-												class="form-control" value="${travelPlan.startDate}" readonly /> 
-											<input type="hidden" id="duration" />
-										</div>
-										<div class="date col-sm-3 col-6 mb-2">
-											<input type="text" id="endDate"
-												class="form-control" value="${travelPlan.endDate}" readonly />
-										</div>
-										<!-- hidden input for travelPlanId -->
-										<input type="hidden" id="travelPlanId" name="travelPlanId" value="${travelPlan.travelPlanId}" />
-										
-
 									</div>
+									<div class="date col-sm-3 col-6 mb-2">
+										<input type="text" id="startDate" class="form-control"
+											value="${travelPlan.startDate}" readonly /> <input
+											type="hidden" id="duration" />
+									</div>
+									<div class="date col-sm-3 col-6 mb-2">
+										<input type="text" id="endDate" class="form-control"
+											value="${travelPlan.endDate}" readonly />
+									</div>
+									<!-- hidden input for travelPlanId -->
+									<input type="hidden" id="travelPlanId" name="travelPlanId"
+										value="${travelPlan.travelPlanId}" />
+
+
 								</div>
 							</div>
 						</div>
-					</form>
-				</div>
+					</div>
+				</form>
 			</div>
+		<div class="col-1"></div>
+		</div>
+	</div>
 	<div class="container-fluid">
 		<%@ include file="../fragments/footer.jspf"%>
 	</div>
@@ -77,15 +85,16 @@
 
 	<!-- Axios JS 라이브러리 -->
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	
+
 	<script>
 		//const signedInUser='${signedInUser}';
 	</script>
-	
-	<c:url var="detailsJS" value="/js/plan_details.js"/>
+
+	<c:url var="detailsJS" value="/js/plan_details.js" />
 	<script src="${detailsJS}">
+		
 	</script>
-	
-	
+
+
 </body>
 </html>
