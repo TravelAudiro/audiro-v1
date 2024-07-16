@@ -87,7 +87,7 @@
 						                <c:if test="${user.usersId == sessionScope.signedInUsersId}">
 						                    <div class="favorite-list-container card">   
 						                        <div class="title-like-container">
-	                                                 <h5 class="card-title">${user.interestedUserNickname}</h5>
+	                                                 <h5 class="card-title" onclick="window.location.href='/audiro/post/review/mypage?id=${user.interestedUserId}'">${user.interestedUserNickname}</h5>
 	                                                 <c:url var="like" value="/images/like_black.png" />
 	                                                 <p class="like" onclick="toggleLike(this)" data-type="user" data-id="${user.interestedUserId}" >
 	                                                 	<img src="${like}" alt="like"></p>
@@ -101,9 +101,9 @@
                                 <div id="favorite-list">
 						            <c:forEach items="${favoritePost}" var="post">
 						                <c:if test="${post.usersId == sessionScope.signedInUsersId}">
-						                    <div class="favorite-list-container card"> 
+						                    <div class="favorite-list-container card">  
 						                        <div class="title-like-container">
-	                                                 <h5 class="card-title">${post.favoritePostTitle}</h5>
+	                                                 <h5 class="card-title" onclick="window.location.href='/audiro/community/details?postId=${post.postId}'">${post.favoritePostTitle}</h5>
 	                                                 <c:url var="like" value="/images/like_black.png" />
 	                                                 <p class="like" onclick="toggleLike(this)" data-type="post" data-id="${post.postId}">
 	                                                 	<img src="${like}" alt="like"></p>

@@ -124,8 +124,8 @@
 						<div class="my-card">
 							<p class="top-rank">${status.index + 1}위</p>
 							<p class="num-favorites-post">${post.numFavorites}</p>
-							<div id="post-title" onclick="window.location.href='/audiro/post/review/details?postId=${post.postId}&id='">${post.title}</div>
-							<div id="post-content" onclick="window.location.href='/audiro/post/review/details?postId=${post.postId}&id='">${post.content}</div>
+							<div id="post-title" onclick="window.location.href='/audiro/community/details?postId=${post.postId}'">${post.title}</div>
+							<div id="post-content" onclick="window.location.href='/audiro/community/details?postId=${post.postId}'">${post.content}</div>
 							<p id="post-like" class="like" onclick="toggleLike(this)"
 								data-id="${post.postId}" data-type="post">
 								<img src="images/like_black.png" alt="like" /></p>	

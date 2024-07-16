@@ -9,9 +9,10 @@
             transform: translateX(-50%);
         }
         .modal-footer {
-        		font-size: 13px;
+        	font-size: 13px;
         }
 		.background-image {
+		    margin-top:20px;  
             background-image: url('../images/main.jpg');
             background-size: cover; /* 이미지를 요소에 맞게 조정 */
             background-position: center; /* 이미지를 중앙에 배치 */
@@ -22,7 +23,6 @@
         }
 		.top-title {
 			text-align: center;
-			
             transform: scale(0.8);
 			font-family: 'Jalnan'; 
 			/*font-family: 'HSBomBaram2';*/
@@ -85,7 +85,7 @@
         }
         
         .image-title {
-        		font-family: 'BMHannaAir';
+        	font-family: 'BMHannaAir';
             font-size: 17px;
             font-weight: bold;
             position: absolute;
@@ -142,15 +142,14 @@
 			/* font-family: "Nanum Gothic Coding", monospace; */
 			font-family: 'BMHannaAir';
 			font-size: 18px;
-    			font-weight: bold;
-    			text-shadow: 0.5px 0.5px 0 #000, -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000;
+    		font-weight: bold;
+    		text-shadow: 0.5px 0.5px 0 #000, -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000;
 		}
 		
        .my-card {
             width: 300px;
             min-width: 300px;
             height: 350px;
-         
             border-radius: 0 10px 10px 10px;
             background: rgba(255, 255, 255, 0.5);
             overflow: hidden;
@@ -160,8 +159,8 @@
            	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .my-card:hover {
-        		transform: scale(1.05); /* 카드 크기 확대 */
-	    		box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+        	transform: scale(1.05); /* 카드 크기 확대 */
+	    	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
         }
         #post-title {
 		    font-size: 20px;
