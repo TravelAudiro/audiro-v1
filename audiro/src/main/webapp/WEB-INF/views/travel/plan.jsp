@@ -35,7 +35,7 @@
 		<input type="hidden" value=${signedInUsersId} id="signedInUsersId"/>
 	</div>
 
-	<div class="container-fluid mx-5 text-center" >
+	<div class="container-fluid mx-5 text-center" id="allDiv" >
 		<div class="row">
 			<div class="col-1">
 			</div>
@@ -87,7 +87,7 @@
 
 			<div class="col-4 px-0">
 				<div class="card" id="noLine">
-					<div class="card-body">
+					<div class="card-body" id="favContainer">
 						<div class="content row row-cols-1 row-cols-md-2 m-1"
 							id="favDestination"></div>
 					</div>

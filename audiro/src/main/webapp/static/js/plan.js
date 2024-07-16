@@ -559,7 +559,7 @@ $(document).ready(function() {
 		let htmlStr = '';
 		htmlStr = `
 			<div id="dayPlan${index}" day-id="${index}" class="plans non-click row g-0 m-2">
-				<h5>${index}일차</h5>
+				<div class="daySize">${index}일차</div>
 				<div class="timeline brightColor">
 					<ul>
 				 	</ul>
@@ -714,7 +714,7 @@ $(document).ready(function() {
                     `;
 			planStr = `
                 	<div id="dayPlan${i}" day-id="${i}" class="plans non-click row g-0 m-2">
-						<h5>${i}일차</h5>
+						<div class="daySize">${i}일차</div>
 						<div class="timeline brightColor">
 							<ul>
 						 	</ul>
