@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						<div class="card fav">
 							<img src="${destination.imgUrl}" class="card-img-top" alt="${destination.name}"/>
 							<div class="card-body my-2">
-								<h5 class="cardTitle">${destination.name}</h5>
+								<div class="cardTitle">${destination.name}</div>
 							</div>
 						</div>
 				</div>

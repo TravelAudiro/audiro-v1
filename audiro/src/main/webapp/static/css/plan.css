@@ -1,13 +1,15 @@
 @charset "UTF-8";
 
 body {
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 1.5;
 }
-
-#container1{
+#noLine{
+	border-color: white;
+}
+#cardContainer{
 	border-radius: 10px;
-    padding: 35px 30px;
+	padding: 35px 10px 35px 10px; 
 }
 .row{ overflow: hidden;}
 
@@ -159,4 +161,8 @@ img.deleteFavImg{
 .link{
 	color: inherit; /* 부모 요소의 색상을 상속 */
     text-decoration: none; /* 밑줄 제거 */
+}
+
+.name{
+	font-size:20px;
 }
