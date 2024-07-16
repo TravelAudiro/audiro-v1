@@ -48,9 +48,10 @@
 					<div class="carousel-image">
 						<h3 id="destination-name">${destination.name}</h3>	
 						<p class="top-rank">${status.index + 1}위</p>
-						<img src="${destination.imgUrl}" class="d-block w-100" alt="${destination.name}"/>
+						<img src="${destination.imgUrl}" class="d-block w-100" alt="${destination.name}" onclick="window.location.href='/audiro/travel/details?id=${destination.travelDestinationId}'"/>
 						<p class="like" onclick="toggleLike(this)" data-id="${destination.travelDestinationId}" data-type="destination">
-						<img src="images/like.png" alt="like" /></p>		
+						<img src="images/like.png" alt="like" /></p>	
+						<p class="num-favorites-dest">${destination.numFavorites}</p>	
 					</div>
 					<c:choose>
 						<c:when test="${status.index % 3 == 2 || status.index == (topDestination.size() - 1)}">
@@ -122,12 +123,13 @@
 					</c:choose>
 						<div class="my-card">
 							<p class="top-rank">${status.index + 1}위</p>
-							<p id="post-title">${post.title}</p>
-							<p id="post-content">${post.content}</p>
+							<p class="num-favorites-post">${post.numFavorites}</p>
+							<div id="post-title" onclick="window.location.href='/audiro/post/review/details?postId=${post.postId}&id='">${post.title}</div>
+							<div id="post-content" onclick="window.location.href='/audiro/post/review/details?postId=${post.postId}&id='">${post.content}</div>
 							<p id="post-like" class="like" onclick="toggleLike(this)"
 								data-id="${post.postId}" data-type="post">
-								<img src="images/like_black.png" alt="like" />
-							</p>
+								<img src="images/like_black.png" alt="like" /></p>	
+							
 						</div>
 					<c:choose>
 						<c:when test="${status.index % 3 == 2 || status.index == (topPost.size() - 1)}">

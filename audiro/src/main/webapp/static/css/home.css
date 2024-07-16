@@ -111,7 +111,7 @@
         		transition: all 0.3s ease-in-out; /* 부드러운 전환 효과 */
             width: 300px;
             max-width: 500px; /* 최대 너비 제한 */
-     		
+     		cursor: pointer; 
             height: 350px;
             border-radius: 0 10px 10px 10px;
             overflow: hidden;
@@ -125,8 +125,6 @@
         .carousel-image:hover {
 		    width: 50%; /* 호버 시 너비 증가 */
             filter: brightness(1);
-		    
-		   
 		    color: black;
 		}
 		.carousel-image:hover #destination-name {
@@ -152,6 +150,7 @@
             width: 300px;
             min-width: 300px;
             height: 350px;
+         
             border-radius: 0 10px 10px 10px;
             background: rgba(255, 255, 255, 0.5);
             overflow: hidden;
@@ -160,26 +159,32 @@
            	border: 1px solid gray; /* 테두리 추가 */
            	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+        .my-card:hover {
+        		transform: scale(1.05); /* 카드 크기 확대 */
+	    		box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+        }
         #post-title {
 		    font-size: 20px;
 		    font-weight: bold;
 		    position: absolute;
-		    top: 50px;
+		    top: 70px;
 		    left: 20px;
 		    color: navy;
 		    z-index: 1;
-		    padding: 5px; /* 내부 여백 설정 */  
+		    padding: 5px; /* 내부 여백 설정 */ 
+		    cursor: pointer; 
 		}
 		
 		#post-content {	
 		    font-size: 15px;
 		    font-weight: bold;
 		    position: absolute;
-		    top: 90px; 
+		    top: 110px; 
 		    left: 20px; 
 		    color: black;
 		    z-index: 1;
-		    padding: 5px; /* 내부 여백 설정 */		    
+		    padding: 5px; /* 내부 여백 설정 */	
+		    cursor: pointer;	    
 		}
            
         .carousel-image img {
@@ -225,8 +230,25 @@
         .top-rank:hover::before {
 		    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 애니메이션 효과 추가 */
 		}
+		.carousel-image .num-favorites-dest {
+		    position: absolute;
+		    top: 35px; /* 좋아요 버튼 아래에 위치하도록 합니다 */
+		    right: 26px;
+		    color: white;
+		    font-size: 20px;
+		    font-weight: bold;
+		    text-shadow: 0.5px 0.5px 0 #000, -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000;
+		}
+		.num-favorites-post {
+		    position: absolute;
+		    top: 35px; /* 좋아요 버튼 아래에 위치하도록 합니다 */
+		    right: 28px;
+		    color: black;
+		    font-size: 20px;
+		    font-weight: bold;
+		}
         .like {
-            position: absolute;
+            position: absolute;         
             top: 10px;
             right: 20px;
             width: 25px; 

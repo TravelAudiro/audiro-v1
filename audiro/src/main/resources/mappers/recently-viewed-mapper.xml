@@ -22,7 +22,7 @@
 		from RankedDestinations
 		where rn = 1
 		order by viewed_at desc
-        fetch first 7 rows only
+        fetch first 5 rows only
     </select>
 	
 </mapper>

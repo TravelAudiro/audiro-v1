@@ -153,4 +153,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     displayRecentlyViewedDestinations();
+
+        window.addEventListener('scroll', () => {
+            const container = document.getElementById('recently-viewed-container');
+            const triggerHeight = window.innerHeight * 0.5;
+
+            if (window.scrollY > triggerHeight) {
+                container.style.position = 'fixed';
+                container.style.top = '50px';
+            } else {
+                container.style.position = 'absolute';
+                container.style.top = '30vh';
+            }
+        		
+     	});
 });

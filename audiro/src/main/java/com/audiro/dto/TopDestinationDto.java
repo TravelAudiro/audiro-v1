@@ -8,6 +8,6 @@ public class TopDestinationDto {
 	private String name;
 	private String address;
 	private String imgUrl;
-	private Integer num_favorites;
+	private Integer numFavorites;
 	private Integer rank;
 }

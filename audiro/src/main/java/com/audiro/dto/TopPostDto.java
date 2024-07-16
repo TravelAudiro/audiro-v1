@@ -11,6 +11,6 @@ public class TopPostDto {
 	private String content;
 	private Integer good;
 	
-	private Integer num_favorites;
+	private Integer numFavorites;
 	private Integer rank;
 }

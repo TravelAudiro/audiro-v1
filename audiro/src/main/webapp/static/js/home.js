@@ -55,10 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => {
                     console.log(response.data);
                     if (response.data !== -1) {
-                        el.innerHTML = '<img src="/audiro/images/like_red2.png" alt="like_red">';
-                    } else {
-                        el.innerHTML = '<img src="/audiro/images/like_black.png" alt="like_black">';
-                    }
+						if (dataType === 'post') {
+							el.innerHTML = '<img src="/audiro/images/like_red2.png" alt="like_red">';
+						} else if (dataType === 'destination') {
+							el.innerHTML = '<img src="/audiro/images/like_red.png" alt="like_red">';
+						}
+					} else {
+						if (dataType === 'post') {
+							el.innerHTML = '<img src="/audiro/images/like_black.png" alt="like_black">';
+						} else if (dataType === 'destination') {
+							el.innerHTML = '<img src="/audiro/images/like.png" alt="like">';
+						}
+					}
                 })
                 .catch(error => {
                     console.error('오류가 발생했습니다:', error);
@@ -149,8 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		        imgElement.classList.remove('like-animation');
 		    }, { once: true });
 		}
-    
-    
     }
     
 });
