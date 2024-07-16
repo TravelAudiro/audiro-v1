@@ -4,6 +4,10 @@ body {
 	font-size: 18px;
 	line-height: 1.5;
 }
+
+#allDiv{
+	margin-top: 50px;
+}
 #noLine{
 	border-color: white;
 }
@@ -37,15 +41,17 @@ body {
     flex-grow: 1;
 }
 
+
 .card-body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5px;
-    margin-top:20px;
     box-sizing: border-box;
+    padding-top:0;
 }
-
+#favContainer{
+	padding-top:0;
+}
 .cardTitle {
 	font-size:15px;
     text-align: center;
@@ -93,6 +99,7 @@ input, h2, ul, #dayContainer, #planContainer, button, .favDestination{
 .plans.active {
 	background-color: #27334c; /* Change this to your desired color */
 }
+
 
 ::after, ::before{
 	box-sizing:border-box;
@@ -166,4 +173,8 @@ img.deleteFavImg{
 
 .name{
 	font-size:20px;
+}
+
+.daySize{
+	font-size: 20px;
 }

@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const dayId = document.querySelector('div.click').getAttribute('day-id');
 		const plan = document.querySelector(`div#dayPlan${dayId} .timeline ul`);
 		const htmlStr = `
-                <li id="list${data.favoriteDestinationId}" class="list row g-0 my-1 p-2" des-id="${data.destinationId}">
+                <li id="list${data.favoriteDestinationId}" class="list row g-0 p-2" des-id="${data.destinationId}">
                 	<div class="name col-10">${data.name}</div>
                 	<div class="deleteFav col-2">
 						<img class="deleteFavImg" src="/audiro/images/delete.png" />
