@@ -18,11 +18,12 @@
     <link href="${heartCss}" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">
-        <header>
-            <%@ include file="../fragments/header.jspf" %>
-        </header>
-        
+	
+	<header>
+        <%@ include file="../fragments/header.jspf" %>
+    </header>
+	
+    <div class="container">    
         <main>
             <div class="card">
                 <div class="card-header">

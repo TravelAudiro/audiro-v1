@@ -21,11 +21,11 @@
 </head>
 <body>
 
+	<header>
+        <%@ include file="../fragments/header.jspf" %>
+    </header>
+    
     <div class="container">
-        <header>
-            <%@ include file="../fragments/header.jspf" %>
-        </header>
-        
         <main> 
             <div class="row">
                 <div class="col-2 tag-container">
