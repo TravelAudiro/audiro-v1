@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <img class="collapseImg" alt="collapseImg" src="/audiro/images/collapse.png" />
                             </div>
                             <div class="col-7">
-                                <a href="#dayPlan${i}">${i}일차</a>
+                                ${i}일차
                             </div>
                         </div>
                     `;

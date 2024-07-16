@@ -36,7 +36,7 @@
     }
     
     .card-header {
-        display: flex;
+     
         justify-content: space-between;
         align-items: center;
     }
@@ -47,7 +47,7 @@
         border-radius: 50%; /* 동그라미 형태를 만들기 위한 설정 */
         object-fit: cover; /* 이미지가 잘리지 않고 비율을 유지하도록 설정 */
         margin-left: 10px; 
-        margin-right: 10px;" 
+      
     }
     
     .label-time.text-center {
@@ -90,12 +90,12 @@
 </style>
 </head>
 <body>
-    <div class="container-fluid">
         <c:set var="pageTitle" value="Post Details" />
         <%@ include file="../../fragments/header.jspf"%>
+    <div class="container-fluid">
 
         <main>
-            <div class="main-class mt-2 card">                
+            <div class="main-class mt-5 card">                
                     <input id="postId" name="postId" type="hidden" value="${post.postId}" /> 
                     <input type="hidden" id="loginUsersId" value="${signedInUsersId}" />
                     <table class="table table-borderless">
@@ -118,10 +118,10 @@
                                 <td class="profile-container" colspan="2"
                                     style="display: flex; align-items: center; justify-content: space-between;">
                                     <div style="display: flex; align-items: center;">
-                                   <!--  --> 
+                                  
                                    <c:url var="path" value="../../${post.path}"></c:url>
                                          <img src="${path}" alt="프로필 이미지" class="p-profile-image"
-                                            id="p-profile-image" />--> 
+                                            id="p-profile-image" />
                                         <div> 
 										<a href="/audiro/post/review/mypage?id=${post.usersId}"
 											class="nickname-link"> <span>${post.nickname}</span>

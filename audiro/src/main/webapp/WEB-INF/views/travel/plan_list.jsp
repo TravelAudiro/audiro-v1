@@ -52,7 +52,7 @@
 										<c:url var="planDetailsPage" value="/travel/plan/details">
 	                                		<c:param name="id" value="${t.travelPlanId}"></c:param> 
 	                                	</c:url>
-	                               		<a href="${planDetailsPage}">${t.title}</a>
+	                               		<a href="${planDetailsPage}" class="link">${t.title}</a>
 									</td>
 									<c:set var="days" value="${t.duration+1}"></c:set>
 									<td>${t.duration}박 ${days}일</td>

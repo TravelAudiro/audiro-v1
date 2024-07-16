@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				<div class="favDestination col" fav-id="${destination.favoriteDestinationId}">
 						<div class="card fav">
 							<img src="${destination.imgUrl}" class="card-img-top" alt="${destination.name}"/>
-							<div class="card-body">
+							<div class="card-body my-2">
 								<h5 class="cardTitle">${destination.name}</h5>
 							</div>
 						</div>

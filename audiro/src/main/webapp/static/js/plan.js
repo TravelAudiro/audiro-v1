@@ -444,7 +444,7 @@ $(document).ready(function() {
 					<img class="collapseImg" alt="collapseImg" src="/audiro/images/collapse.png" />
 				</div>
 				<div class="col-7">
-					<a href="#dayPlan${index}">${index}일차</a>
+					<a href="#dayPlan${index}" class="link">${index}일차</a>
 				</div>
 				<div id="delete${index}" class="deleteDay col-3">
 					<img class="deleteDayImg" src="/audiro/images/delete.png" />
@@ -705,7 +705,7 @@ $(document).ready(function() {
                                 <img class="collapseImg" alt="collapseImg" src="/audiro/images/collapse.png" />
                             </div>
                             <div class="col-7">
-                                <a href="#dayPlan${i}">${i}일차</a>
+                                <a href="#dayPlan${i}" class="link">${i}일차</a>
                             </div>
                             <div id="delete${index}" class="deleteDay col-3">
 								<img class="deleteDayImg" src="/audiro/images/delete.png" />
