@@ -2,6 +2,8 @@ package com.audiro.dto;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Data
@@ -10,7 +12,9 @@ public class CommunityCommentsSelectListDto {
     private Integer postId; //nn Foreign Key: post 테이블의 post_id(pk) 컬럼을 참조.
     private Integer usersId; //nn Foreign Key: users 테이블의 users_id(pk) 컬럼을 참조.
     private String content; //nn 댓글 내용.
+    @JsonFormat(pattern = "YYYY-MM-DD hh:mm:ss")
     private LocalDateTime createdTime; // 댓글 최초 작성 시간.
+    @JsonFormat(pattern = "YYYY-MM-DD hh:mm:ss")
     private LocalDateTime modifiedTime; // 댓글 최종 수정 시간.
     private Integer parentCommentId; //대댓글에 쓰일 부모 댓글 아이디 부모댓글의 commentsId를 저장insert시키면 된다.
     private Integer isPrivate; //default 0, --> 비밀댓글(0=공개 1=비밀)

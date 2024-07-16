@@ -9,14 +9,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>어디로</title>
-<c:url var="css" value="/css/community.css" />
-<link href="${css}" rel="stylesheet">
-<link href="${css}" rel="stylesheet" />
+
+
+        
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+        crossorigin="anonymous" />
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
 <!-- CSS 스타일 추가 마크태그에 쓰려고 했으나 그냥 빼버림-->
 <style>
 .carousel-item {
-            width: 800px;
-            height: 400px;
+            width: 8500px;
+            height: 450px;
             overflow: hidden;
         } 
         .carousel-item video, .carousel-item img {
@@ -42,74 +50,11 @@
 </style>
 </head>
 <body>
+    
+        <div class="container-fluid mt-3">
+        <%@ include file="../fragments/header.jspf"%>
+        </div>
     <div class="container">
-     <!-- 맨 위에 뜨는거 -->
-         <%-- 세션에 로그인 정보가 없는 경우 --%>
-    <c:if test="${empty signedInUser}">
-        <ul class="nav justify-content-end">
-            <c:url var="signUp" value="/user/signup"></c:url>
-            <li class="nav-item"><a class="nav-link"
-                href="${signUp}">회원가입</a></li>
-            <c:url var="signIn" value="/user/signin"></c:url>
-            <li class="nav-item"><a class="nav-link"
-                href="${signIn}">🤍 로그인</a></li>
-        </ul>
-    </c:if>
-    <%-- 로그인 정보가 세션에 저장된 경우 --%>
-    <c:if test="${not empty signedInUser}">
-        <ul class="nav justify-content-end">
-            <c:url var="mypage" value="/mypage">
-                <c:param name="id" value="${signedInUser}"></c:param>
-            </c:url>
-            <li class="nav-item"><a class="nav-link"
-                href="${mypage}">내 정보</a></li>
-            <li class="nav-item"><c:url var="signOutPage"
-                    value="/user/signout" /> <a class="nav-link"
-                href="${signOutPage}"><span>${signedInUser}💜</span> 로그아웃</a>
-            </li>                
-        </ul>
-    </c:if>
-     <!-- 맨 위에 뜨는 nav끝 -->
-    <nav class="navbar navbar-expand-lg bg-danger mt-3" data-bs-theme="dark">
-  <div class="container">
-      <c:url var="communitymain" value="/community/main"></c:url>
-    <a class="navbar-brand ms-2" href="${communitymain}">audiro🤍 community</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
-        <c:url var="home" value="/"></c:url>
-          <a class="nav-link active" href="${home}">어디로 메인
-            <span class="visually-hidden">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-            <c:url var="ts" value="/travel/search"></c:url>
-          <a class="nav-link" href="${ts}">여행지 찾기</a>
-        </li>
-        <li class="nav-item">
-            <c:url var="tpl" value="/travel/plan/list"></c:url>
-          <a class="nav-link" href="${tpl}">
-            여행 코스</a>
-        </li>
-        <li class="nav-item">
-            <c:url var="prm" value="/post/review/mypage">
-                <c:param name="id" value="${signedInUser}"></c:param>
-            </c:url>
-          <a class="nav-link" href="${prm}">
-            여행 후기</a>
-        </li>        
-        <li class="nav-item">
-             <c:url var="fl" value="/favorite/list" />
-          <a class="nav-link" href="${fl}">찜목록</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<!-- nav끝-->
     <!-- 전체 콘텐츠를 감싸는 컨테이너, 상단 마진을 추가합니다. -->
 <div class="container mt-5 ms-5">
     <!-- 그리드 시스템의 행(row)을 정의합니다. -->
@@ -127,21 +72,18 @@
                 <div class="carousel-inner">
                     <!-- 첫 번째 캐러셀 아이템: 동영상 -->
                     <div class="carousel-item active">
-                        <c:url var="logo" value="/images/audiro_logo.png"></c:url>
-                        <img src="${logo}" class="d-block w-100" alt="Image 1">                    
+                        <c:url var="logo1" value="/images/3_.gif"></c:url>
+                        <img src="${logo1}" class="d-block w-100 img-fluid" alt="Image 1"/>                   
                     </div>
                     <!-- 두 번째 캐러셀 아이템: 이미지 -->
                     <div class="carousel-item">
-                        <c:url var="logo2" value="/images/audiro_logo2.png"></c:url>
-                        <img src="${logo2}" class="d-block w-100" alt="Image 2">
+                        <c:url var="logo2" value="/images/2_.gif"></c:url>
+                        <img src="${logo2}" class="d-block w-100 img-fluid" alt="Image 2"/>
                     </div>
                     <!-- 세 번째 캐러셀 아이템: 이미지 -->
                     <div class="carousel-item">
-                        <video class="d-block w-100" autoplay muted playsinline>
-                            <c:url var="v" value="/images/audiro.mp4"></c:url>
-                            <source src="${v}" type="video/mp4">
-                            <p>Your browser does not support the video tag.</p>
-                        </video>
+                        <c:url var="logo3" value="/images/1_.gif"></c:url>
+                        <img src="${logo3}" class="d-block w-100 img-fluid" alt="Image 3"/>
                     </div>
                 </div>
                 <!-- 이전 버튼 -->
@@ -186,8 +128,8 @@
                                     <tbody>
                                         <c:choose>
                                             <c:when test="${like.rank == 1}">
-                                                <tr class="table-warning">
-                                                    <td class="text-center">🤴🏻</td>
+                                                <tr class="table-primary">
+                                                    <td class="text-center">🐳</td>
                                                     <td class="text-center">${like.nickname}</td>
                                                     <td class="text-center">${like.count}</td>
                                                 </tr>
@@ -230,8 +172,8 @@
                                     <tbody>
                                         <c:choose>
                                             <c:when test="${pg.rank == 1}">
-                                                <tr class="table-warning">
-                                                    <td class="text-center">🤴🏻</td>
+                                                <tr class="table-primary">
+                                                    <td class="text-center">🐳</td>
                                                     <td class="text-center">${pg.title}</td>
                                                     <td class="text-center">${pg.good}</td>
                                                 </tr>
@@ -274,8 +216,8 @@
                                     <tbody>
                                         <c:choose>
                                             <c:when test="${cu.rank == 1}">
-                                                <tr class="table-warning">
-                                                    <td class="text-center">🤴🏻</td>
+                                                <tr class="table-primary">
+                                                    <td class="text-center">🐳</td>
                                                     <td class="text-center">${cu.nickname}</td>
                                                     <td class="text-center">${cu.count}</td>
                                                 </tr>
@@ -303,7 +245,7 @@
 
     
     <div class="mt-5 ms-3">
-        <p style="font-size: 1.5rem;">💌Bulletn Board</p>   
+        <p style="font-size: 1.5rem;">💌 Bulletn Board</p> 
     </div>
 
 <!--탭 시작-->
@@ -324,7 +266,7 @@
         <c:url var="writing" value="/community/create">
             <c:param name="id" value="${signedInUser}"></c:param>
         </c:url>
-        <a href="${writing}" class="btn btn-outline-danger ms-2 mb-1">글쓰기</a> 
+        <a href="${writing}" class="btn btn-outline-primary ms-2 mb-1">글쓰기</a> 
         <!--검색옵션 시작-->      
         <div class="col-1 ms-5 me-2">
             <select class="form-control" name="category1">
@@ -344,10 +286,10 @@
         </div>
         <!-- 검색 옵션 끝 -->
         <!--검색 시작-->
-        <div class="d-flex me-2">
+        <div class="d-flex me-2 mb-1">
         
                 <input id="inputSearch" class="form-control me-sm-2 col-10" type="search" placeholder="커뮤니티 검색" required>
-                <button  id="btnSearch" class="btn btn-danger my-2 my-sm-0" type="submit">Search</button>
+                <button  id="btnSearch" class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
         
         </div>
         <!--검색 끝-->
@@ -363,16 +305,16 @@
                     <p class="mb-0">전체 목록</p>
                     <div class="btn-group ms-auto" role="group" aria-label="Basic radio toggle button group">
                         <input type="radio" class="btn-check" name="btnradio1" id="btnradio1_1" autocomplete="off" checked>
-                        <label class="btn btn-outline-dark" for="btnradio1_1">최신순</label>
+                        <label class="btn btn-outline-primary" for="btnradio1_1">최신순</label>
                         <input type="radio" class="btn-check" name="btnradio1" id="btnradio1_2" autocomplete="off">
-                        <label class="btn btn-outline-dark" for="btnradio1_2">인기순</label>
+                        <label class="btn btn-outline-primary" for="btnradio1_2">인기순</label>
                     </div>
                 </div>
             </div>
             <!-- 라디오 버튼 끝 -->
                     <!-- 전체 글 목록 테이블 시작 -->
                     <table class="table table-hover mt-1">
-                        <thead class="table-dark">
+                        <thead class="table table-primary">
                             <tr>
                                 <th class="text-center">#</th>
                                 <th class="text-center">Title</th>
@@ -403,16 +345,16 @@
                     <p class="mb-0">여행 메이트 게시판</p>
                         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                             <input type="radio" class="btn-check" name="btnradio2" id="btnradio2_1" autocomplete="off" checked>
-                            <label class="btn btn-outline-dark" for="btnradio2_1">최신순</label>
+                            <label class="btn btn-outline-primary" for="btnradio2_1">최신순</label>
                             <input type="radio" class="btn-check" name="btnradio2" id="btnradio2_2" autocomplete="off" >
-                            <label class="btn btn-outline-dark" for="btnradio2_2">인기순</label>
+                            <label class="btn btn-outline-primary" for="btnradio2_2">인기순</label>
                         </div>
                 </div>
             </div>
             <!-- 라디오 버튼 끝 -->
                     <!-- 여행메이트 글 목록 테이블 시작 -->
                     <table class="table table-hover mt-2">
-                        <thead class="table-dark">
+                        <thead class="table table-primary">
                             <tr>
                                 <th class="text-center">#</th>
                                 <th class="text-center">Title</th>
@@ -443,16 +385,16 @@
                     <p class="mb-0">자유 게시판</p>
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                         <input type="radio" class="btn-check" name="btnradio3" id="btnradio3_1" autocomplete="off" checked>
-                        <label class="btn btn-outline-dark" for="btnradio3_1">최신순</label>
+                        <label class="btn btn-outline-primary" for="btnradio3_1">최신순</label>
                         <input type="radio" class="btn-check" name="btnradio3" id="btnradio3_2" autocomplete="off" >
-                        <label class="btn btn-outline-dark" for="btnradio3_2">인기순</label>
+                        <label class="btn btn-outline-primary" for="btnradio3_2">인기순</label>
                     </div>
                 </div>
             </div>
             <!-- 라디오 버튼 끝 -->                
                     <!-- 전체 글 목록 테이블 시작 -->
                     <table class="table table-hover mt-2">
-                        <thead class="table-dark">
+                        <thead class="table table-primary">
                             <tr>
                                 <th class="text-center">#</th>
                                 <th class="text-center">Title</th>
@@ -478,7 +420,7 @@
         <!-- 검색 결과 탭 콘텐츠 -->
     <div class="tab-pane fade" id="search" role="tabpanel" aria-labelledby="search-tab">
                     <table class="table table-hover mt-2">
-                        <thead class="table-dark">
+                        <thead class="table table-primary">
                             <tr>
                                 <th class="text-center">#</th>
                                 <th class="text-center">Title</th>
@@ -499,10 +441,9 @@
 </div>
 <!-- 탭 끝 -->
 <footer class="footer mt-5 mb-3 pb-3 pt-5">
-<div class="container">
-            <p style="text-align: right;">&copy; 2024 Audiro. All rights reserved. 
-            </p>
-</div>
+    <div class="container-fluid">
+        <%@ include file="../fragments/footer.jspf"%>
+    </div>
 </footer>
 </div><!--전체 페이지 div 컨테이너 안 끝-->
 

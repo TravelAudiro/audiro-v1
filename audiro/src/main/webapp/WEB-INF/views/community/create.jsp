@@ -7,7 +7,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>글 작성</title>
-<link href="../css/community.css" rel="stylesheet" />
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous" />
+<link
+    href="https://webfontworld.github.io/Cafe24SsurroundAir/Cafe24SsurroundAir.css"
+    rel="stylesheet">
 <!-- Quill CSS 포함 -->
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
@@ -72,34 +79,12 @@
 
 </style>
 </head>
-<body onload="startTime()">
+<body onload="startTime()"> <!-- style="font-family: Cafe24SsurroundAir;" -->
     <div class="container">
-     <!-- 맨 위에 뜨는거 -->
-         <%-- 세션에 로그인 정보가 없는 경우 --%>
-    <c:if test="${empty signedInUser}">
-        <ul class="nav justify-content-end">
-            <c:url var="signUp" value="/user/signup"></c:url>
-            <li class="nav-item"><a class="nav-link"
-                href="${signUp}">회원가입</a></li>
-            <c:url var="signIn" value="/user/signin"></c:url>
-            <li class="nav-item"><a class="nav-link"
-                href="${signIn}">🤍 로그인</a></li>
-        </ul>
-    </c:if>
-    <%-- 로그인 정보가 세션에 저장된 경우 --%>
-    <c:if test="${not empty signedInUser}">
-        <ul class="nav justify-content-end">
-            <c:url var="mypage" value="/mypage">
-                <c:param name="id" value="${signedInUser}"></c:param>
-            </c:url>
-            <li class="nav-item"><a class="nav-link"
-                href="${mypage}">내 정보</a></li>
-            <li class="nav-item"><c:url var="signOutPage"
-                    value="/user/signout" /> <a class="nav-link"
-                href="${signOutPage}"><span>${signedInUser}💜</span> 로그아웃</a>
-            </li>                
-        </ul>
-    </c:if>
+        <%@ include file="../fragments/header.jspf"%>
+    </div>
+    
+    <div class="container mt-4">
      <!-- 맨 위에 뜨는 nav끝 -->    
         <!-- **** row 클래스를 사용하여 두 섹션을 가로로 배치합니다. **** -->
         <div class="row">
@@ -107,16 +92,16 @@
             <!-- **** col-md-4와 col-lg-3 클래스를 사용하여 반응형 너비를 설정합니다. **** -->
             <div class="col-md-4 col-lg-3 mb-3">
                 <div class="card mb-3">
-                    <h3 class="card-header"
-                        style="background-color: #3faf6c; text-align: center;">AUDIRO 🥦COMMUNITY</h3>
+                    <h3 class="card-header p-3"
+                        style="background-color:#c8dff3; text-align: center;">COMMUNITY</h3>
                     <div class="card-body">
-                        <h4 class="card-title m-1"
+                     <!--   <h4 class="card-title m-1"
                             style="text-align: center;">writing</h4>
                         <h6 class="card-subtitle text-muted p-2"
                             style="text-align: center;">You guys write a lot.</h6>
                         <img
                             style="display: block; margin: 0 auto; width: 100%;"
-                            src="../images/create.png" alt="글 작성">
+                            src="../images/create.png" alt="글 작성">  --> 
                     </div>
                     <div class="card-body">
                         <p class="ps-3 pe-3" style="text-align: center;">
@@ -130,41 +115,52 @@
                             <c:param name="id" value="${signedInUser}"></c:param>
                         </c:url>
                         <li class="list-group-item">
-                            <a href="${main}">커뮤니티 메인</a>
+                            <a style="text-decoration: none;" href="${main}">커뮤니티 메인</a>
                         </li>
                         <c:url var="alllist" value="/community/alllist">
                             <c:param name="id" value="${signedInUser}"></c:param>
                         </c:url>
                         <li class="list-group-item">
-                            <a href="${alllist}">전체 목록</a>
+                            <a style="text-decoration: none;" href="${alllist}">전체 목록</a>
                         </li>
                         <c:url var="matelist" value="/community/matelist">
                             <c:param name="id" value="${signedInUser}"></c:param>
                         </c:url>                        
                         <li class="list-group-item">
-                            <a href="${matelist}">여행 메이트</a>
+                            <a style="text-decoration: none;" href="${matelist}">여행 메이트</a>
                         </li>
                         <c:url var="freelist" value="/community/freelist">
                             <c:param name="id" value="${signedInUser}"></c:param>
                         </c:url>
                         <li class="list-group-item">
-                            <a href="${freelist}">자유게시판</a>     
+                            <a style="text-decoration: none;" href="${freelist}">자유게시판</a>     
                         </li>
                         <c:url var="create" value="/community/create">
                             <c:param name="id" value="${signedInUser}"></c:param>
                         </c:url>                      
                         <li class="list-group-item">
-                            <a href="${create}">글쓰기</a>     
+                            <a style="text-decoration: none;" href="${create}">글쓰기</a>     
                         </li>
                     </ul>
                     <div class="card-body">
-                        <a href="#" class="card-link p-2">#어디로 메인</a> <a
-                            href="#" class="card-link p-2">#여행지 찾기</a> <br />
-                        <a href="#" class="card-link p-2">#여행
-                            계획&nbsp;&nbsp;&nbsp;</a> <a href="#"
+                        <c:url var="home" value="/"></c:url>
+                        <a style="text-decoration: none;" href="${home}"
+                            class="card-link p-2">#어디로 메인</a> 
+                        <c:url var="tp" value="/travel/plan" />
+                            <a
+                            style="text-decoration: none;" href="${tp}"
+                            class="card-link p-2">#여행지 찾기</a> <br /> 
+                        <c:url var="tpl" value="/travel/plan/list" />
+                            <a
+                            style="text-decoration: none;" href="${tpl}"
+                            class="card-link p-2">#여행
+                            계획&nbsp;&nbsp;&nbsp;</a> 
+                            <c:url var="trp" value="/post/review/list" />
+                            <a href="${trp}"
+                            style="text-decoration: none;"
                             class="card-link p-2">#여행 후기</a>
                     </div>
-                    <div class="card-footer text-muted">검색기능</div>
+                   
                 </div>
                 <!-- 랭킹 시작 -->
                 <div class="card">
@@ -191,8 +187,8 @@
                                 <tbody>
                                     <c:choose>
                                         <c:when test="${like.rank == 1}">
-                                            <tr class="table-success">
-                                                <td class="text-center">🐸</td>
+                                            <tr class="table-primary">
+                                                <td class="text-center">🐬</td>
                                                 <td class="text-center">${like.nickname}</td>
                                                 <td class="text-center">${like.count}</td>
                                             </tr>
@@ -233,8 +229,8 @@
                                 <tbody>
                                     <c:choose>
                                         <c:when test="${pg.rank == 1}">
-                                            <tr class="table-success">
-                                                <td class="text-center">🐸</td>
+                                            <tr class="table-primary">
+                                                <td class="text-center">🐬</td>
                                                 <td class="text-center">${pg.title}</td>
                                                 <td class="text-center">${pg.good}</td>
                                             </tr>
@@ -276,8 +272,8 @@
                                 <tbody>
                                     <c:choose>
                                         <c:when test="${cu.rank == 1}">
-                                            <tr class="table-success">
-                                                <td class="text-center">🐸</td>
+                                            <tr class="table-primary">
+                                                <td class="text-center">🐬</td>
                                                 <td class="text-center">${cu.nickname}</td>
                                                 <td class="text-center">${cu.count}</td>
                                             </tr>
@@ -313,7 +309,7 @@
                     <div class="card border-light mb-3">
                         <div class="card-header">
                                     <p class="mt-3 ms-2">
-                                       🥝<span
+                                       <span
                                             class="text-body-secondary"> 글 작성</span>
                                     </p>
                         </div>
@@ -375,6 +371,9 @@
                 </main>
             </div>
         </div>
+            <div class="container-fluid">
+        <%@ include file="../fragments/footer.jspf"%>
+    </div>
     </div>
     <!-- 부트스트랩 js라이브러리 -->
     <script
@@ -506,6 +505,10 @@ quill.on('text-change', function(delta, oldDelta, source) {
 });
 </script>
 <script>
+function showAlert() {
+    alert("글이 등록되었습니다.");
+}
+
     // DOMContentLoaded 이벤트 리스너를 추가합니다. 이는 문서의 DOM 트리가 완전히 로드된 후 실행됩니다.
     document.addEventListener('DOMContentLoaded', function() {
         // 'selectForm'이라는 ID를 가진 폼 요소에 'submit' 이벤트 리스너를 추가합니다.
@@ -540,6 +543,9 @@ quill.on('text-change', function(delta, oldDelta, source) {
             
             // 폼 제출 전 Quill 에디터의 내용을 숨겨진 텍스트 영역에 설정합니다.
             document.getElementById('content').value = content;
+            
+
+            showAlert(); // 글이 등록되었음을 알림
         });
     });
 </script>

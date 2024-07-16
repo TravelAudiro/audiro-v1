@@ -10,7 +10,14 @@
     <title>수정하기</title>
 <!-- Font Awesome CDN 추가 눈알 때문에 추가함-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous" />
+<link
+    href="https://webfontworld.github.io/Cafe24SsurroundAir/Cafe24SsurroundAir.css"
+    rel="stylesheet">
 
 <style>
     .password-toggle {
@@ -48,14 +55,17 @@
         }   
 </style>   
 </head>
-<body>
-
-    <div class="container">
-        <c:set var="pageTitle" value="User Profile" scope="page" />
+<body style="font-family: Cafe24SsurroundAir;">
+ 
+ <c:set var="pageTitle" value="User Profile" scope="page" />
         <%@ include file="../fragments/header.jspf" %>
+<div class="mt-5"></div>
+
+    <div class="container" style="width: 1000px;">
+       
         <main>
             <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-12 mt-5">
+                <div class="col-lg-3 col-md-4 col-sm-12 ">
                     <div class="card mx-auto" style="max-width: 18rem;">
                         <div class="card-header">
                             <h2 class="text-center my-2">프로필 수정</h2>
@@ -87,7 +97,7 @@
                     
                 </div>
                 <!-- 회원정보 수정 -->
-                <div class="col-lg-9 col-md-8 col-sm-12 mt-5">
+                <div class="col-lg-9 col-md-8 col-sm-12">
                     <div class="card">
                         <div class="card-header">
                             <h2 class="text-center my-2">수정하기</h2>

@@ -8,7 +8,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>커뮤니티</title>
-<link href="../css/community.css" rel="stylesheet" />
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous" />
+<link
+    href="https://webfontworld.github.io/Cafe24SsurroundAir/Cafe24SsurroundAir.css"
+    rel="stylesheet">
 <style>
 
 
@@ -115,33 +122,12 @@ textarea::placeholder {
 </style>
 </head>
 <body>
-    <div class="container">
-         <!-- 맨 위에 뜨는거 -->
-         <%-- 세션에 로그인 정보가 없는 경우 --%>
-    <c:if test="${empty signedInUser}">
-        <ul class="nav justify-content-end">
-            <c:url var="signUp" value="/user/signup"></c:url>
-            <li class="nav-item"><a class="nav-link"
-                href="${signUp}">회원가입</a></li>
-            <c:url var="signIn" value="/user/signin"></c:url>
-            <li class="nav-item"><a class="nav-link"
-                href="${signIn}">🤍 로그인</a></li>
-        </ul>
-    </c:if>
-    <%-- 로그인 정보가 세션에 저장된 경우 --%>
-    <c:if test="${not empty signedInUser}">
-        <ul class="nav justify-content-end">
-            <c:url var="mypage" value="/mypage">
-                <c:param name="id" value="${signedInUser}"></c:param>
-            </c:url>
-            <li class="nav-item"><a class="nav-link"
-                href="${mypage}">내 정보</a></li>
-            <li class="nav-item"><c:url var="signOutPage"
-                    value="/user/signout" /> <a class="nav-link"
-                href="${signOutPage}"><span>${signedInUser}💜</span> 로그아웃</a>
-            </li>                
-        </ul>
-    </c:if>
+        <div class="container">
+        <%@ include file="../fragments/header.jspf"%>
+    </div>
+    
+    <div class="container mt-4">
+         
      <!-- 맨 위에 뜨는 nav끝 -->
         <!-- **** row 클래스를 사용하여 두 섹션을 가로로 배치합니다. **** -->
         <div class="row">
@@ -151,18 +137,18 @@ textarea::placeholder {
                 <div class="card mb-3">
                     <c:choose>
                         <c:when test="${p.postTypeId == 20}">
-                            <h3 class="card-header"
-                                style="background-color: #8baddc; text-align: center;">AUDIRO🤍COMMUNITY</h3>
+                            <h3 class="card-header p-3"
+                                style="background-color: #c8dff3; text-align: center;">COMMUNITY</h3>
                             <div class="card-body">
-                                <h5 class="card-title m-1"
+                          <!--      <h5 class="card-title m-1"
                                     style="text-align: center;">travel
                                     mate</h5>
                                 <h6 class="card-subtitle text-muted p-2"
                                     style="text-align: center;">Looking
-                                    for a travel mate!</h6>
-                                <img
+                                    for a travel mate!</h6>-->
+                              <!--  <img
                                     style="display: block; margin: 0 auto; width: 100%;"
-                                    src="../images/mate.png" alt="여행메이트">
+                                    src="../images/mate.png" alt="여행메이트"> -->
                             </div>
                             <div class="card-body">
                                 <p class="ps-3 pe-3"
@@ -173,10 +159,10 @@ textarea::placeholder {
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <h3 class="card-header"
-                                style="background-color: #f39ca2; text-align: center;">AUDIRO🖤COMMUNITY</h3>
+                            <h3 class="card-header p-3"
+                                style="background-color: #c8dff3; text-align: center;">COMMUNITY</h3>
                             <div class="card-body">
-                                <h5 class="card-title m-1"
+                            <!--     <h5 class="card-title m-1"
                                     style="text-align: center;">Free
                                     Board</h5>
                                 <h6 class="card-subtitle text-muted p-2"
@@ -184,7 +170,7 @@ textarea::placeholder {
                                     free to write 😁</h6>
                                 <img
                                     style="display: block; margin: 0 auto; width: 100%;"
-                                    src="../images/free.png" alt="여행메이트">
+                                    src="../images/free.png" alt="여행메이트">  -->
                             </div>
                             <div class="card-body">
                                 <p class="ps-3 pe-3"
@@ -199,41 +185,52 @@ textarea::placeholder {
                             <c:param name="id" value="${signedInUser}"></c:param>
                         </c:url>
                         <li class="list-group-item">
-                            <a href="${main}">커뮤니티 메인</a>
+                            <a style="text-decoration: none;"  href="${main}">커뮤니티 메인</a>
                         </li>
                         <c:url var="alllist" value="/community/alllist">
                             <c:param name="id" value="${signedInUser}"></c:param>
                         </c:url>
                         <li class="list-group-item">
-                            <a href="${alllist}">전체 목록</a>
+                            <a style="text-decoration: none;" href="${alllist}">전체 목록</a>
                         </li>
                         <c:url var="matelist" value="/community/matelist">
                             <c:param name="id" value="${signedInUser}"></c:param>
                         </c:url>
                         <li class="list-group-item">
-                            <a href="${matelist}">여행 메이트</a>
+                            <a style="text-decoration: none;" href="${matelist}">여행 메이트</a>
                         </li>
                         <c:url var="freelist" value="/community/freelist">
                             <c:param name="id" value="${signedInUser}"></c:param>
                         </c:url>
                         <li class="list-group-item">
-                            <a href="${freelist}">자유게시판</a>     
+                            <a style="text-decoration: none;" href="${freelist}">자유게시판</a>     
                         </li>
                         <c:url var="create" value="/community/create">
                             <c:param name="id" value="${signedInUser}"></c:param>
                         </c:url>
                         <li class="list-group-item">
-                            <a id="create" href="${create}">글쓰기</a>     
+                            <a style="text-decoration: none;" id="create" href="${create}">글쓰기</a>     
                         </li>
                     </ul>
                     <div class="card-body">
-                        <a href="#" class="card-link p-2">#어디로 메인</a> <a
-                            href="#" class="card-link p-2">#여행지 찾기</a> <br />
-                        <a href="#" class="card-link p-2">#여행
-                            계획&nbsp;&nbsp;&nbsp;</a> <a href="#"
+                        <c:url var="home" value="/"></c:url>
+                        <a style="text-decoration: none;" href="${home}"
+                            class="card-link p-2">#어디로 메인</a> 
+                        <c:url var="tp" value="/travel/plan" />
+                            <a
+                            style="text-decoration: none;" href="${tp}"
+                            class="card-link p-2">#여행지 찾기</a> <br /> 
+                        <c:url var="tpl" value="/travel/plan/list" />
+                            <a
+                            style="text-decoration: none;" href="${tpl}"
+                            class="card-link p-2">#여행
+                            계획&nbsp;&nbsp;&nbsp;</a> 
+                            <c:url var="trp" value="/post/review/list" />
+                            <a href="${trp}"
+                            style="text-decoration: none;"
                             class="card-link p-2">#여행 후기</a>
                     </div>
-                    <div class="card-footer text-muted">검색기능</div>
+                   
                 </div>
                 <!-- 랭킹 시작 -->
                 <c:choose>
@@ -264,9 +261,9 @@ textarea::placeholder {
                                                 <c:when
                                                     test="${like.rank == 1}">
                                                     <tr
-                                                        class="table-info">
+                                                        class="table-primary">
                                                         <td
-                                                            class="text-center">&#129351;</td>
+                                                            class="text-center">🐬</td>
                                                         <td
                                                             class="text-center">${like.nickname}</td>
                                                         <td
@@ -277,7 +274,7 @@ textarea::placeholder {
                                                     test="${like.rank == 2}">
                                                     <tr>
                                                         <td
-                                                            class="text-center">&#129352;</td>
+                                                            class="text-center">2</td>
                                                         <td
                                                             class="text-center">${like.nickname}</td>
                                                         <td
@@ -287,7 +284,7 @@ textarea::placeholder {
                                                 <c:otherwise>
                                                     <tr>
                                                         <td
-                                                            class="text-center">&#129353;</td>
+                                                            class="text-center">3</td>
                                                         <td
                                                             class="text-center">${like.nickname}</td>
                                                         <td
@@ -319,9 +316,9 @@ textarea::placeholder {
                                                 <c:when
                                                     test="${pg.rank == 1}">
                                                     <tr
-                                                        class="table-info">
+                                                        class="table-primary">
                                                         <td
-                                                            class="text-center">&#129351;</td>
+                                                            class="text-center">🐬</td>
                                                         <td
                                                             class="text-center">${pg.title}</td>
                                                         <td
@@ -332,7 +329,7 @@ textarea::placeholder {
                                                     test="${pg.rank == 2}">
                                                     <tr>
                                                         <td
-                                                            class="text-center">&#129352;</td>
+                                                            class="text-center">2</td>
                                                         <td
                                                             class="text-center">${pg.title}</td>
                                                         <td
@@ -342,7 +339,7 @@ textarea::placeholder {
                                                 <c:otherwise>
                                                     <tr>
                                                         <td
-                                                            class="text-center">&#129353;</td>
+                                                            class="text-center">3</td>
                                                         <td
                                                             class="text-center">${pg.title}</td>
                                                         <td
@@ -375,9 +372,9 @@ textarea::placeholder {
                                                 <c:when
                                                     test="${cu.rank == 1}">
                                                     <tr
-                                                        class="table-info">
+                                                        class="table-primary">
                                                         <td
-                                                            class="text-center">&#129351;</td>
+                                                            class="text-center">🐬</td>
                                                         <td
                                                             class="text-center">${cu.nickname}</td>
                                                         <td
@@ -388,7 +385,7 @@ textarea::placeholder {
                                                     test="${cu.rank == 2}">
                                                     <tr>
                                                         <td
-                                                            class="text-center">&#129352;</td>
+                                                            class="text-center">2</td>
                                                         <td
                                                             class="text-center">${cu.nickname}</td>
                                                         <td
@@ -398,7 +395,7 @@ textarea::placeholder {
                                                 <c:otherwise>
                                                     <tr>
                                                         <td
-                                                            class="text-center">&#129353;</td>
+                                                            class="text-center">3</td>
                                                         <td
                                                             class="text-center">${cu.nickname}</td>
                                                         <td
@@ -441,9 +438,9 @@ textarea::placeholder {
                                                 <c:when
                                                     test="${like.rank == 1}">
                                                     <tr
-                                                        class="table-danger">
+                                                        class="table-primary">
                                                         <td
-                                                            class="text-center">&#129351;</td>
+                                                            class="text-center">🐬</td>
                                                         <td
                                                             class="text-center">${like.nickname}</td>
                                                         <td
@@ -454,7 +451,7 @@ textarea::placeholder {
                                                     test="${like.rank == 2}">
                                                     <tr>
                                                         <td
-                                                            class="text-center">&#129352;</td>
+                                                            class="text-center">2</td>
                                                         <td
                                                             class="text-center">${like.nickname}</td>
                                                         <td
@@ -464,7 +461,7 @@ textarea::placeholder {
                                                 <c:otherwise>
                                                     <tr>
                                                         <td
-                                                            class="text-center">&#129353;</td>
+                                                            class="text-center">3</td>
                                                         <td
                                                             class="text-center">${like.nickname}</td>
                                                         <td
@@ -496,9 +493,9 @@ textarea::placeholder {
                                                 <c:when
                                                     test="${pg.rank == 1}">
                                                     <tr
-                                                        class="table-danger">
+                                                        class="table-primary">
                                                         <td
-                                                            class="text-center">&#129351;</td>
+                                                            class="text-center">🐬</td>
                                                         <td
                                                             class="text-center">${pg.title}</td>
                                                         <td
@@ -509,7 +506,7 @@ textarea::placeholder {
                                                     test="${pg.rank == 2}">
                                                     <tr>
                                                         <td
-                                                            class="text-center">&#129352;</td>
+                                                            class="text-center">2</td>
                                                         <td
                                                             class="text-center">${pg.title}</td>
                                                         <td
@@ -519,7 +516,7 @@ textarea::placeholder {
                                                 <c:otherwise>
                                                     <tr>
                                                         <td
-                                                            class="text-center">&#129353;</td>
+                                                            class="text-center">3</td>
                                                         <td
                                                             class="text-center">${pg.title}</td>
                                                         <td
@@ -552,9 +549,9 @@ textarea::placeholder {
                                                 <c:when
                                                     test="${cu.rank == 1}">
                                                     <tr
-                                                        class="table-danger">
+                                                        class="table-primary">
                                                         <td
-                                                            class="text-center">&#129351;</td>
+                                                            class="text-center">🐬</td>
                                                         <td
                                                             class="text-center">${cu.nickname}</td>
                                                         <td
@@ -565,7 +562,7 @@ textarea::placeholder {
                                                     test="${cu.rank == 2}">
                                                     <tr>
                                                         <td
-                                                            class="text-center">&#129352;</td>
+                                                            class="text-center">2</td>
                                                         <td
                                                             class="text-center">${cu.nickname}</td>
                                                         <td
@@ -575,7 +572,7 @@ textarea::placeholder {
                                                 <c:otherwise>
                                                     <tr>
                                                         <td
-                                                            class="text-center">&#129353;</td>
+                                                            class="text-center">3</td>
                                                         <td
                                                             class="text-center">${cu.nickname}</td>
                                                         <td
@@ -604,14 +601,14 @@ textarea::placeholder {
                             <c:choose>
                                 <c:when test="${p.postTypeId == 20}">
                                     <p class="mt-3 ms-2">
-                                        🌳 <span
+                                        <span
                                             class="text-body-secondary">여행
                                             메이트 구해요</span>
                                     </p>
                                 </c:when>
                                 <c:otherwise>
                                     <p class="mt-3 ms-2">
-                                        🍭 <span
+                                        <span
                                             class="text-body-secondary">자유
                                             게시판</span>
                                     </p>
@@ -654,7 +651,7 @@ textarea::placeholder {
                                 <div class="d-flex align-items-center">
                                     <img id="btngood" class="image-hover" alt="good1" src="../images/good1.png" style="width: 40px; height: auto; margin-right: 5px;" data-post-id="${p.postId}" data-users-id="${signedInUsersId}" data-author-id="${p.usersId}">
                                     <span style="margin-top: 11px;">추천&nbsp;</span>
-                                    <span class="badge rounded-pill" style="margin-top: 8px; background-color:#E5B9D9;">${p.good}</span>
+                                    <span class="badge rounded-pill pe-2 ps-2" style="margin-top: 12px; background-color:#96c8ef;">${p.good}</span>
                                 </div>
                                 <p class="mb-0 me-4" style="color: grey; font-size: 90%; text-align: right;">수정 시간 : ${p.modifiedTime}</p>
                             </div>
@@ -666,14 +663,14 @@ textarea::placeholder {
                                 <c:url var="mate" value="/community/matelist">
                                      <c:param name="id" value="${signedInUser}"></c:param>
                                 </c:url>
-                                <a class="btn btn-outline-warning ms-2"
+                                <a class="btn btn-outline-dark ms-2"
                                     href="${mate}">최신 목록</a>
                                     </c:when>
                                     <c:when test="${p.postTypeId == 30}">
                                 <c:url var="free" value="/community/freelist">
                                      <c:param name="id" value="${signedInUser}"></c:param>
                                 </c:url>
-                                <a class="btn btn-outline-warning ms-2"
+                                <a class="btn btn-outline-dark ms-2"
                                     href="${free}">최신 목록</a>                                    
                                     </c:when>
                                 </c:choose>
@@ -687,7 +684,7 @@ textarea::placeholder {
                                     </c:url>
                                 <!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->
                                 <c:if test="${signedInUser eq p.id}">
-                                    <a class="btn btn-outline-info me-2"
+                                    <a class="btn btn-outline-primary me-2"
                                         href="${postModifyPage}">수정</a>
                                         <c:url var="delete"
                                         value="/community/delete">
@@ -733,7 +730,7 @@ textarea::placeholder {
                                     <div class="col-12 button-container">
                                         <img src="https://img.icons8.com/?size=100&id=l0nYZP2WZJqy&format=png&color=000000" id="openIcon"  class="icon visible" alt="open" />
                                         <img src="https://img.icons8.com/?size=100&id=88611&format=png&color=000000" id="lockIcon" class="icon" alt="lock" />
-                                        <button class="btn btn-outline-info mt-3 mb-3 me-2"  onclick="checkTextarea()">댓글 등록</button>
+                                        <button class="btn btn-outline-success mt-3 mb-3 me-2"  onclick="checkTextarea()">댓글 등록</button>
                                     </div>
                                 </div>
                             </c:if>
@@ -748,7 +745,7 @@ textarea::placeholder {
                                         <div class="col-12 button-container">
                                             <img src="https://img.icons8.com/?size=100&id=l0nYZP2WZJqy&format=png&color=000000" id="openIcon" class="icon hidden" alt="open" />
                                             <img src="https://img.icons8.com/?size=100&id=88611&format=png&color=000000"  id="lockIcon" class="icon hidden" alt="lock" />                                            
-                                            <button class="btn btn-info mt-3 mb-3 me-1" disabled>댓글 등록</button>
+                                            <button class="btn btn-primary mt-3 mb-3 me-1" disabled>댓글 등록</button>
                                         </div>
                                     </div>
                                 </c:if>
@@ -762,12 +759,16 @@ textarea::placeholder {
         </div>
         <!-- 저작권 표시 꼭 있어야함 -->
         <footer class="container mt-4 mb-5">
+        
+        
+
         <div class="row">
             <div class="col-12 text-end">
                 <a target="_blank" href="https://icons8.com/icon/DFelf9dA7GBS/heart-lock" style="color: gray;">Icons by :</a>
                 <a target="_blank" href="https://icons8.com" style="color: gray;">Icons8</a>
             </div>
         </div>
+        <%@ include file="../fragments/footer.jspf"%>
     </footer>
     </div>
     <!-- 부트스트랩 js라이브러리 -->

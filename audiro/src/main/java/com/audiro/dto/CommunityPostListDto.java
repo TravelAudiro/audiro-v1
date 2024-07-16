@@ -22,9 +22,9 @@ public class CommunityPostListDto {
 	private String title;					//게시글 제목.
 	private String content;					//게시글 내용.
 	
-	//json 날짜 형식 변환 처리.
-	@JsonFormat(pattern = "YYYY년 MM월 DD일 HH:MM:SS")
+	@JsonFormat(pattern = "YYYY-MM-DD hh:mm:ss")
 	private LocalDateTime createdTime;		//댓글 최초 작성 시간.
+	@JsonFormat(pattern = "YYYY-MM-DD hh:mm:ss")
 	private LocalDateTime modifiedTime;		//댓글 최종 수정 시간.
 	private Integer good;					//게시글 좋아요 갯수.
 //	private Integer travelPlanId;			//Foregin Key: travel_plan테이블의 travel_plan_id(pk) 컬럼을 참조.
