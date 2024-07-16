@@ -17,13 +17,16 @@
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin>
 <style>
+
+font
 body {
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
 	background-color: #f8f9fa;
 	margin: 0;
+	font-family: 'Cafe24SsurroundAir', sans-serif; /* 웹폰트 적용 */
+	
 }
 
 .container-fluid {
@@ -136,9 +139,9 @@ body {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
-	-webkit-line-clamp: 10; /* 원하는 줄 수로 설정 */
+	-webkit-line-clamp: 5; /* 원하는 줄 수로 설정 */
 	-webkit-box-orient: vertical;
-	max-height: 150px; /* 최대 높이 설정 */
+	max-height: 100px; /* 최대 높이 설정 */
 }
 
 .card-content img {
@@ -150,14 +153,15 @@ body {
 </style>
 </head>
 <body>
+	<c:set var="travelReviewPage" value="여행후기" />
+	<%@ include file="../../fragments/header.jspf"%>
+	
 	<div class="container-fluid">
-		<c:set var="travelReviewPage" value="여행후기" />
-		<%@ include file="../../fragments/header.jspf"%>
-
-		<main class="row justify-content-center">
+	</div>
+		<div class="container">
+		<main class="row justify-content-center" style="margin-top: 50px;">
 			<input id="postId" name="postId" type="hidden" value="${post.postId}" />
-			<input id="usersId" name="usersId" type="hidden"
-				value="${signedInUsersId}" />
+			<input id="usersId" name="usersId" type="hidden" value="${signedInUsersId}" />
 
 			<!-- 여행일기 목록불러오기 -->
 			<div class="col-md-8">
@@ -249,7 +253,10 @@ body {
 				</div>
 		</main>
 	</div>
-
+	
+	<script>
+		const signedInUser = `${signedInUser}`;
+	</script>
 
 	<!-- Bootstrap의 JS 라이브러리 -->
 	<script

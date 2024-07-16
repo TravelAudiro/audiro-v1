@@ -107,12 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	   
 	// 저장 버튼 클릭 시 실행할 함수
 	function saveBtnListener(e) {
-		//alert('저장 버튼 클릭!');
-
+		
 		e.preventDefault();// 버튼기본동작을 막음.
 
 		const inputTitle = document.querySelector('input#title').value;
-		const content = document.querySelector('.ql-editor').innerHTML;
+		const content = document.querySelector('.c_editor').innerHTML;
 
 		// form 찾음. -> form.action, form.method 설정 -> form.submit()
 		const form = document.querySelector('form#createForm')

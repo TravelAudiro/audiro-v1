@@ -5,7 +5,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Summernote with Bootstrap 4</title>
+<title>여행후기 수정페이지</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
 	crossorigin="anonymous"></script>
 <script
@@ -21,6 +21,12 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
+
+<link
+	href="https://webfontworld.github.io/Cafe24SsurroundAir/Cafe24SsurroundAir.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css"
@@ -42,16 +48,17 @@ body {
 }
 
 .main-content {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: calc(100vh - 70px); /* 70px는 네비바 높이를 가정 */
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 70px); /* 70px는 네비바 높이를 가정 */
+    width: 90%; /* 원하는 넓이로 설정 */
+    margin: 0 auto; /* 가운데 정렬 */
 
 .card {
-	width: 100%;
-	max-width: 800px; /* 원하는 너비로 설정 */
-	margin: 0 auto;
+    width: 100%;
+    max-width: 1200px; /* 원하는 너비로 설정 */
+    margin: 0 auto;
 }
 </style>
 
@@ -63,7 +70,7 @@ body {
 		<%@ include file="../../fragments/header.jspf"%>
 
 		<div class="main-content">
-			<div class="mt-2 card">
+			<div class="mt-5 card">
 				<div class="card-header">
 					<h4>여행후기 수정페이지</h4>
 				</div>
