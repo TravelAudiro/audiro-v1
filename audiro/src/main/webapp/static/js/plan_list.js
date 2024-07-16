@@ -3,13 +3,13 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-	
+	/*
 	if (signedInUser === null || signedInUser === '') {
 		if (confirm("로그인하시겠습니까?")) {
 			window.location.href = '/audiro/user/signin';
 		}
 		return;
-	}
+	}*/
 	
 	const deletePlanImg = document.querySelectorAll('img.deletePlanImg');
 	deletePlanImg.forEach((d) => {

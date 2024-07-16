@@ -17,13 +17,13 @@ $(document).ready(function() {
 	let endDateValue = document.querySelector('input#endDate').value;
 	const modifyUrl = "/audiro/travel/plan/modify";
 	
-	if (signedInUser === null || signedInUser === '') {
+	/*if (signedInUser === null || signedInUser === '') {
 		if (confirm("로그인하시겠습니까?")) {
 			window.location.href = '/audiro/user/signin';
 		}
 		return;
 	}
-
+*/
 
 	// Datepicker 초기화
 	$('#startDate').datepicker({
@@ -733,7 +733,7 @@ $(document).ready(function() {
 		detailedPlans.forEach((d) => {
 			const li = document.querySelector(`#dayPlan${d.day} ul`);
 			let htmlStr = `
-                <li id="list${d.favoriteDestinationId}" class="list row g-0 my-1 p-2" des-id="${d.destinationId}">
+                <li id="list${d.favoriteDestinationId}" class="list row g-0 p-2" des-id="${d.destinationId}">
 	            	<div class="name col-10">${d.name}</div>
 	            	<div class="deleteFav col-2">
 						<img class="deleteFavImg" src="/audiro/images/delete.png" />

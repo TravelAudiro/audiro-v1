@@ -43,14 +43,17 @@
 					<div class="row g-0 ">
 						<div class="col-3 p-2 ">
 							<div class="row g-0">
-								<div id="btnContainer">
+								<div id="btnContainer" class="btn-group" role="group" aria-label="Basic example">
 								<!-- style="display: none;" -->
-									<button id="deleteAll" class="btn btn-primary">전체 삭제</button>
-									<button type="submit" id="btnSave" class="btn btn-primary">저장</button>
+								
+									<button type="button" id="deleteAll" class="btn btn-secondary">전체 삭제</button>
+									<button type="submit" id="btnSave" class="btn btn-secondary">저장</button>
 								</div>
 							</div>
 							<div id="dayContainer"></div>
-							<button id="createDay" class="btn btn-primary">일차 추가</button>
+							<div class="row g-0">
+								<button  type="button" class="btn btn-secondary"id="createDay">일차 추가</button>
+							</div>
 						</div>
 
 						<div class="col-9">

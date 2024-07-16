@@ -23,6 +23,8 @@ import com.audiro.repository.TravelPlan;
 import com.audiro.service.FavoriteDestinationService;
 import com.audiro.service.TravelPlanService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,28 +38,31 @@ public class TravelPlanRestController {
 	private final TravelPlanService planService;
 
 	@GetMapping("/fav")
-	public ResponseEntity<List<FavoriteDestinationDto>> readAllFavoriteDestination() {
-		List<FavoriteDestinationDto> list = favService.readAll();
+	public ResponseEntity<List<FavoriteDestinationDto>> readAllFavoriteDestination(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		int usersId = (int) session.getAttribute("signedInUsersId");
+		List<FavoriteDestinationDto> list = favService.readAll(usersId);
 		return ResponseEntity.ok(list);
+
 	}
 
 	@GetMapping("/fav/{favoriteDestinationId}")
 	public ResponseEntity<FavoriteDestinationDto> favoriteDestinationId(@PathVariable int favoriteDestinationId) {
-		FavoriteDestinationDto dto=favService.readById(favoriteDestinationId);
+		FavoriteDestinationDto dto = favService.readById(favoriteDestinationId);
 		return ResponseEntity.ok(dto);
 	}
-	
+
 	@PostMapping("/create/travelPlan")
-	public ResponseEntity<Integer> createPlan(@RequestBody TravelPlanDto dto){
-	 
-	    int result=planService.createPlan(dto);
+	public ResponseEntity<Integer> createPlan(@RequestBody TravelPlanDto dto) {
+
+		int result = planService.createPlan(dto);
 		return ResponseEntity.ok(result);
 	}
-	
+
 	@PostMapping("/create/detailedPlan")
-	public ResponseEntity<Integer> createDetailedPlan(@RequestBody List<DetailedPlan> plan){
+	public ResponseEntity<Integer> createDetailedPlan(@RequestBody List<DetailedPlan> plan) {
 		log.debug("rest");
-		int result=planService.createDetailedPlan(plan);
+		int result = planService.createDetailedPlan(plan);
 		return ResponseEntity.ok(result);
 	}
 
@@ -65,7 +70,7 @@ public class TravelPlanRestController {
 	public ResponseEntity<Map<String, Object>> details(@PathVariable("travelPlanId") int travelPlanId) {
 		List<DetailedPlanDto> list = planService.readDetailedPlanByTravelPlanId(travelPlanId);
 		int maxDay = planService.getMaxDay(travelPlanId);
-		TravelPlan plan=planService.readTravelPlanById(travelPlanId);
+		TravelPlan plan = planService.readTravelPlanById(travelPlanId);
 
 		// Map을 사용하여 list와 maxDay를 함께 담습니다.
 		Map<String, Object> response = new HashMap<>();
@@ -75,18 +80,18 @@ public class TravelPlanRestController {
 		// ResponseEntity로 OK 응답과 함께 Map을 반환합니다.
 		return ResponseEntity.ok(response);
 	}
-	
+
 	@PostMapping("/modify")
-	public ResponseEntity<Integer> modifyPlan(@RequestBody TravelPlanDto dto){
-		int result=planService.updateTravelPlan(dto);
+	public ResponseEntity<Integer> modifyPlan(@RequestBody TravelPlanDto dto) {
+		int result = planService.updateTravelPlan(dto);
 		planService.deleteAllDetailedPlan(dto.getTravelPlanId());
 		return ResponseEntity.ok(result);
 	}
-	
+
 	@GetMapping("/deleteCourse/{travelPlanId}")
-	public ResponseEntity<Integer> deletePlan(@PathVariable("travelPlanId") int travelPlanId){
-		int result=planService.deletePlanById(travelPlanId);
+	public ResponseEntity<Integer> deletePlan(@PathVariable("travelPlanId") int travelPlanId) {
+		int result = planService.deletePlanById(travelPlanId);
 		return ResponseEntity.ok(result);
 	}
-	
+
 }

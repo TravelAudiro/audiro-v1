@@ -15,8 +15,8 @@ public class FavoriteDestinationService {
 
 	private final FavoriteDestinationDao dao;
 
-	public List<FavoriteDestinationDto> readAll() {
-		List<FavoriteDestinationDto> list = dao.selectAllOrderById();
+	public List<FavoriteDestinationDto> readAll(int usersId) {
+		List<FavoriteDestinationDto> list = dao.selectAllOrderById(usersId);
 		return list;
 	}
 	
