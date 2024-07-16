@@ -17,13 +17,13 @@ $(document).ready(function() {
 	let endDateValue = document.querySelector('input#endDate').value;
 	const modifyUrl = "/audiro/travel/plan/modify";
 	
-	if (signedInUser === null || signedInUser === '') {
+	/*if (signedInUser === null || signedInUser === '') {
 		if (confirm("로그인하시겠습니까?")) {
 			window.location.href = '/audiro/user/signin';
 		}
 		return;
 	}
-
+*/
 
 	// Datepicker 초기화
 	$('#startDate').datepicker({

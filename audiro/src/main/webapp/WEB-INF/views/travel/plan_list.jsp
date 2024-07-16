@@ -56,7 +56,7 @@
 									</td>
 									<c:set var="days" value="${t.duration+1}"></c:set>
 									<td>${t.duration}박 ${days}일</td>
-									<td>${t.startDate}~${t.endDate}</td>
+									<td>${t.startDate}-${t.endDate}</td>
 									<td>
 										<c:choose>
 											<c:when test="${t.isReviewed==0}">

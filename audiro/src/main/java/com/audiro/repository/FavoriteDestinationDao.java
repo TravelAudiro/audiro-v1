@@ -10,7 +10,7 @@ import com.audiro.dto.FavoriteListDestUpdateReqDto;
 
 public interface FavoriteDestinationDao {
 	
-	List<FavoriteDestinationDto> selectAllOrderById();	
+	List<FavoriteDestinationDto> selectAllOrderById(Integer usersId);	
 	FavoriteDestinationDto selectById(Integer favoriteDestinationId);
 	
 	// views/favorite/list

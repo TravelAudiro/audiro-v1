@@ -27,50 +27,61 @@ public class TravelPlanController {
 	private final TravelPlanService service;
 
 	@GetMapping("")
-	public void plan() {
-		
+	public String plan(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session != null && session.getAttribute("signedInUsersId") != null) {
+			return "/travel/plan";
+		} else {
+			// 세션이 존재하지 않는 경우 처리할 로직 추가
+			return "redirect:/user/signin";
+		}
 	}
 
 	@GetMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession();
-		if (session != null) {
+		HttpSession session = request.getSession(false);
+		if (session != null && session.getAttribute("signedInUsersId") != null) {
 			int usersId = (int) session.getAttribute("signedInUsersId");
 			List<TravelPlan> list = service.readAllTravelPlan(usersId);
 			model.addAttribute("travelPlan", list);
 			return "/travel/plan_list";
 		} else {
 			// 세션이 존재하지 않는 경우 처리할 로직 추가
-			return "redirect:/audiro/user/signin";
+			return "redirect:/user/signin";
 		}
 	}
-	
+
 	@GetMapping("/details")
-	public String details(@RequestParam(name="id") int id, Model model) {
-		TravelPlan plan=service.readTravelPlanById(id);
-		List<DetailedPlanDto> list=service.readDetailedPlanByTravelPlanId(id);
-		model.addAttribute("travelPlan",plan);
+	public String details(@RequestParam(name = "id") int id, Model model) {
+		TravelPlan plan = service.readTravelPlanById(id);
+		List<DetailedPlanDto> list = service.readDetailedPlanByTravelPlanId(id);
+		model.addAttribute("travelPlan", plan);
 		return "/travel/plan_details";
 	}
-	
+
 	@PostMapping("/modify")
 	public String modify(@RequestParam("travelPlanId") int travelPlanIdForModify, Model model) {
 		model.addAttribute("travelPlanIdForModify", travelPlanIdForModify);
 		return "/travel/plan";
 	}
-	
+
 	@GetMapping("/search")
-	public String search(@RequestParam(name = "category", defaultValue = "c") String category,HttpServletRequest request, Model model) {
-		List<TravelPlan> list;
-		HttpSession session=request.getSession();
-		int usersId=(int) session.getAttribute("signedInUsersId");
-		if ("t".equals(category)) {
-			list = service.readAllTravelPlanOrderByTitle(usersId);
+	public String search(@RequestParam(name = "category", defaultValue = "c") String category,
+		HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession(false);
+		if (session != null && session.getAttribute("signedInUsersId") != null) {
+			int usersId = (int) session.getAttribute("signedInUsersId");
+			List<TravelPlan> list;
+			if ("t".equals(category)) {
+				list = service.readAllTravelPlanOrderByTitle(usersId);
+			} else {
+				list = service.readAllTravelPlan(usersId);
+			}
+			model.addAttribute("travelPlan", list);
+			return "/travel/plan_list";
 		} else {
-			list = service.readAllTravelPlan(usersId);
+			return "redirect:/user/signin";
 		}
-		model.addAttribute("travelPlan", list);
-		return "/travel/plan_list";
 	}
-	
+
 }

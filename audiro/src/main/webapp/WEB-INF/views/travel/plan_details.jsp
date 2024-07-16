@@ -29,8 +29,8 @@
 						<div class="row">
 							<div class="col-3 p-2 ">
 								<div class="row g-0">
-									<div id="btnContainer">
-										<button type="submit" id="btnSave" class="btn btn-primary">수정</button>
+									<div id="btnContainer" class="btn-group text-start ms-3" role="group" aria-label="Basic example">
+										<button class="btn btn-secondary"type="submit" id="btnSave">수정</button>
 									</div>
 								</div>
 								<div id="dayContainer" plan-id="${travelPlan.travelPlanId}">

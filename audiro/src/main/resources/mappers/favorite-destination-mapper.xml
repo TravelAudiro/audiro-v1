@@ -50,6 +50,7 @@
 		select f.*, t.name, t.img_url from favorite_destination f
 		join travel_destination t
 		on f.destination_id = t.travel_destination_id
+		where f.users_id = #{usersId}
 		order by favorite_destination_id
 	</select>
 	
