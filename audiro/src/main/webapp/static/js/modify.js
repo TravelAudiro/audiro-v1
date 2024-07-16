@@ -12,8 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// 수정완료
 	function modifyBtnListener(e) {
-		alert('수정완료버튼!');
-		
 		e.preventDefault();
 		
 		 const form = document.querySelector('form#modifyForm');

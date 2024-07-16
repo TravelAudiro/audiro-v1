@@ -22,18 +22,19 @@ document.addEventListener('DOMContentLoaded', () => {
 	   });
 	*/
 
+	/*
 	// 썸네일 선택 버튼 클릭 시 파일 입력 요소 클릭
 	const thumbnailButton = document.querySelector('#thumbnailButton');
 	const thumbnailInput = document.querySelector('#thumbnailInput');
 	thumbnailButton.addEventListener('click', () => {
 		thumbnailInput.click();
 	});
-
+*/
 
 
 
 	/*--------------------------------------------------------------------------------------------------------- */
-
+/*
 	// 여행 코스 선택 버튼 클릭 시 모달 표시
 		const selectTravelCourseButton = document.querySelector('#selectTravelCourseButton');
 	        selectTravelCourseButton.addEventListener('click', () => {
@@ -98,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	   document.querySelector('.modal-footer .btn-secondary').addEventListener('click', () => {
 	       $('#selectTravelCourseModal').modal('hide');
 	   });
-
+*/
 	   
 	   
 	   
@@ -128,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		form.submit();
 
 	}
-	
+	/*
 	
 	// 임시저장 선택 버튼 클릭 시 모달 표시
 		   const selectdraftButton = document.querySelector('#draftbtn');
@@ -298,36 +299,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	    if (existingThumbnail.length > 0) {
 	        existingThumbnail.remove();
 	    }
+		*/
 	});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

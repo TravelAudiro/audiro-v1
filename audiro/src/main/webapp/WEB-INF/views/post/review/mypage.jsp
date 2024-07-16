@@ -246,15 +246,16 @@ main {
 </style>
 </head>
 <body>
-		<c:set var="travelReviewPage" value="${post[0].nickname}님의 여행일기" />
-		<%@ include file="../../fragments/header.jspf"%>
+	<c:set var="travelReviewPage" value="${post[0].nickname}님의 여행일기" />
+	<%@ include file="../../fragments/header.jspf"%>
 	<div class="container-fluid">
 
 		<main class="main-class mt-5">
 			<div class="profile-container">
 				<div class="profile-header">
 					<input type="hidden" value="${signedInUsersId}" id="usersId" /> <img
-						src="${post[0].path}" class="profile-img" alt="프로필 이미지">
+						src="../../images/defaultprofile5.png" class="profile-img"
+						alt="프로필 이미지">
 					<div class="profile-info">
 						<div class="username-stats">
 							<h2 class="profile-nickname-container">
@@ -282,36 +283,39 @@ main {
 				<div class="profile-posts" id="profilePosts">
 					<!-- 여행후기 반복문 -->
 					<c:forEach var="post" items="${post}">
-						<article id="post-${post.postId}"
-							class="post-${post.postId} post type-post status-publish format-standard has-post-thumbnail hentry category-lifestyle">
-							<div class="blog-post-item"
-								style="border: 1px solid #dbdbdb; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: box-shadow 0.3s ease;">
+						<c:if test="${post.postId != previousPostId}">
+							<article id="post-${post.postId}"
+								class="post-${post.postId} post type-post status-publish format-standard has-post-thumbnail hentry category-lifestyle">
+								<div class="blog-post-item"
+									style="border: 1px solid #dbdbdb; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: box-shadow 0.3s ease;">
 
-								<!-- .featured-image -->
-								<div class="entry-container">
-									<header class="entry-header">
-										<div class="entry-content"
-											onclick="window.location.href='details?postId=${post.postId}&id=${postlist.id}'">
-											${list[0].content}</div>
-										<h4 class="entry-title">
-											<a href="details?postId=${post.postId}" rel="bookmark">${post.title}</a>
-										</h4>
-									</header>
-									<!-- .entry-content -->
-									<div class="modified-time">
-										<small>${post.modifiedTime}</small>
+									<!-- .featured-image -->
+									<div class="entry-container">
+										<header class="entry-header">
+											<div class="entry-content"
+												onclick="window.location.href='details?postId=${post.postId}&id=${postlist.id}'">
+												${list[0].content}</div>
+											<h4 class="entry-title">
+												<a href="details?postId=${post.postId}" rel="bookmark">${post.title}</a>
+											</h4>
+										</header>
+										<!-- .entry-content -->
+										<div class="modified-time">
+											<small>${post.modifiedTime}</small>
+										</div>
+										<!-- .modified-time -->
+										<div class="card-header" style="text-align: right">
+											<button
+												class="btn likeReviewBtn ${post.favoritePost != null ? 'active' : ''}"
+												data-review-id="${post.postId}"></button>
+										</div>
 									</div>
-									<!-- .modified-time -->
-									<div class="card-header" style="text-align: right">
-										<button
-											class="btn likeReviewBtn ${post.favoritePost != null ? 'active' : ''}"
-											data-review-id="${post.postId}"></button>
-									</div>
+									<!-- .entry-container -->
 								</div>
-								<!-- .entry-container -->
-							</div>
-							<!-- .blog-post-item -->
-						</article>
+								<!-- .blog-post-item -->
+							</article>
+							<c:set var="previousPostId" value="${post.postId}" />
+						</c:if>
 					</c:forEach>
 				</div>
 			</div>

@@ -7,27 +7,26 @@
 
 	<!-- 내여행후기 -->
 	<!-- 내 여행후기 전체 불러오기 (최신순) -->
-	<select id="readMyReview" resultType="com.audiro.dto.MyReviewListDto">
-	    select 
-	        p.users_id 
-	        , p.title
-	        , p.modified_time
-	        , p.post_id
-	        , u.nickname
-	        , u.id
-	        , fp.users_id as favorite_post
-	        , fu.favorite_users_id as favorite_user_id
-	        , pr.path
-	        , pr.introduction
-	    from post p
-	    left join users u on p.users_id = u.users_id
-	    left join favorite_post fp on p.post_id = fp.post_id and u.users_id = fp.users_id
-	    left join favorite_users fu on p.users_id = fu.users_id
-	    left join profile pr on p.users_id = pr.users_id 
-	    where p.post_type_id = 10
-	          and u.users_id = #{id}   
-	    order by p.modified_time desc
-	</select>
+<select id="readMyReview" resultType="com.audiro.dto.MyReviewListDto">
+    SELECT 
+        p.users_id, 
+        p.title, 
+        p.modified_time, 
+        p.post_id, 
+        u.nickname, 
+        u.id, 
+        MAX(fp.users_id) AS favorite_post, 
+        pr.path, 
+        pr.introduction
+    FROM post p
+    LEFT JOIN users u ON p.users_id = u.users_id
+    LEFT JOIN favorite_post fp ON p.post_id = fp.post_id AND u.users_id = fp.users_id
+    LEFT JOIN profile pr ON p.users_id = pr.users_id
+    WHERE p.post_type_id = 10
+          AND u.users_id = #{id}
+    GROUP BY p.users_id, p.title, p.modified_time, p.post_id, u.nickname, u.id, pr.path, pr.introduction
+    ORDER BY p.modified_time DESC
+</select>
 
 	<!-- 내 여행후기 전체 불러오기 (좋아요순) 
 	<select id="readMyReviewByGood" resultType="com.audiro.dto.MyReviewListDto" parameterType="MyReviewListDto">
@@ -198,6 +197,7 @@
 				and fp.users_id = #{usersId}
 			</if>
 		<where>
+        	p.post_type_id = 10
 			<choose>
 				<when test='category != null and category.equals("t")'>
 					and upper(p.title) like '%'||upper(#{keyword})||'%'

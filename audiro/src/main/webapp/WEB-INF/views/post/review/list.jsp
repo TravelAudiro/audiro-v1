@@ -16,50 +16,34 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin>
+
 <style>
 
-font
+/* 전체적인 스타일 설정 */
 body {
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
 	background-color: #f8f9fa;
 	margin: 0;
-	font-family: 'Cafe24SsurroundAir', sans-serif; /* 웹폰트 적용 */
-	
+	/*font-family: 'Cafe24SsurroundAir', sans-serif; /* 웹폰트 적용 */
 }
 
+/* 컨테이너 스타일 설정 */
 .container-fluid {
 	width: 100%;
 	max-width: 1200px;
 }
 
-.heart-icon {
-	width: 70px;
-	height: 70px;
+/* 메인 컨테이너 스타일 설정 */
+#main {
+	width: 1200px;
+	margin: 0 auto; /* 가운데 정렬 */
 }
 
-.heart-icon.active {
-	filter: grayscale(0%) brightness(100%); /* 클릭 후 색이 변하도록 필터 적용 */
-}
 
-.list-group-item a {
-	text-decoration: none;
-	color: inherit; /* 부모 요소의 색상을 상속 */
-}
 
-.list-group-item a:hover {
-	text-decoration: none; /* 호버 시 텍스트 밑줄 제거 */
-	color: inherit; /* 부모 요소의 색상을 상속 */
-}
-
-#ranking {
-	max-height: 700px; /* 원하는 랭킹 섹션 최대 높이로 조정 */
-	max-width: 300px; /* 랭킹 섹션의 최대 너비 조정 */
-	margin: auto; /* 가운데 정렬 */
-}
-
-/* 여행후기 게시판 제목에 마우스 오버 시 포인트 스타일 변경 */
+/* 카드 링크 스타일 설정 */
 .card-link {
 	cursor: pointer;
 	color: #000; /* 기본 텍스트 색상 */
@@ -72,6 +56,7 @@ body {
 	text-decoration: none; /* 밑줄 제거 */
 }
 
+/* 좋아요 버튼 스타일 설정 */
 .likeReview {
 	width: 70px;
 	height: 70px;
@@ -98,6 +83,7 @@ body {
 	display: inline-block;
 }
 
+/* 민트색 버튼 스타일 설정 */
 .btn-mint {
 	background-color: #d4f0f0; /* 파스텔 민트 색상 */
 	border: none;
@@ -114,6 +100,7 @@ body {
 	background-color: #a2e1db; /* 조금 더 진한 파스텔 민트 색상 */
 }
 
+/* 카드 고정 높이 스타일 설정 */
 .card-fixed-height {
 	height: 300px; /* 원하는 고정 높이 설정 */
 	overflow: hidden; /* 내용이 넘칠 경우 숨김 */
@@ -127,6 +114,7 @@ body {
 	background-color: #fff;
 }
 
+/* 카드 본문 스타일 설정 */
 .card-body {
 	flex: 1; /* 카드 본문이 남은 공간을 차지하도록 설정 */
 	overflow: hidden; /* 넘치는 내용 숨김 */
@@ -134,6 +122,7 @@ body {
 	flex-direction: column;
 }
 
+/* 카드 내용 스타일 설정 */
 .card-content {
 	flex-grow: 1; /* 내용이 적더라도 공간을 채우도록 설정 */
 	overflow: hidden;
@@ -142,37 +131,52 @@ body {
 	-webkit-line-clamp: 5; /* 원하는 줄 수로 설정 */
 	-webkit-box-orient: vertical;
 	max-height: 100px; /* 최대 높이 설정 */
+	font-size: 16px; /* 폰트 크기 설정 */
 }
 
+/* 카드 내용 내 이미지 스타일 설정 */
 .card-content img {
 	max-width: 100%; /* 이미지가 카드의 너비를 넘지 않도록 설정 */
 	height: auto; /* 이미지의 높이는 자동 조정 */
 	max-height: 100px; /* 이미지의 최대 높이 설정 */
 	object-fit: cover; /* 이미지가 컨테이너에 맞게 조정되도록 설정 */
 }
+
+/* 글꼴을 명시적으로 가져오기 */
+@font-face {
+	font-family: 'Cafe24SsurroundAir';
+	src:
+		url('https://webfontworld.github.io/Cafe24SsurroundAir/Cafe24SsurroundAir.woff2')
+		format('woff2'),
+		url('https://webfontworld.github.io/Cafe24SsurroundAir/Cafe24SsurroundAir.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 </style>
 </head>
-<body>
+<body style="font-family: Cafe24SsurroundAir;">
 	<c:set var="travelReviewPage" value="여행후기" />
 	<%@ include file="../../fragments/header.jspf"%>
-	
-	<div class="container-fluid">
-	</div>
-		<div class="container">
+
+	<div class="container-fluid" id="main" style="width: 1200px;"></div>
+	<div class="container">
 		<main class="row justify-content-center" style="margin-top: 50px;">
 			<input id="postId" name="postId" type="hidden" value="${post.postId}" />
-			<input id="usersId" name="usersId" type="hidden" value="${signedInUsersId}" />
+			<input id="usersId" name="usersId" type="hidden"
+				value="${signedInUsersId}" />
 
 			<!-- 여행일기 목록불러오기 -->
-			<div class="col-md-8">
+			<div class="col-md-15 listContainer">
 				<div class="mt-2 card" id="list">
+					<div class="card-header me-1">
+						<h3 class="my-3">
+							<a href="<c:url value='/post/review/list' />" class="card-link">여행
+								후기 게시판</a>
+						</h3>
+					</div>
 					<div class="card-body">
-						<div class="mb-3">
-							<h3>
-								<a href="<c:url value='/post/review/list' />" class="card-link">여행
-									후기 게시판</a>
-							</h3>
-						</div>
+						<div class="mb-3"></div>
 						<div>
 							<!-- 로그인한 경우 추가 기능 -->
 							<c:if test="${not empty signedInUser}">
@@ -217,7 +221,7 @@ body {
 									<input id="postId" name="postId" type="hidden"
 										value="${post.postId}" /> <input id="usersId" name="usersId"
 										type="hidden" value="${signedInUsersId}" />
-									<div class="card h-80">
+									<div class="card h-100 d-flex flex-column">
 										<div class="position-relative">
 											<a href="details?postId=${list.postId}&id=${list.id}"
 												class="card-link"></a>
@@ -253,7 +257,7 @@ body {
 				</div>
 		</main>
 	</div>
-	
+
 	<script>
 		const signedInUser = `${signedInUser}`;
 	</script>
