@@ -49,10 +49,13 @@ public class ReviewService {
 	}
 
 	// 내 여행일기 리스트 불러오기
-	public List<MyReviewListDto> myReviewList(MyReviewListDto dto) {
-		List<MyReviewListDto> list = reviewDao.readMyReview(dto.getId());
-		log.debug("myReviewList={}", list);
-		return list;
+		public List<MyReviewListDto> myReviewList(MyReviewListDto dto) {
+			List<MyReviewListDto> list = reviewDao.readMyReview(dto.getId());
+			
+			
+			
+			log.debug("myReviewList={}", list);
+			return list;
 
 	}
 	//프로필 이미지 가져오기
@@ -113,13 +116,13 @@ public class ReviewService {
 		DetailsReviewDto list = reviewDao.readDetailsReviewById(dto);
 		
 		// 날짜 포맷팅을 위한 패턴 설정
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	    //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	    // LocalDateTime 객체를 포맷팅된 문자열로 변환
-	    String formattedModifiedTime = list.getModifiedTime().format(formatter);
+	    //String formattedModifiedTime = list.getModifiedTime().format(formatter);
 
 	    // 변환된 문자열을 설정
-	    list.setFormattedModifiedTime(formattedModifiedTime);
+	    //list.setFormattedModifiedTime(formattedModifiedTime);
 	 
 	    return list;
 	}
@@ -137,14 +140,7 @@ public class ReviewService {
 		return result;
 	}
 
-	// 여행후기 게시글 임시저장
-	public int createDraft(DraftPost draftPost) {
-		log.debug("draftPost={}", draftPost);
-		int result = reviewDao.saveDraftPost(draftPost);
-
-		return result;
-	}
-
+	
 	// 여행후기 게시글 수정
 	public int update(CreateReviewDto dto) {
 		int result = reviewDao.updateReview(dto);
@@ -224,19 +220,5 @@ public class ReviewService {
 	}
 	
 	
-
-	// 여행후기 임시저장 불러오기
-	public List<DraftPost> draftList() {
-		List<DraftPost> list = reviewDao.selectDraftList();
-		return list;
-	}
-
-	// 여행후기 임시저장 1개 상세보기
-	public DraftPost draftPost(Integer draftPostId) {
-
-		DraftPost draftPost = reviewDao.selectDrafById(draftPostId);
-		return draftPost;
-
-	}
 
 }

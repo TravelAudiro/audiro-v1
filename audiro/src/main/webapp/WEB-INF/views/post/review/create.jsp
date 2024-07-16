@@ -25,24 +25,49 @@
 
 
 <style>
-body {<!--body 스타일 --> width:80%;
-	margin: 0 auto;
+body {
+	width: 100%;
+	margin: 0;
 	font-family: Arial, sans-serif;
 	line-height: 1.6;
 	background-color: white !important;
-	padding: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-#title, #buttons-container { <%--모든 제목, 버튼 비율 --%> width:100%;
-	
+.container-fluid {
+	width: 80%;
+	margin: 0 auto;
+	padding: 20px;
 }
 
-#buttons-container .btn { <%--모든 버튼들 마진--%> margin-right:5px;
+.card {
+    margin-left: auto; /* 왼쪽 마진 자동으로 설정 */
+    margin-right: auto; /* 오른쪽 마진 자동으로 설정 */
+    margin-top: 50px !important; /* 위쪽 마진 추가 */
+    width: 90%; /* 카드의 너비를 90%로 설정 */
+    max-width: 1000px; /* 카드의 최대 너비를 1000px로 설정 */
+    padding: 20px; /* 내부 패딩 추가 */
+    border: 1px solid #ccc; /* 경계 설정 */
+    border-radius: 8px; /* 둥근 모서리 설정 */
+    background-color: #fff; /* 배경색 설정 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 설정 */
+}
+
+
+
+#title, #buttons-container {
+	width: 100%;
+}
+
+#buttons-container .btn {
+	margin-right: 5px;
 	margin-left: 10px;
 }
 
-#thumbnailDeleteButton { <%--썸네일 이미지 삭제버튼 --%> display:none;
-	
+#thumbnailDeleteButton {
+	display: none;
 }
 
 #savebtn {
@@ -73,24 +98,22 @@ body {<!--body 스타일 --> width:80%;
 
 .form-row {
 	display: flex;
-	align-items: center;
-	justify-content: flex-end; /* 오른쪽 정렬 */
+	flex-direction: column; /* 세로 정렬 */
+	align-items: flex-start;
 }
 
 #title {
-	flex: 1; /* 남은 공간을 차지하도록 설정 */
-	margin-right: 20px; /* 버튼과의 간격 */
+	width: 100%; /* 제목 입력란의 너비를 100%로 설정 */
+	margin-bottom: 20px; /* 제목과 에디터 사이의 간격 */
 }
 
-#buttons-container {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end; /* 오른쪽 정렬 */
+.editor-container {
+	height: 700px; /* 에디터의 높이를 크게 설정 */
+	border: 1px solid #ccc; /* 에디터 경계 설정 */
+	width: 100%; /* 에디터 너비를 100%로 설정 */
 }
 
-<!--
-스타일 태그안에 넣기 --><!--폰트 크기 옵션을 스타일링 -->.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="10px"]::before
-	{
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="10px"]::before {
 	content: '10px';
 	font-size: 10px;
 }
@@ -135,86 +158,43 @@ body {<!--body 스타일 --> width:80%;
 	font-size: 32px;
 }
 
-.editor-container {
-	height: 500px; /* 원하는 높이로 설정 */
-	border: 1px solid #ccc; /* 에디터 경계 설정 */
-}
+
+
+
 </style>
 </head>
 <body class="bg-white">
 	<div class="container-fluid">
-		<
 		<c:set var="travelReviewPage" value="내 여행일기" />
 		<%@ include file="../../fragments/header.jspf"%>
 
 		<header>
 			<main>
-				<div class="mt-2 card">
+				<div class="mt-2 card ">
 					<div class="card-header">
 						<h4>여행후기 글쓰기</h4>
 					</div>
 					<div class="card-body">
 						<c:url var="reviewPage" value="/post/review/list" />
 
+						<!-- 여행후기 작성 폼 -->
 						<form id="createForm">
 							<input type="hidden" name="id" value="${signedInUser}" />
-							<!-- 여행코스 선택하기(모달창), 썸네일 이미지 선택,삭제하기 (버튼) -->
-							<div class="form-row w-100">
-								<div class="col-md-8 mb-3">
-									<input id="title" name="title" class="form-control" type="text"
-										placeholder="제목을 입력하세요" required>
-								</div>
-								<div id="buttons-container">
-
-									<button type="button" id="selectTravelCourseButton"
-										class="btn travelCourseBtn" data-toggle="modal"
-										data-target="#selectTravelCourseModal">여행 코스 선택하기</button>
-									<button type="button" id="thumbnailButton"
-										class="btn thumbnailBtn ml-2">썸네일 이미지 선택하기</button>
-									<input type="file" id="thumbnailInput" accept="image/*"
-										style="display: none;">
-									<button type="button" id="thumbnailDeleteButton"
-										class="btn btn-danger ml-2">썸네일 이미지 삭제</button>
-								</div>
+							
+							<!-- 제목 입력란 -->
+							<div class="form-group">
+								<input id="title" name="title" class="form-control" type="text" placeholder="제목을 입력하세요" required>
 							</div>
 
-							<!-- 여행코스선택 모달창-->
-							<div class="modal fade" id="selectTravelCourseModal"
-								tabindex="-1" role="dialog"
-								aria-labelledby="selectTravelCourseModalLabel"
-								aria-hidden="true">
-								<div class="modal-dialog modal-lg" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="selectTravelCourseModalLabel">여행
-												코스 선택</h5>
-
-										</div>
-										<div class="modal-body" id="modalBodyContent">
-											<!-- 여행 코스 선택 모달 본문이 여기에 동적으로 삽입됩니다. -->
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
-												data-dismiss="modal">닫기</button>
-											<button type="button" id="selectTravelCourseCompleteButton"
-												class="btn btn-primary">선택 완료</button>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- 썸머노트라이브러이 이용한 내용작성
-						<textarea id="summernote" name="content"></textarea>-->
-
-							<!-- quill 에디터 이용한 내용작성	-->
-							<div class="container mt-3">
+							<!-- Quill 에디터를 사용한 내용 입력 -->
+							<div class="form-group mt-3">
 								<div class="editor-container" id="editor"></div>
-								<!-- Quill 에디터 내용을 저장하기 위한 숨겨진 텍스트 영역 추가 -->
+								<!-- Quill 에디터 내용을 저장하기 위한 숨겨진 텍스트 영역 -->
 								<textarea id="c_editor" name="content" style="display: none;"></textarea>
 							</div>
 						</form>
 
-						<!-- create 전체 내용 저장 -->
+						<!-- 저장 버튼 -->
 						<button type="submit" class="btn" id="savebtn">저장</button>
 					</div>
 
@@ -222,44 +202,6 @@ body {<!--body 스타일 --> width:80%;
 	</div>
 	</main>
 	</div>
-
-	<script>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-	// Summernote 설정
-	$('#summernote').summernote({
-		placeholder : '내용을 입력하세요',
-		tabsize : 2,
-		height : 300
-	// Summernote의 초기 높이 설정
-	});
-
-	// textarea의 높이 자동 조정
-	$('#summernote').on('summernote.change', function() {
-		// textarea의 높이를 Summernote의 높이에 맞게 조정
-		$(this).height('');
-		$(this).height(this.scrollHeight);
-	});
-	*/
-
-	</script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -269,14 +211,6 @@ body {<!--body 스타일 --> width:80%;
 
 	<c:url var="createJS" value="/js/create.js" />
 	<script src="${createJS}"></script>
-
-
-
-
-
-
-
-
 
 	<!-- Quill 라이브러리 -->
 	<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
@@ -292,11 +226,8 @@ Quill.register(Size, true);
 var Color = Quill.import('attributors/style/color');
 Quill.register(Color, true);
 
-
-
 // 툴바 옵션 설정
 var toolbarOptions = [
-
     [{ 'size': ['10px', '12px', '14px', '16px', '18px', '20px', '24px', '28px', '32px'] }], // 폰트 크기 옵션
     [{ 'color': [] }], // 글씨 색상 옵션 (Quill에서 기본 색상 팔레트 사용)
     [{ 'header': [1, 2, 3, false] }], // 헤더 스타일
@@ -324,65 +255,14 @@ document.querySelector('.ql-clean').addEventListener('click', function() {
     quill.setContents([]); // 모든 콘텐츠를 제거
 });
 
-// 사용자 정의 언어 (한국어) 설정
-var koreanTranslations = {
-    'bold': '굵게',
-    'italic': '기울임',
-    'underline': '밑줄',
-    'strike': '취소선',
-    'link': '링크',
-    'image': '이미지',
-    'video': '비디오',
-    'clean': '서식 제거',
-    'header': '헤더',
-    'list': '목록',
-    'ordered': '순서 있는 목록',
-    'bullet': '순서 없는 목록',
-    'blockquote': '인용문',
-    'code-block': '코드 블럭',
-    'script': '첨자',
-    'sub': '아래 첨자',
-    'super': '위 첨자',
-    'indent': '들여쓰기',
-    'direction': '텍스트 방향',
-
-};
-
-// 툴바 버튼의 텍스트를 한국어로 변경
-var toolbarButtons = document.querySelectorAll('.ql-toolbar button');
-toolbarButtons.forEach(button => {
-    var format = button.classList[0].split('-')[1];
-    if (koreanTranslations[format]) {
-        button.title = koreanTranslations[format];
-    }
+// Quill 에디터 내용 저장
+document.getElementById('savebtn').addEventListener('click', function() {
+    var content = quill.root.innerHTML;
+    document.getElementById('c_editor').value = content;
+    document.getElementById('createForm').submit();
 });
 
-// 드롭다운 메뉴의 텍스트를 한국어로 변경
-var selectItems = document.querySelectorAll('.ql-toolbar select');
-selectItems.forEach(select => {
-    var format = select.classList[0].split('-')[1];
-    if (koreanTranslations[format]) {
-        select.title = koreanTranslations[format];
-        Array.from(select.options).forEach(option => {
-            if (koreanTranslations[option.value]) {
-                option.text = koreanTranslations[option.value];
-            }
-        });
-    }
-});
-
-
-// Quill 이벤트 리스너 추가
-quill.on('text-change', function(delta, oldDelta, source) {
-    console.log('Text change detected!');
-    console.log(delta);
-});
 </script>
-
-
-
-
-
 
 </body>
 </html>

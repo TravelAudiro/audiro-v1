@@ -50,8 +50,6 @@ public class ReviewController {
 		String usersId = (String)session.getAttribute("signedInUser");		
 		TravelPlan plan = service.readTravelPlanById(id);
 		List<DetailedPlanDto> list = service.readDetailedPlanByTravelPlanId(id);
-		List<DraftPost> draft = reviewService.draftList();
-		model.addAttribute("drafts", draft);
 		model.addAttribute("travelPlan",plan);		
 		model.addAttribute("list",list);
 
@@ -67,12 +65,6 @@ public class ReviewController {
 		return "redirect:/post/review/list";
 	}
 
-	// 여행후기 작성 임시저장 후 페이지
-	@PostMapping("/draft")
-	public String draft(DraftPost draftPost) {
-		reviewService.createDraft(draftPost);
-		return "redirect:/post/review/list";
-	}
 
 	// 여행후기 상세보기, 수정하기하면 작성된 페이지 띄우기
 	@GetMapping("/details")
@@ -123,17 +115,19 @@ public class ReviewController {
 		
 	    // 내 여행일기 목록
 	    List<MyReviewListDto> post = reviewService.myReviewList(dto);
+	   
 	    model.addAttribute("post", post);
 	   
 	    
 	    // 내 여행일기 수
-	    int countMyReview = reviewService.countMyReveiw(dto.getId());
+	    int countMyReview = reviewService.countMyReveiw(post.get(0).getId());
 	    model.addAttribute("countMyReview", countMyReview);
 	    log.debug("countMyReview", countMyReview);
 	    
 	    // 나를 찜한 유저 수
-	    int countLike = reviewService.countLike(dto.getId());
+	    int countLike = reviewService.countLike(post.get(0).getId());
 	    model.addAttribute("countLike", countLike);
+	    
 	}
 
 
@@ -184,10 +178,6 @@ public class ReviewController {
 	 * return "post/review/list"; }
 	 */
 
-	// 댓글
-	@GetMapping("/comments")
-	public void test() {
 
-	}
 
 }

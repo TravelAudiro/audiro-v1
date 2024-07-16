@@ -57,17 +57,6 @@ public class ReviewRestController {
     }
 	
 
-	// 임시저장 목록 1개 선택시 불러오기
-	@GetMapping("/draftPost")
-	public ResponseEntity<DraftPost> SelectdaraftPost(DraftPost draftPost) {
-		log.debug("draftPost(draftId={}", draftPost);
-
-		DraftPost daraftPost = reviewService.draftPost(draftPost.getDraftPostId());
-		return ResponseEntity.ok(daraftPost);
-
-	}
-	
-
 
 	// 여행후기 최신순, 좋아요순 정렬
 	@GetMapping("/list")

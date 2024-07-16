@@ -27,6 +27,7 @@ public class MyReviewListDto {
 	private String path; //프로필경로
 	private String introduction; //프로필 자기소개
 	private String content;
+	private String formattedModifiedTime; //시간타입변환해서 저장용도
 	
 	public static MyReviewListDto fromEntity(Post post) {
 		return MyReviewListDto.builder()
@@ -41,6 +42,7 @@ public class MyReviewListDto {
 				.path(post.getPath())
 				.introduction(post.getIntroduction())
 				.content(post.getContent())
+				.formattedModifiedTime(post.getFormattedModifiedTime())
 				.build();
 	}
 }

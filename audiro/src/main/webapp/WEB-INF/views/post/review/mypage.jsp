@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html>
@@ -27,6 +28,17 @@ body {
 .container-fluid {
 	width: 100%;
 	padding: 0;
+}
+
+.entry-content {
+	flex-grow: 1; /* 내용이 적더라도 공간을 채우도록 설정 */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 10; /* 원하는 줄 수로 설정 */
+	-webkit-box-orient: vertical;
+	max-height: 150px; /* 최대 높이 설정 */
+	/* 추가적인 스타일이 필요할 수 있습니다 */
 }
 
 main {
@@ -99,23 +111,23 @@ main {
 }
 
 .profile-nickname-container {
-    margin: 0;
-    font-size: 24px;
-    display: flex;
-    align-items: center;
+	margin: 0;
+	font-size: 24px;
+	display: flex;
+	align-items: center;
 }
 
 .profile-nickname {
-    font-weight: bold;
-    font-family: Arial, sans-serif; /* 원하는 깔끔한 폰트로 변경하세요 */
-    color: #333; /* 원하는 글자색으로 변경하세요 */
-    margin-right: 10px;
+	font-weight: bold;
+	font-family: Arial, sans-serif; /* 원하는 깔끔한 폰트로 변경하세요 */
+	color: #333; /* 원하는 글자색으로 변경하세요 */
+	margin-right: 10px;
 }
-
 
 .profile-posts {
 	display: grid; /* Grid 사용 */
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 자동 열 설정 */
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	/* 자동 열 설정 */
 	gap: 10px; /* 그리드 간격 */
 	padding: 0 20px;
 }
@@ -127,7 +139,8 @@ main {
 	border-radius: 10px; /* 포스트 아이템 둥글게 */
 	background-color: #fff; /* 포스트 아이템 배경색 */
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 포스트 아이템 그림자 */
-	transition: box-shadow 0.3s ease, transform 0.3s ease; /* 마우스 오버 시 포커스 효과 */
+	transition: box-shadow 0.3s ease, transform 0.3s ease;
+	/* 마우스 오버 시 포커스 효과 */
 }
 
 .profile-posts .post-item:hover {
@@ -145,7 +158,8 @@ main {
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	background: url('https://via.placeholder.com/24x24') no-repeat center center; /* 하트 아이콘 배경 설정 */
+	background: url('https://via.placeholder.com/24x24') no-repeat center
+		center; /* 하트 아이콘 배경 설정 */
 	background-size: contain;
 	width: 24px;
 	height: 24px;
@@ -167,8 +181,6 @@ main {
 	color: #6c757d;
 }
 
-
-
 .blog-post-item a {
 	text-decoration: none; /* 링크 밑줄 제거 */
 	color: inherit; /* 링크 색상 상속 */
@@ -180,55 +192,54 @@ main {
 	right: 30px;
 	width: 50px;
 	height: 50px;
-	background: url('https://via.placeholder.com/50x50') no-repeat center center; /* 맨 위로 가기 버튼 배경 */
+	background: url('https://via.placeholder.com/50x50') no-repeat center
+		center; /* 맨 위로 가기 버튼 배경 */
 	background-size: contain;
 	cursor: pointer;
 	display: none; /* Initially hidden */
 }
 
-.blog-post-item:hover { 
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    transform: scale(1.05);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-}
-.read-more {      /* 더보기 */
-    font-size: 0.8em; /* 글자 크기 줄이기 */
-    text-align: right; /* 오른쪽 정렬 */
+.blog-post-item:hover {
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	transform: scale(1.05);
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
-.entry-title {  /* post-title*/
-    font-size: 1em; /* 글자 크기 조정 */
-    text-align: left; /* 왼쪽 정렬 */
+.read-more { /* 더보기 */
+	font-size: 0.8em; /* 글자 크기 줄이기 */
+	text-align: right; /* 오른쪽 정렬 */
+}
+
+.entry-title { /* post-title*/
+	font-size: 1em; /* 글자 크기 조정 */
+	text-align: left; /* 왼쪽 정렬 */
 }
 
 .entry-container {
-    position: relative; /* 부모 요소를 기준으로 위치 설정 */
+	position: relative; /* 부모 요소를 기준으로 위치 설정 */
 }
 
-.modified-time {  /*수정시간*/
-    position: absolute;
-    bottom: 0px;
-    left: 5px;
-    font-size: 0.7em; /* 글자 크기 더 작게 */
-    color: #6c757d; /* 색상 설정 */
+.modified-time { /*수정시간*/
+	position: absolute;
+	bottom: 0px;
+	left: 5px;
+	font-size: 0.7em; /* 글자 크기 더 작게 */
+	color: #6c757d; /* 색상 설정 */
 }
 
 /* 좋아요 버튼 스타일 */
 .likeReviewBtn, .userLike {
-    width: 30px;
-    height: 30px;
-    background: url("../../images/like_black.png") no-repeat center center;
-    background-size: contain;
-    border: none;
+	width: 30px;
+	height: 30px;
+	background: url("../../images/like_black.png") no-repeat center center;
+	background-size: contain;
+	border: none !important;
 }
 
-.likeReviewBtn.active , .userLike.active {
-    background: url("../../images/like_red2.png") no-repeat center center;
-    background-size: contain;
+.likeReviewBtn.active, .userLike.active {
+	background: url("../../images/like_red2.png") no-repeat center center;
+	background-size: contain;
 }
-
-
-
 </style>
 </head>
 <body>
@@ -239,25 +250,27 @@ main {
 		<main>
 			<div class="profile-container">
 				<div class="profile-header">
-					<img src="${post[0].path}" class="profile-img" alt="프로필 이미지">
+					<input type="hidden" value="${signedInUsersId}" id="usersId" /> <img
+						src="${post[0].path}" class="profile-img" alt="프로필 이미지">
 					<div class="profile-info">
 						<div class="username-stats">
 							<h2 class="profile-nickname-container">
 								<span id="nickname" class="profile-nickname">${post[0].nickname}</span>
+								<%-- 
 								<button id="userLike"
 									class="userLike ${post[0].favoriteUserId != null ? 'active' : ''}"
-									data-user-id="${signedInUsersId}"></button>
+									data-user-id="${signedInUsersId}"></button--%>
 							</h2>
 							<div class="stats">
 								<div>
 									<span>${countMyReview}</span> Posts
 								</div>
-								<div>
+								<%--<div>
 									<span>${countLike}</span> Likes
 								</div>
 								<div>
 									<span>150</span> comments
-								</div>
+								</div>--%>
 							</div>
 						</div>
 						<div class="bio">${post[0].introduction}</div>
@@ -270,27 +283,17 @@ main {
 							class="post-${post.postId} post type-post status-publish format-standard has-post-thumbnail hentry category-lifestyle">
 							<div class="blog-post-item"
 								style="border: 1px solid #dbdbdb; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: box-shadow 0.3s ease;">
-							
-								<div class="featured-image">
-									<a class="post-thumbnail" href="details?postId=${post.postId}"
-										aria-hidden="true" tabindex="-1"> <img width="150"
-										height="250"
-										src="https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=f8f357b6-4fdf-41dc-a6ff-cfddb4087409"
-										class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-										alt="${post.title}" decoding="async"
-										style="width: 100%; height: auto;" />
-									</a>
-								</div>
+
 								<!-- .featured-image -->
 								<div class="entry-container">
 									<header class="entry-header">
+										<div class="entry-content"
+											onclick="window.location.href='details?postId=${post.postId}&id=${postlist.id}'">
+											${list[0].content}</div>
 										<h4 class="entry-title">
-										<a href="details?postId=${post.postId}" rel="bookmark">${post.title}</a>
+											<a href="details?postId=${post.postId}" rel="bookmark">${post.title}</a>
 										</h4>
 									</header>
-									<!-- .entry-header -->
-									<div class="entry-content">${post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content}
-									</div>
 									<!-- .entry-content -->
 									<div class="modified-time">
 										<small>${post.modifiedTime}</small>
@@ -325,7 +328,10 @@ main {
 
 	<!-- reviewMypage.js -->
 	<script>
-		let signedInUsersId = ${sessionScope.signedInUsersId};
+		let signedInUsersId = $
+		{
+			sessionScope.signedInUsersId
+		};
 	</script>
 	<c:url var="mypageJS" value="/js/mypage.js" />
 	<script src="${mypageJS}"></script>

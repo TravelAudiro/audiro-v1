@@ -4,6 +4,7 @@ import java.sql.Clob;
 import java.time.LocalDateTime;
 
 import com.audiro.repository.Post;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,8 +29,9 @@ public class DetailsReviewDto {
 	private Integer favoritePost;
 	private Integer favoriteUserId;
 	private String id;
-	private String formattedModifiedTime; //시간타입변환해서 저장용도
+	//private String formattedModifiedTime; //시간타입변환해서 저장용도
 	private Integer commentId;
+	private String path;
 	
 	public static DetailsReviewDto fromEntity(Post post) {
 		
@@ -43,8 +45,7 @@ public class DetailsReviewDto {
 				.modifiedTime(post.getModifiedTime())
 				.favoriteUserId(post.getInterestedUserId())
 				.favoritePost(post.getFavoritePostId())
-				.id(post.getId())
-				.formattedModifiedTime(post.getFormattedModifiedTime())
+				.id(post.getId())	
 				.commentId(post.getCommentId())
 				.build();
 		

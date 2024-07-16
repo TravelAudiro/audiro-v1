@@ -4,6 +4,7 @@ import java.sql.Clob;
 import java.time.LocalDateTime;
 
 import com.audiro.repository.Post;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonFormat(pattern = "yyyy년 mm월 dd일")
 public class ListReviewDto {
 	
 	private Integer postId;

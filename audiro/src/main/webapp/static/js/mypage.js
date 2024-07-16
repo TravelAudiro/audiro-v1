@@ -25,13 +25,14 @@ document.addEventListener('DOMContentLoaded', function() {
 		
 	// 여행후기 찜담기(찜담고 삭제기능)
 		async function favoriteReview(event) {
-		    alert('후기찜버튼!!!!!');
+			
+			/*const signedInUsersId = document.getElementById('userId')
 			if (signedInUsersId === null || signedInUsersId === '') {
 			            if (confirm("로그인하시겠습니까?")) {
 			                window.location.href = '/audiro/user/signin';
 			            }
 			            return;
-			        }
+			        }*/
 
 					
 		    const tag = event.currentTarget;
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		        console.error('Error toggling favorite:', error);
 		    }
 		}
-
+	/*
 	// 유저 관심 담기(담고 삭제하기)
 	async function favoriteUser(event) {
 		alert('관심유저 버튼!!!!!');
@@ -75,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			console.error('Error toggling like:', error);
 		}
 	}
-	
+	*/
 	
 /*11111번찜담기 기능
 	//여행후기 찜담기(찜담고 삭제기능)

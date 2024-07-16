@@ -76,22 +76,12 @@
 	
 	
 	<!-- 여행 후기 1개 상세 내용불러오기 -->
-	<select id="readDetailsReviewById" resultType="DetailsReviewDto" >
-    	select p.*, u.nickname, favorite_post_id
-    	from post p 
-    	join users u on p.users_id = u.users_id 
-    	left join favorite_post fp 
-        on p.post_id = fp.post_id
-        <choose>
-	        <when test="usersId != null and usersId !=''">
-	        	and fp.users_id = #{usersId}
-	        </when>
-        	<otherwise>
-        		and fp.users_id is null
-        	</otherwise>
-        </choose>
-    	where p.post_id = #{postId}
- 	</select>
+<select id="readDetailsReviewById" resultType="DetailsReviewDto">
+    select p.*, u.nickname
+    from post p
+    join users u on p.users_id = u.users_id
+    where p.post_id = #{postId}
+</select>
 
 	<!-- 해당 여행후기 좋아요 수 -->
 	<select id="countGoodByPostId" resultType="Integer">
@@ -228,30 +218,6 @@
 		</where>
 		order by p.post_id desc
 	</select>
-
-
-
-
-	<!-- 여향후기 임시저장 -->
-	<!-- 여행후기 글 임시저장하기 -->
-	<insert id="saveDraftPost">
-		insert into draft_post (type_id, users_id, title, content)
-		values (10, #{usersId}, #{title}, #{content, jdbcType=CLOB})
-	</insert>
-	<!-- 임시저장 목록 불러오기 -->
-	<select id="selectDraftList" resultType="DraftPost">
-		select * from draft_post
-	</select> 
-	<!-- 임시저장 파일 1개 상세내용 불러오기 -->
-	<select id="selectDrafById" resultType="DraftPost">
-		select * from draft_post where draft_post_id=#{draftPostId}
-	</select> 	
-	<!-- 임시저장 삭제 -->
-	<delete id="deleteDraftPost">
-		delete from draft_post where draft_post_id=#{draftPostId}
-	</delete>
-
-
 
 
 
