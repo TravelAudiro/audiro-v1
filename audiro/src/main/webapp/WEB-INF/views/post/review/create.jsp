@@ -31,9 +31,9 @@ body {
 	font-family: Arial, sans-serif;
 	line-height: 1.6;
 	background-color: white !important;
-	display: flex;
 	flex-direction: column;
 	align-items: center;
+	font-family: 'Cafe24SsurroundAir', sans-serif; /* 웹폰트 적용 */
 }
 
 .container-fluid {
@@ -164,13 +164,13 @@ body {
 </style>
 </head>
 <body class="bg-white">
-	<div class="container-fluid">
 		<c:set var="travelReviewPage" value="내 여행일기" />
 		<%@ include file="../../fragments/header.jspf"%>
+	<div class="container-fluid">
 
 		<header>
 			<main>
-				<div class="mt-2 card ">
+				<div class="mt-5 card ">
 					<div class="card-header">
 						<h4>여행후기 글쓰기</h4>
 					</div>

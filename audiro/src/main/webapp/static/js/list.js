@@ -4,25 +4,23 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-	/*if (signedInUser === null || signedInUser === '') {
-		if (confirm("로그인하시겠습니까?")) {
-			window.location.href = '/audiro/user/signin';
-		}
-		return;
-	}*/
-	
 	//여행후기 찜 담기 클릭 이벤트
 	const btnReviewLike = document.querySelectorAll('.likeReview');
 	btnReviewLike.forEach(btn => {
 		btn.addEventListener('click', updateReveiw);
+
 	});
-	
-
-
 	
 	//여행후기 찜담기(찜담고 삭제기능)
 	async function updateReveiw(event) {
-		alert('찜!!!!!!!!!!!!!!!');
+		
+		if (signedInUser === null || signedInUser === '') {
+					if (confirm("로그인하시겠습니까?")) {
+						window.location.href = '/audiro/user/signin';
+					}
+					return;
+				}
+
 		const tag = event.currentTarget;
 		const postId = tag.attributes['data-review-id'].nodeValue; // 클릭된 버튼의 data-review-id 값 가져오기
 		const id = document.querySelector('input#usersId').value;

@@ -12,12 +12,15 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous" />
-
+<link
+	href="https://webfontworld.github.io/Cafe24SsurroundAir/Cafe24SsurroundAir.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin>
 <style>
 body {
 	background-color: #fafafa; /* 배경색 설정 */
 	font-family: Arial, sans-serif; /* 폰트 설정 */
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
@@ -243,11 +246,11 @@ main {
 </style>
 </head>
 <body>
-	<div class="container-fluid">
 		<c:set var="travelReviewPage" value="${post[0].nickname}님의 여행일기" />
 		<%@ include file="../../fragments/header.jspf"%>
+	<div class="container-fluid">
 
-		<main>
+		<main class="main-class mt-5">
 			<div class="profile-container">
 				<div class="profile-header">
 					<input type="hidden" value="${signedInUsersId}" id="usersId" /> <img
