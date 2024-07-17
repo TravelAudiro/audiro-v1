@@ -258,7 +258,7 @@ main {
 						alt="프로필 이미지">
 					<div class="profile-info">
 						<div class="username-stats">
-							<h2 class="profile-nickname-container">
+							<h2 class="profile-nickname-container style="font-size: 18px;">
 								<span id="nickname" class="profile-nickname">${post[0].nickname}</span>
 								<%-- 
 								<button id="userLike"
@@ -266,7 +266,7 @@ main {
 									data-user-id="${signedInUsersId}"></button--%>
 							</h2>
 							<div class="stats">
-								<div>
+								<div style="font-size: 15px;">
 									<span>${countMyReview}</span> Posts
 								</div>
 								<%--<div>

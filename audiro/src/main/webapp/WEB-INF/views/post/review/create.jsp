@@ -27,8 +27,11 @@
 <style>
 @font-face {
 	font-family: 'Cafe24SsurroundAir';
-	src: url('https://webfontworld.github.io/Cafe24SsurroundAir/Cafe24SsurroundAir.woff2') format('woff2'),
-		 url('https://webfontworld.github.io/Cafe24SsurroundAir/Cafe24SsurroundAir.woff') format('woff');
+	src:
+		url('https://webfontworld.github.io/Cafe24SsurroundAir/Cafe24SsurroundAir.woff2')
+		format('woff2'),
+		url('https://webfontworld.github.io/Cafe24SsurroundAir/Cafe24SsurroundAir.woff')
+		format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -43,12 +46,24 @@ body {
 	font-family: 'Cafe24SsurroundAir', sans-serif; /* 웹폰트 적용 */
 }
 
-.container-fluid {
-	width: 80%;
-	margin: 0 auto;
-	padding: 20px;
+.main-class {
+	margin-top: 100px;
+	margin-left: 100px;
+	margin-right: 100px;
 }
 
+.container-fluid {
+	width: 100%;
+	padding: 0;
+	}
+
+.card {
+	width: 100%;
+	max-width: 1200px; /* 원하는 너비로 설정 */
+	margin: 0 auto;
+}
+
+/*
 .card {
 	margin-left: auto; /* 왼쪽 마진 자동으로 설정 */
 	margin-right: auto; /* 오른쪽 마진 자동으로 설정 */
@@ -60,7 +75,7 @@ body {
 	border-radius: 8px; /* 둥근 모서리 설정 */
 	background-color: #fff; /* 배경색 설정 */
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 설정 */
-}
+}*/
 
 #title, #buttons-container {
 	width: 100%;
@@ -169,42 +184,38 @@ body {
 	<%@ include file="../../fragments/header.jspf"%>
 	<div class="container-fluid">
 
-		<header>
-			<main>
-				<div class="mt-15 main">
-					<div class="mt-5 card ">
-						<div class="card-header">
-							<h4>여행후기 글쓰기</h4>
-						</div>
-						<div class="card-body">
-							<c:url var="reviewPage" value="/post/review/list" />
+		<main>
+			<div class="main-class mt-5 card">
 
-							<!-- 여행후기 작성 폼 -->
-							<form id="createForm">
-								<input type="hidden" name="id" value="${signedInUser}" />
-
-								<!-- 제목 입력란 -->
-								<div class="form-group">
-									<input id="title" name="title" class="form-control" type="text"
-										placeholder="제목을 입력하세요" required>
-								</div>
-
-								<!-- Quill 에디터를 사용한 내용 입력 -->
-								<div class="form-group mt-3">
-									<div class="editor-container" id="editor"></div>
-									<!-- Quill 에디터 내용을 저장하기 위한 숨겨진 텍스트 영역 -->
-									<textarea id="c_editor" name="content" style="display: none;"></textarea>
-								</div>
-							</form>
-
-							<!-- 저장 버튼 -->
-							<button type="submit" class="btn" id="savebtn">저장</button>
-						</div>
-
-					</div>
+				<div class="card-header">
+					<h4>여행후기 글쓰기</h4>
 				</div>
-	</div>
-	</main>
+				<div class="card-body">
+					<c:url var="reviewPage" value="/post/review/list" />
+
+					<!-- 여행후기 작성 폼 -->
+					<form id="createForm">
+						<input type="hidden" name="id" value="${signedInUser}" />
+
+						<!-- 제목 입력란 -->
+						<div class="form-group">
+							<input id="title" name="title" class="form-control" type="text"
+								placeholder="제목을 입력하세요" required>
+						</div>
+
+						<!-- Quill 에디터를 사용한 내용 입력 -->
+						<div class="form-group mt-3">
+							<div class="editor-container" id="editor"></div>
+							<!-- Quill 에디터 내용을 저장하기 위한 숨겨진 텍스트 영역 -->
+							<textarea id="c_editor" name="content" style="display: none;"></textarea>
+						</div>
+					</form>
+
+					<!-- 저장 버튼 -->
+					<button type="submit" class="btn" id="savebtn">저장</button>
+				</div>
+			</div>
+		</main>
 	</div>
 
 	<script
