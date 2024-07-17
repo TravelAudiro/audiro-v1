@@ -47,7 +47,7 @@
 									<tr>
 										<th>제목</th>
 										<th>기간</th>
-										<th>기간</th>
+										<th></th>
 										<th>후기작성여부</th>
 									</tr>
 								</thead>
@@ -59,16 +59,18 @@
 													<c:param name="id" value="${t.travelPlanId}"></c:param>
 												</c:url> <a href="${planDetailsPage}" class="link">${t.title}</a></td>
 											<c:set var="days" value="${t.duration+1}"></c:set>
-											<td>${t.duration}박${days}일</td>
 											<td>${t.startDate}-${t.endDate}</td>
-											<td><c:choose>
+											<td>${t.duration}박${days}일</td>
+											<td>
+												<c:choose>
 													<c:when test="${t.isReviewed==0}">
-												No
-											</c:when>
+														No
+													</c:when>
 													<c:when test="${t.isReviewed==1}">
-												Yes
-											</c:when>
-												</c:choose></td>
+														Yes
+													</c:when>
+												</c:choose>
+											</td>
 											<td class="img" plan-id="${t.travelPlanId}"><img
 												class="deletePlanImg" src="/audiro/images/delete.png" /></td>
 										</tr>
