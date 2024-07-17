@@ -27,7 +27,7 @@ table {
 }
 
 td, th {
-	font-family: 'Cafe24SsurroundAir';
+	/* font-family: 'Cafe24SsurroundAir'; */
 	border: 1px solid black;
 	padding: 20px;
     text-align: left; /* Change text alignment to left */

@@ -87,7 +87,7 @@ body {
 	object-fit: cover;
 }
 input, h2, ul, #dayContainer, #planContainer, button, .favDestination{
-	font-family: 'Cafe24SsurroundAir' !important;
+	/* font-family: 'Cafe24SsurroundAir' !important; */
 }
 
 .plans{
@@ -107,7 +107,7 @@ input, h2, ul, #dayContainer, #planContainer, button, .favDestination{
 
 
 #planContainer h5 {
-	font-family: 'Cafe24SsurroundAir';
+	/* font-family: 'Cafe24SsurroundAir';  */
 	font-size: 2rem;
 	margin-bottom: .5em;
 }
