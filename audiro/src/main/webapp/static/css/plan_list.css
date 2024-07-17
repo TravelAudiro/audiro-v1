@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+#allDiv{
+	margin-top: 50px;
+}
 .tableList table thead {
     background: #27334c;
     color: #ffffff;

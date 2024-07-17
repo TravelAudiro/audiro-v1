@@ -24,8 +24,8 @@
 	<div class="container-fluid">
 		<%@ include file="../fragments/header.jspf"%>
 	</div>
-	<div class="container-fluid text-center">
-		<div class="row">
+	<div class="container-fluid text-center" id="allDiv">
+		<div class="row"> 
 			<div class="col-1"></div>
 			<div class="col-10" id="cardContainer">
 				<c:url var="modifyPlan" value="/travel/plan/modify"></c:url>

@@ -21,9 +21,9 @@
 	<div class="container-fluid">
 		<%@ include file="../fragments/header.jspf"%>
 		<main>
-			<div class="row">
-				<div class="col-1"></div>
-				<div class="col-10">
+			<div class="row" id="allDiv">
+				<div class="col-2"></div>
+				<div class="col-8">
 					<div class="card">
 						<div class="card-header">
 							<c:url var="planSearchPage" value="/travel/plan/search" />
@@ -80,7 +80,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-1"></div>
+				<div class="col-2"></div>
 			</div>
 		</main>
 	</div>
